@@ -13,7 +13,7 @@ test('theo chế độ sáng/tối của trình duyệt', async ({ page }, testI
   await page.goto('/')
   const bg = await page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor)
   const dark = testInfo.project.name === 'dark'
-  expect(bg).toBe(dark ? 'rgb(11, 11, 13)' : 'rgb(255, 252, 245)')
+  expect(bg).toBe(dark ? 'rgb(10, 18, 48)' : 'rgb(248, 250, 255)')
 })
 
 test('robots và sitemap trả về hợp lệ', async ({ request }) => {
