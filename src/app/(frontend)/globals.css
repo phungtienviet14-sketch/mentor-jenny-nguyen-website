@@ -399,8 +399,28 @@ body {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  /* Mặt trăng vẽ bằng SVG trong AmbientBackground; ở đây chỉ còn quầng sáng */
-  box-shadow: 0 0 70px rgba(214, 226, 255, 0.22);
+  /* Sáng: mặt trời + corona. Tối: mặt trăng + quầng lạnh. Hình vẽ bằng SVG trong AmbientBackground. */
+  box-shadow:
+    0 0 60px 18px rgba(255, 205, 90, 0.5),
+    0 0 170px 70px rgba(255, 150, 50, 0.28);
+}
+
+.ambient__sphere .sky-moon {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ambient__sphere {
+    box-shadow: 0 0 70px rgba(214, 226, 255, 0.22);
+  }
+
+  .ambient__sphere .sky-sun {
+    display: none;
+  }
+
+  .ambient__sphere .sky-moon {
+    display: block;
+  }
 }
 
 /* Điện thoại: vật thể 3D nhỏ lại để không che chữ */
@@ -427,4 +447,85 @@ body {
   .ambient__cube:not(.ambient__cube--sm) .f4 { transform: rotateY(-90deg) translateZ(35px); }
   .ambient__cube:not(.ambient__cube--sm) .f5 { transform: rotateX(90deg) translateZ(35px); }
   .ambient__cube:not(.ambient__cube--sm) .f6 { transform: rotateX(-90deg) translateZ(35px); }
+}
+
+/* ---------- Bầu trời: sao nhấp nháy (tối) / bụi sáng + mây (sáng) ---------- */
+.ambient__stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  color: rgba(244, 160, 40, 0.9);
+  will-change: transform;
+  animation: twinkle 5s ease-in-out infinite;
+}
+
+.ambient__stars--1 { animation-duration: 3.4s; }
+.ambient__stars--2 { width: 4px; height: 4px; animation-duration: 5.2s; animation-delay: -1.7s; }
+.ambient__stars--3 { width: 4px; height: 4px; animation-duration: 7.1s; animation-delay: -3.1s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.95; }
+}
+
+.ambient__cloud {
+  position: absolute;
+  width: 46vmax;
+  height: 16vmax;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.85) 0%, transparent 70%);
+  filter: blur(26px);
+  opacity: 0.7;
+  animation: cloud-drift 110s linear infinite alternate;
+}
+
+.ambient__cloud--a { top: 8vh; left: -10vw; }
+.ambient__cloud--b { top: 46vh; left: 30vw; animation-duration: 150s; animation-delay: -40s; opacity: 0.5; }
+.ambient__cloud--c { top: 74vh; left: -20vw; animation-duration: 130s; animation-delay: -80s; opacity: 0.55; }
+
+@keyframes cloud-drift {
+  to { transform: translateX(38vw); }
+}
+
+/* Cực quang: lớp màu hiện dần/mờ dần phủ trên các quầng sáng (chỉ đổi opacity) */
+.ambient__orb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0;
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ambient__stars { color: #fff; }
+  .ambient__cloud { display: none; }
+
+  .ambient__orb::after {
+    display: block;
+    animation: aurora 16s ease-in-out infinite;
+    will-change: opacity;
+  }
+
+  .ambient__orb--a::after { background: radial-gradient(circle, rgba(52, 211, 153, 0.32), transparent 66%); }
+  .ambient__orb--b::after { background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent 66%); animation-delay: -5s; animation-duration: 19s; }
+  .ambient__orb--c::after { background: radial-gradient(circle, rgba(251, 146, 60, 0.26), transparent 66%); animation-delay: -10s; animation-duration: 22s; }
+}
+
+@keyframes aurora {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient__stars,
+  .ambient__cloud,
+  .ambient__orb::after {
+    animation: none;
+  }
+
+  .ambient__stars { opacity: 0.7; }
 }
