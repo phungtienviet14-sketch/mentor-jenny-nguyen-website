@@ -405,3 +405,29 @@ body {
     inset 9px 9px 28px rgba(255, 255, 255, 0.67),
     35px 55px 65px rgba(22, 69, 184, 0.15);
 }
+
+/* Điện thoại: vật thể 3D nhỏ lại để không che chữ */
+@media (max-width: 767px) {
+  .ambient__sphere {
+    width: 170px;
+    height: 170px;
+  }
+
+  .ambient__ring {
+    width: 240px;
+    height: 240px;
+    border-width: 14px;
+  }
+
+  .ambient__cube:not(.ambient__cube--sm) {
+    width: 70px;
+    height: 70px;
+  }
+
+  .ambient__cube:not(.ambient__cube--sm) .f1 { transform: translateZ(35px); }
+  .ambient__cube:not(.ambient__cube--sm) .f2 { transform: rotateY(180deg) translateZ(35px); }
+  .ambient__cube:not(.ambient__cube--sm) .f3 { transform: rotateY(90deg) translateZ(35px); }
+  .ambient__cube:not(.ambient__cube--sm) .f4 { transform: rotateY(-90deg) translateZ(35px); }
+  .ambient__cube:not(.ambient__cube--sm) .f5 { transform: rotateX(90deg) translateZ(35px); }
+  .ambient__cube:not(.ambient__cube--sm) .f6 { transform: rotateX(-90deg) translateZ(35px); }
+}
