@@ -2,9 +2,62 @@
 
 import { useEffect, useRef } from 'react'
 
-const FACES = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6']
 /** Hệ số xoay Z theo scrollY của từng vật thể (đo từ site tham chiếu). */
 const SPIN_Z = [0.018, -0.045, 0.065, 0.08]
+
+type GemFace = { w: number; h: number; m: string; t: number }
+
+/**
+ * Viên pha lê bát diện (8 mặt tam giác đều) dựng bằng CSS 3D: mỗi mặt là một phần tử có
+ * matrix3d tính sẵn từ ba đỉnh, nên xoay theo cuộn không bao giờ bị "mỏng như tấm phẳng".
+ * Tính tại thời điểm nạp module (xác định, không lệch hydration).
+ */
+function octahedron(a: number): GemFace[] {
+  const faces: GemFace[] = []
+  for (const sx of [1, -1]) {
+    for (const sy of [1, -1]) {
+      for (const sz of [1, -1]) {
+        const A = [sx * a, 0, 0]
+        const B = [0, sy * a, 0]
+        const C = [0, 0, sz * a]
+        const w = Math.hypot(B[0] - A[0], B[1] - A[1], B[2] - A[2])
+        const h = (w * Math.sqrt(3)) / 2
+        const u = [(B[0] - A[0]) / w, (B[1] - A[1]) / w, (B[2] - A[2]) / w]
+        const M = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2, (A[2] + B[2]) / 2]
+        const d = [(M[0] - C[0]) / h, (M[1] - C[1]) / h, (M[2] - C[2]) / h]
+        const n = [u[1] * d[2] - u[2] * d[1], u[2] * d[0] - u[0] * d[2], u[0] * d[1] - u[1] * d[0]]
+        const t = [C[0] - (w / 2) * u[0], C[1] - (w / 2) * u[1], C[2] - (w / 2) * u[2]]
+        const m = [...u, 0, ...d, 0, ...n, 0, ...t, 1].map((v) => v.toFixed(4)).join(',')
+        faces.push({
+          w: Math.round(w * 10) / 10,
+          h: Math.round(h * 10) / 10,
+          m: `matrix3d(${m})`,
+          t:
+            Math.round(
+              (0.5 - 0.5 * ((sx * -0.4 + sy * -0.7 + sz * 0.6) / (Math.sqrt(3) * 0.9644))) * 100,
+            ) / 100,
+        })
+      }
+    }
+  }
+  return faces
+}
+const GEM_BIG = octahedron(58)
+const GEM_SMALL = octahedron(30)
+
+function GemFaces({ faces }: { faces: GemFace[] }) {
+  return (
+    <>
+      {faces.map((f, i) => (
+        <i
+          key={i}
+          className="ambient__gem-face"
+          style={{ width: f.w, height: f.h, transform: f.m, ['--t' as string]: f.t }}
+        />
+      ))}
+    </>
+  )
+}
 
 /** Hố thiên thạch: [cx, cy, r] trong hệ 300x300. */
 const CRATERS: [number, number, number][] = [
@@ -224,17 +277,17 @@ export function AmbientBackground() {
       <div data-obj className="ambient__obj ambient__sphere ambient__obj--1">
         <SunSvg />
         <MoonSvg />
+        <span className="ambient__orbit">
+          <span className="ambient__orbit-spin">
+            <i className="ambient__sat" />
+          </span>
+        </span>
       </div>
-      <div data-obj className="ambient__obj ambient__ring ambient__obj--2" />
-      <div data-obj className="ambient__obj ambient__cube ambient__obj--3">
-        {FACES.map((f) => (
-          <i key={f} className={`face ${f}`} />
-        ))}
+      <div data-obj className="ambient__obj ambient__gem ambient__obj--2">
+        <GemFaces faces={GEM_BIG} />
       </div>
-      <div data-obj className="ambient__obj ambient__cube ambient__cube--sm ambient__obj--4">
-        {FACES.map((f) => (
-          <i key={f} className={`face ${f}`} />
-        ))}
+      <div data-obj className="ambient__obj ambient__gem ambient__obj--3">
+        <GemFaces faces={GEM_SMALL} />
       </div>
     </div>
   )

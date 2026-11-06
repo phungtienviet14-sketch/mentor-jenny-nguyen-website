@@ -352,48 +352,10 @@ body {
   transform: rotateX(48deg) rotateY(25deg);
 }
 
-.ambient__cube {
-  width: 100px;
-  height: 100px;
-}
 
-.ambient__cube--sm {
-  width: 56px;
-  height: 56px;
-}
 
-.ambient__cube .face {
-  position: absolute;
-  inset: 0;
-  border: 1px solid #d3757b;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(220, 150, 155, 0.5));
-  box-shadow: inset 0 0 22px rgba(255, 255, 255, 0.53);
-}
 
-.ambient__cube .f1 { transform: translateZ(50px); }
-.ambient__cube .f2 { transform: rotateY(180deg) translateZ(50px); }
-.ambient__cube .f3 { transform: rotateY(90deg) translateZ(50px); }
-.ambient__cube .f4 { transform: rotateY(-90deg) translateZ(50px); }
-.ambient__cube .f5 { transform: rotateX(90deg) translateZ(50px); }
-.ambient__cube .f6 { transform: rotateX(-90deg) translateZ(50px); }
-.ambient__cube--sm .f1 { transform: translateZ(28px); }
-.ambient__cube--sm .f2 { transform: rotateY(180deg) translateZ(28px); }
-.ambient__cube--sm .f3 { transform: rotateY(90deg) translateZ(28px); }
-.ambient__cube--sm .f4 { transform: rotateY(-90deg) translateZ(28px); }
-.ambient__cube--sm .f5 { transform: rotateX(90deg) translateZ(28px); }
-.ambient__cube--sm .f6 { transform: rotateX(-90deg) translateZ(28px); }
 
-.ambient__ring {
-  width: 440px;
-  height: 440px;
-  border-radius: 50%;
-  border: 22px solid #9fb9f1;
-  box-shadow:
-    inset 5px 8px 12px #fff,
-    inset -6px -8px 15px rgba(50, 88, 169, 0.5),
-    8px 14px 0 rgba(89, 121, 191, 0.33),
-    20px 30px 45px rgba(22, 69, 184, 0.08);
-}
 
 .ambient__sphere {
   width: 300px;
@@ -430,23 +392,8 @@ body {
     height: 170px;
   }
 
-  .ambient__ring {
-    width: 240px;
-    height: 240px;
-    border-width: 14px;
-  }
 
-  .ambient__cube:not(.ambient__cube--sm) {
-    width: 70px;
-    height: 70px;
-  }
 
-  .ambient__cube:not(.ambient__cube--sm) .f1 { transform: translateZ(35px); }
-  .ambient__cube:not(.ambient__cube--sm) .f2 { transform: rotateY(180deg) translateZ(35px); }
-  .ambient__cube:not(.ambient__cube--sm) .f3 { transform: rotateY(90deg) translateZ(35px); }
-  .ambient__cube:not(.ambient__cube--sm) .f4 { transform: rotateY(-90deg) translateZ(35px); }
-  .ambient__cube:not(.ambient__cube--sm) .f5 { transform: rotateX(90deg) translateZ(35px); }
-  .ambient__cube:not(.ambient__cube--sm) .f6 { transform: rotateX(-90deg) translateZ(35px); }
 }
 
 /* ---------- Bầu trời: sao nhấp nháy (tối) / bụi sáng + mây (sáng) ---------- */
@@ -535,7 +482,6 @@ body {
 .ambient__obj--2 { opacity: 0.26; }
 .ambient__obj--3,
 .ambient__obj--4 { opacity: 0.2; }
-.ambient__ring { border-width: 12px; }
 .ambient__sphere {
   box-shadow:
     0 0 36px 4px rgba(255, 205, 90, 0.22),
@@ -553,9 +499,116 @@ body {
   .ambient__obj--2 { opacity: 0.24; }
   .ambient__obj--3,
   .ambient__obj--4 { opacity: 0.26; }
-  .ambient__ring { border-width: 12px; }
   .ambient__sphere { box-shadow: 0 0 60px rgba(214, 226, 255, 0.18); }
   .ambient__stars { width: 3px; height: 3px; color: #fff; }
   .ambient__stars--2,
   .ambient__stars--3 { width: 4px; height: 4px; }
+}
+
+/* ---------- Viên pha lê, quỹ đạo + vệ tinh, bụi sáng chỉ ở chế độ tối ---------- */
+.ambient__obj--1 { opacity: 1; }
+.ambient__sphere .sky-sun { opacity: 0.38; }
+.ambient__sphere .sky-moon { opacity: 0.7; }
+
+.ambient__gem {
+  width: 0;
+  height: 0;
+}
+
+.ambient__gem-face {
+  --gem-hi: #ffe6e8;
+  --gem-lo: #b3303a;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.4), transparent 55%),
+    color-mix(in srgb, var(--gem-hi), var(--gem-lo) calc(var(--t) * 100%));
+}
+
+.ambient__obj--2 {
+  left: auto;
+  right: 7vw;
+  top: auto;
+  bottom: 12vh;
+  opacity: 0.3;
+  transform: rotateX(25deg) rotateY(35deg);
+}
+
+.ambient__obj--3 {
+  left: 46vw;
+  right: auto;
+  top: 12vh;
+  bottom: auto;
+  opacity: 0.26;
+  transform: rotateX(48deg) rotateY(25deg);
+}
+
+.ambient__orbit {
+  position: absolute;
+  inset: -38%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(22, 69, 184, 0.3);
+  transform-style: preserve-3d;
+  transform: rotateX(74deg) rotateZ(-18deg);
+}
+
+.ambient__orbit-spin {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: orbit-spin 16s linear infinite;
+}
+
+/* Vệ tinh luôn quay mặt về người xem: bù trừ phép nghiêng của quỹ đạo và vòng quay */
+.ambient__sat {
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #c93e45 70%);
+  box-shadow: 0 0 12px 3px rgba(201, 62, 69, 0.45);
+  animation: sat-face 16s linear infinite;
+}
+
+@keyframes orbit-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes sat-face {
+  from { transform: rotateZ(18deg) rotateX(-74deg); }
+  to { transform: rotateZ(-342deg) rotateX(-74deg); }
+}
+
+/* Chế độ sáng: không có chấm bụi sáng (nhìn như vết bẩn), chỉ giữ mây */
+.ambient__stars { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  .ambient__stars { display: block; }
+  .ambient__obj--2 { opacity: 0.38; }
+  .ambient__obj--3 { opacity: 0.32; }
+
+  .ambient__gem-face {
+    --gem-hi: #e4eaff;
+    --gem-lo: #3f4fc4;
+  }
+
+  .ambient__orbit { border-color: rgba(214, 226, 255, 0.38); }
+
+  .ambient__sat {
+    background: radial-gradient(circle at 35% 30%, #fff, #f1c64d 70%);
+    box-shadow: 0 0 12px 3px rgba(241, 198, 77, 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient__orbit-spin,
+  .ambient__sat {
+    animation: none;
+  }
 }
