@@ -10,7 +10,11 @@ function CourseCard({ course, index }: { course: Course; index: number }) {
       <header
         className={`px-4 py-3 text-white ${index % 2 === 0 ? 'bg-[#183771]' : 'bg-[#c93e45]'}`}
       >
-        <p className="text-[11px] font-semibold tracking-[0.18em] text-[#f1c64d]">{course.tag}</p>
+        <p
+          className={`text-[11px] font-semibold tracking-[0.18em] ${index % 2 === 0 ? 'text-[#f1c64d]' : 'text-white'}`}
+        >
+          {course.tag}
+        </p>
         <h3 className="font-display text-lg leading-tight font-extrabold uppercase">
           {course.name}
         </h3>
