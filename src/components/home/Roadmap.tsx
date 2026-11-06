@@ -6,7 +6,10 @@ import { ROADMAP } from '@/content/home'
 /** Khối 8: lộ trình 5 bước, cùng cơ chế cuộn ngang ghim như khối khóa học. */
 export function Roadmap() {
   const steps = ROADMAP.steps.map((s) => (
-    <article key={s.no} className={`${CARD_CLASS} flex h-full flex-col gap-2 !p-5`}>
+    <article
+      key={s.no}
+      className={`${CARD_CLASS} flex h-full flex-col gap-2 !p-5 group-data-[active=true]:border-gold-500 group-data-[active=true]:bg-gold-500/15 group-data-[active=true]:shadow-xl group-data-[active=true]:shadow-black/10`}
+    >
       <p className="font-display text-3xl font-bold text-gold-500">{s.no}</p>
       <h3 className="font-display text-xl font-bold text-fg">{s.title}</h3>
       <p className="text-muted">{s.text}</p>

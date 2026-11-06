@@ -237,8 +237,8 @@ body {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  --sy: 0;
   --orb: 0.18;
+  perspective: 1100px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -252,6 +252,7 @@ body {
   border-radius: 50%;
   filter: blur(60px);
   background: radial-gradient(circle, rgba(212, 175, 55, var(--orb)) 0%, transparent 68%);
+  will-change: transform;
 }
 
 .ambient__orb--a {
@@ -283,54 +284,50 @@ body {
     linear-gradient(var(--border-gold) 1px, transparent 1px),
     linear-gradient(90deg, var(--border-gold) 1px, transparent 1px);
   background-size: 64px 64px;
-  transform: perspective(600px) rotateX(62deg);
-  transform-origin: top;
+  transform: translate3d(0, 0, -120px) rotateX(65deg);
+  transform-origin: 50% 0;
+  will-change: transform;
   mask-image: linear-gradient(to bottom, transparent, #000 40%, transparent);
   opacity: 0.5;
-}
-
-.ambient__scene {
-  position: absolute;
-  inset: 0;
-  perspective: 900px;
 }
 
 .ambient__obj {
   position: absolute;
   transform-style: preserve-3d;
-  opacity: 0.55;
+  will-change: transform;
 }
 
+/* Vị trí gốc và dáng tĩnh (khi giảm chuyển động); JS ghi đè transform khi cuộn. */
 .ambient__obj--1 {
-  top: 14%;
-  right: 9%;
-  transform: translateY(calc(var(--sy) * -0.04px)) rotateX(calc(var(--sy) * 0.11deg + 20deg))
-    rotateY(calc(var(--sy) * 0.17deg + 30deg));
+  right: -6vw;
+  top: 12vh;
+  opacity: 0.6;
 }
 
 .ambient__obj--2 {
-  bottom: 18%;
-  left: 7%;
-  transform: translateY(calc(var(--sy) * 0.03px)) rotateX(calc(var(--sy) * -0.14deg))
-    rotateY(calc(var(--sy) * 0.1deg + 10deg));
+  left: -12vw;
+  top: 42vh;
+  opacity: 0.5;
+  transform: rotateX(48deg) rotateY(25deg);
 }
 
 .ambient__obj--3 {
-  top: 48%;
-  right: 22%;
-  transform: translateY(calc(var(--sy) * -0.06px)) rotateX(calc(var(--sy) * 0.09deg + 65deg))
-    rotateZ(calc(var(--sy) * 0.12deg));
+  left: 12vw;
+  top: 16vh;
+  opacity: 0.4;
+  transform: rotateX(-25deg) rotateY(35deg);
 }
 
 .ambient__obj--4 {
-  top: 26%;
-  left: 18%;
-  transform: translateY(calc(var(--sy) * 0.05px));
+  right: 24vw;
+  bottom: 14vh;
+  opacity: 0.4;
+  transform: rotateX(48deg) rotateY(25deg);
 }
 
 .ambient__cube {
-  width: 96px;
-  height: 96px;
+  width: 100px;
+  height: 100px;
 }
 
 .ambient__cube--sm {
@@ -345,12 +342,12 @@ body {
   background: rgba(212, 175, 55, 0.05);
 }
 
-.ambient__cube .f1 { transform: translateZ(48px); }
-.ambient__cube .f2 { transform: rotateY(180deg) translateZ(48px); }
-.ambient__cube .f3 { transform: rotateY(90deg) translateZ(48px); }
-.ambient__cube .f4 { transform: rotateY(-90deg) translateZ(48px); }
-.ambient__cube .f5 { transform: rotateX(90deg) translateZ(48px); }
-.ambient__cube .f6 { transform: rotateX(-90deg) translateZ(48px); }
+.ambient__cube .f1 { transform: translateZ(50px); }
+.ambient__cube .f2 { transform: rotateY(180deg) translateZ(50px); }
+.ambient__cube .f3 { transform: rotateY(90deg) translateZ(50px); }
+.ambient__cube .f4 { transform: rotateY(-90deg) translateZ(50px); }
+.ambient__cube .f5 { transform: rotateX(90deg) translateZ(50px); }
+.ambient__cube .f6 { transform: rotateX(-90deg) translateZ(50px); }
 .ambient__cube--sm .f1 { transform: translateZ(28px); }
 .ambient__cube--sm .f2 { transform: rotateY(180deg) translateZ(28px); }
 .ambient__cube--sm .f3 { transform: rotateY(90deg) translateZ(28px); }
@@ -359,16 +356,23 @@ body {
 .ambient__cube--sm .f6 { transform: rotateX(-90deg) translateZ(28px); }
 
 .ambient__ring {
-  width: 120px;
-  height: 120px;
+  width: 440px;
+  height: 440px;
   border-radius: 50%;
-  border: 6px solid var(--border-gold);
+  border: 22px solid rgba(212, 175, 55, 0.55);
+  box-shadow:
+    inset 5px 8px 12px rgba(255, 255, 255, 0.5),
+    inset -6px -8px 15px rgba(122, 90, 12, 0.35),
+    20px 30px 45px rgba(122, 90, 12, 0.12);
 }
 
 .ambient__sphere {
-  width: 72px;
-  height: 72px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, var(--gold-400), transparent 70%);
-  opacity: 0.4;
+  background: radial-gradient(circle at 28% 23%, #fff 0%, #fbe9b0 18%, #e2b94b 48%, #a8801c 76%, #5a420a 100%);
+  box-shadow:
+    inset -25px -30px 45px rgba(90, 66, 10, 0.35),
+    inset 9px 9px 28px rgba(255, 255, 255, 0.65),
+    35px 55px 65px rgba(122, 90, 12, 0.18);
 }

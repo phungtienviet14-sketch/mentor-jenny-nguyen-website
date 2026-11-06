@@ -4,7 +4,8 @@ import { Reveal } from '@/components/motion/Reveal'
 
 /** Lớp dùng chung cho vùng nội dung của mỗi khối và thẻ. */
 export const SECTION_CLASS = 'mx-auto w-full max-w-6xl px-6 py-20 md:py-28'
-export const CARD_CLASS = 'rounded-3xl border border-line-gold bg-surface/85 p-6 backdrop-blur-sm md:p-8'
+export const CARD_CLASS =
+  'rounded-3xl border border-line-gold bg-surface/85 p-6 backdrop-blur-sm transition-[translate,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-gold-500 hover:shadow-xl hover:shadow-black/10 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:p-8'
 
 type Props = {
   eyebrow?: string

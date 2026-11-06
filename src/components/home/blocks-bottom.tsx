@@ -87,7 +87,7 @@ export function FinalCta() {
         </Reveal>
       </div>
       <Reveal index={1}>
-        <form className={`${CARD_CLASS} flex flex-col gap-4`} noValidate>
+        <form className={`${CARD_CLASS} flex flex-col gap-4 hover:translate-y-0 hover:shadow-none`} noValidate>
           <label className="flex flex-col gap-1 text-sm font-medium text-fg">
             Họ tên
             <input name="fullName" autoComplete="name" className={field} placeholder="Nguyễn Văn A" />
