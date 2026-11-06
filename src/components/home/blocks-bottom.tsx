@@ -1,3 +1,4 @@
+import { LeadForm } from '@/components/home/LeadForm'
 import { Reveal } from '@/components/motion/Reveal'
 import { Button } from '@/components/ui/Button'
 import { CARD_CLASS, SECTION_CLASS, SectionHeading } from '@/components/ui/SectionHeading'
@@ -75,13 +76,7 @@ export function Faq() {
   )
 }
 
-const field =
-  'w-full rounded-xl border border-line-gold bg-base px-4 py-3 text-fg placeholder:text-muted focus-visible:outline-offset-2'
-
-/**
- * Khối 16: lời mời cuối + form. Đây là giao diện (Phase 3); gửi dữ liệu, kiểm tra, Turnstile và
- * trạng thái lỗi/đang gửi/thành công được nối ở Phase 4.
- */
+/** Khối 16: lời mời cuối + form đăng ký (xử lý ở LeadForm, gửi qua /api/leads). */
 export function FinalCta() {
   return (
     <section id="dang-ky" className={`${SECTION_CLASS} grid gap-10 md:grid-cols-2`}>
@@ -96,74 +91,11 @@ export function FinalCta() {
         </Reveal>
       </div>
       <Reveal index={1}>
-        <form
-          className={`${CARD_CLASS} flex flex-col gap-4 hover:translate-y-0 hover:shadow-none`}
-          noValidate
-        >
-          <label className="flex flex-col gap-1 text-sm font-medium text-fg">
-            Họ tên
-            <input
-              name="fullName"
-              autoComplete="name"
-              className={field}
-              placeholder="Nguyễn Văn A"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm font-medium text-fg">
-            Số điện thoại / Zalo
-            <input
-              name="phone"
-              type="tel"
-              autoComplete="tel"
-              inputMode="tel"
-              className={field}
-              placeholder="09xx xxx xxx"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm font-medium text-fg">
-            Email
-            <input
-              name="email"
-              type="email"
-              autoComplete="email"
-              className={field}
-              placeholder="ban@congty.vn"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm font-medium text-fg">
-            Công ty &amp; chức vụ
-            <input
-              name="company"
-              autoComplete="organization"
-              className={field}
-              placeholder="Công ty, chức vụ"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm font-medium text-fg">
-            Quan tâm
-            <select name="interest" className={field} defaultValue="">
-              <option value="" disabled>
-                Chọn nội dung quan tâm
-              </option>
-              {FINAL_CTA.interests.map((o) => (
-                <option key={o}>{o}</option>
-              ))}
-            </select>
-          </label>
-          <label className="flex items-start gap-3 text-xs text-muted">
-            <input type="checkbox" name="consent" className="mt-0.5" />
-            <span>
-              Tôi đồng ý để đội ngũ Jenny liên hệ theo{' '}
-              <a href="/chinh-sach-bao-mat" className="underline">
-                Chính sách bảo mật
-              </a>
-              .
-            </span>
-          </label>
-          <Button type="button" role="button" className="w-full">
-            {FINAL_CTA.submit}
-          </Button>
-        </form>
+        <LeadForm
+          interests={FINAL_CTA.interests}
+          submitLabel={FINAL_CTA.submit}
+          className={`${CARD_CLASS} hover:translate-y-0 hover:shadow-none`}
+        />
       </Reveal>
     </section>
   )
