@@ -27,7 +27,8 @@ export function Reveal({ children, index = 0, as: Tag = 'div', className = '' }:
       typeof IntersectionObserver === 'undefined' ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
-      setVisible(true)
+      // Không cần quan sát: hiện ngay bằng DOM để tránh setState đồng bộ trong effect.
+      el.classList.add('is-visible')
       return
     }
     const observer = new IntersectionObserver(

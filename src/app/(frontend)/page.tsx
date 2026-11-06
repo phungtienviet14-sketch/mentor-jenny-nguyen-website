@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { Organization, Person } from 'schema-dts'
 
 import { Reveal } from '@/components/motion/Reveal'
@@ -38,12 +39,12 @@ export default function HomePage() {
         <p className="max-w-2xl text-lg text-muted">{SITE.description}</p>
       </Reveal>
       <Reveal index={3}>
-        <a
+        <Link
           href="/admin"
           className="inline-flex rounded-full bg-action px-8 py-3 font-semibold text-on-gold transition-colors hover:bg-action-hover active:bg-action-pressed"
         >
           Trang đang được xây dựng
-        </a>
+        </Link>
       </Reveal>
     </section>
   )
