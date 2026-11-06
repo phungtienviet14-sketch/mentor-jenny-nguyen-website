@@ -100,3 +100,5 @@ Lưu ý: bản Next.js thử nghiệm trong thư mục tạm (ngoài repo) **s�
 - Việc làm ở Phase 2: tasks 2.1-2.13 trong TASKS.md (Payload + Postgres, Tailwind v4, tokens Sáng/Tối, font, khung SEO, collections + phân quyền admin/marketing, seed từ docx, CI, test), mở PR cho bạn xem.
 
 **Việc của bạn còn lại:** GA4 + Tag Manager (ID), App Password Gmail (khi tới Phase 4), nâng Node (nếu có thể), tên miền/DNS (Phase 6), admin duyệt pháp lý, email người dùng marketing (khi có).
+
+- Tên miền: mentorjennynguyen.com (chủ sở hữu tự cấu hình DNS sau, Phase 6). Cả hai email admin đều có quyền duyệt Chính sách bảo mật và Điều khoản. GA4/GTM chỉ cần ở Phase 4, không chặn Phase 2. Node: người dùng cần giải thích; đề xuất nâng bằng winget hoặc bộ cài nodejs.org, cần được cho phép trước khi tôi cài.
