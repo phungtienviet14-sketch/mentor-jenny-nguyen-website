@@ -29,7 +29,7 @@ export const HERO = {
     'Hệ thống kênh tự động kéo khách về đều đặn mỗi ngày',
     'Quy trình đóng gói sẵn, giao cho nhân viên là chạy',
   ],
-  nameTag: { name: 'Mentor', roles: 'Doanh nhân · Mentor · Tác giả sách' },
+  nameTag: { name: 'Mentor Jenny Nguyễn ✦ AI thực chiến', roles: 'Doanh nhân · Mentor · Tác giả sách' },
 }
 
 export const STATS = [
@@ -58,9 +58,9 @@ export const CONTEXT = {
   body: 'Doanh nghiệp phải làm nhiều hơn với ngân sách và nguồn lực giới hạn. Khi AI thay đổi cách sản xuất nội dung, bán hàng và quản lý, nhiều chủ doanh nghiệp vẫn gặp khó khăn trong việc triển khai vào vận hành thực tế.',
   askTitle: 'Có phải anh chị đang gặp:',
   pains: [
-    'Chi phí sản xuất nội dung cao nhưng hiệu quả chưa như kỳ vọng.',
+    'Chi phí quảng cáo và sản xuất nội dung cao nhưng hiệu quả chưa như kỳ vọng.',
     'Nhân sự bận rộn, chủ doanh nghiệp ôm quá nhiều việc.',
-    'Đã học nhiều khóa AI nhưng về công ty không áp dụng được.',
+    'Học nhiều khóa AI, cài nhiều công cụ, nhưng không áp dụng được.',
     'Đối thủ ra video mỗi ngày, còn mình vẫn chờ ê-kíp quay dựng.',
   ],
   closing:
@@ -82,7 +82,10 @@ export const ABOUT = {
   roles: [
     'Tổng giám đốc NetViet TV lĩnh vực Công nghệ và truyền thông ứng dụng AI (sản xuất TVC, video, phim, app AI, MCN VHub…)',
     'Trưởng cộng đồng Công nghệ AI Khởi nghiệp Sáng tạo Quốc gia Techfest Việt Nam - Trung tâm Hỗ trợ Khởi nghiệp Sáng tạo Quốc gia',
+    'Chuyên gia nội dung chuyên mục "Giải mã AI" (VTV2)',
     'BCH CLB Đầu tư và Khởi nghiệp Doanh nhân trẻ Việt Nam',
+    'Ban giám khảo các cuộc thi khởi nghiệp, AI cấp bộ, tỉnh',
+    'Doanh nhân tiêu biểu hội nhập 2019; Vinh danh Hiến kế kinh tế Chính phủ 2019',
   ],
   cta: { label: 'ĐỌC CÂU CHUYỆN CỦA JENNY', href: '#ve-jenny' },
 }
@@ -128,6 +131,7 @@ export const COURSES: Course[] = [
       'Quy trình làm video AI trọn vẹn: ý tưởng, kịch bản, hình ảnh, giọng đọc, dựng, xuất bản',
       'Video quảng cáo đầu tiên cho sản phẩm của mình, làm xong ngay tại lớp',
       'Hệ thống 3–5 kênh vệ tinh và lịch đăng 30 ngày',
+      'Bộ quy trình giao cho nhân viên vận hành, chủ doanh nghiệp chỉ cần duyệt',
     ],
     format: 'Offline 2 ngày + nhóm hỗ trợ sau khóa',
     confirm: true,
@@ -142,6 +146,7 @@ export const COURSES: Course[] = [
       'Bản định vị cá nhân và câu chuyện thương hiệu',
       'Bộ ảnh, video chân dung làm bằng AI giữ đúng thần thái của mình',
       '30 bài nội dung mẫu theo giọng văn riêng',
+      'Kế hoạch xây kênh cá nhân 90 ngày',
     ],
     format: 'Offline / online',
     confirm: true,
@@ -154,6 +159,7 @@ export const COURSES: Course[] = [
     audience: 'chủ doanh nghiệp, ban giám đốc, trưởng phòng vận hành – kinh doanh.',
     outcomes: [
       'Bản đồ ứng dụng AI cho từng phòng ban của doanh nghiệp mình',
+      '1–3 trợ lý AI hoặc AI Agent chạy thật sau khóa học',
       'Lộ trình triển khai 90 ngày và cách đo hiệu quả',
       'Bộ prompt cho báo cáo, kế hoạch, ra quyết định',
     ],
@@ -166,7 +172,12 @@ export const COURSES: Course[] = [
     hook: 'Từ hiểu khách hàng đến chốt đơn, AI làm cùng anh chị.',
     desc: 'Dùng AI cho cả chuỗi marketing: nghiên cứu khách hàng, lên kế hoạch, viết nội dung, làm hình ảnh và video quảng cáo, kịch bản livestream, chăm sóc khách hàng. Đội marketing nhỏ vẫn chạy được khối lượng việc lớn.',
     audience: 'chủ doanh nghiệp, đội marketing – sales, agency.',
-    outcomes: ['Chân dung khách hàng và thông điệp bán hàng rõ ràng'],
+    outcomes: [
+      'Chân dung khách hàng và thông điệp bán hàng rõ ràng',
+      'Kế hoạch nội dung 1 tháng cho các kênh',
+      'Bộ prompt marketing theo ngành',
+      'Mẫu quảng cáo và kịch bản livestream dùng ngay',
+    ],
     format: 'Offline / online',
     confirm: true,
   },
