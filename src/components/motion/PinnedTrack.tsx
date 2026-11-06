@@ -1,7 +1,14 @@
 'use client'
 
-import { motion, useScroll, useSpring, useTransform } from 'motion/react'
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { motion, useMotionValueEvent, useScroll, useSpring, useTransform } from 'motion/react'
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type ReactNode,
+} from 'react'
 
 /** Desktop/tablet: ghim từ 761px (giống site tham chiếu). Luôn tắt khi người dùng bật giảm chuyển động. */
 const QUERY_DESKTOP = '(min-width: 761px) and (prefers-reduced-motion: no-preference)'
@@ -36,7 +43,13 @@ type Props = {
  * Cuộn dọc biến thành chuyển động ngang: khối cao, phần trong `sticky`, track dịch theo tiến độ cuộn
  * (làm mượt bằng spring). Dưới 761px hoặc giảm chuyển động: cuộn ngang tự nhiên có scroll-snap.
  */
-export function PinnedTrack({ header, items, itemClassName = 'w-[78vw] max-w-[440px]', label, pinOnMobile = false }: Props) {
+export function PinnedTrack({
+  header,
+  items,
+  itemClassName = 'w-[78vw] max-w-[440px]',
+  label,
+  pinOnMobile = false,
+}: Props) {
   const store = pinOnMobile ? allStore : desktopStore
   const pinned = useSyncExternalStore(store.subscribe, store.getSnapshot, getServerSnapshot)
   const outerRef = useRef<HTMLElement | null>(null)
@@ -65,8 +78,22 @@ export function PinnedTrack({ header, items, itemClassName = 'w-[78vw] max-w-[44
   }, [pinned, measure])
 
   const { scrollYProgress } = useScroll({ target: outerRef, offset: ['start start', 'end end'] })
-  const smooth = useSpring(scrollYProgress, { stiffness: 140, damping: 32, mass: 0.6, restDelta: 0.0005 })
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 32,
+    mass: 0.6,
+    restDelta: 0.0005,
+  })
   const x = useTransform(smooth, (p) => -p * overflow)
+  // Thanh tiến độ bắt đầu ở 20% như site tham chiếu: .2 + .8p
+  const bar = useTransform(smooth, (p) => 0.2 + p * 0.8)
+
+  // Thẻ đang tới (để làm nổi bật); chỉ cập nhật state khi đổi thẻ
+  const [active, setActive] = useState(0)
+  useMotionValueEvent(smooth, 'change', (p) => {
+    const next = Math.round(Math.min(1, Math.max(0, p)) * (items.length - 1))
+    setActive((prev) => (prev === next ? prev : next))
+  })
 
   // Một phần tử gốc ổn định cho cả hai chế độ để useScroll luôn bám đúng `target`.
   return (
@@ -79,15 +106,25 @@ export function PinnedTrack({ header, items, itemClassName = 'w-[78vw] max-w-[44
       {pinned ? (
         <div className="sticky top-0 flex h-dvh flex-col justify-center gap-4 overflow-hidden pt-[68px] pb-3">
           {header && <div className="mx-auto w-full max-w-6xl px-6">{header}</div>}
-          <motion.ul ref={trackRef} style={{ x }} className="flex w-max gap-6 px-6 will-change-transform">
+          <motion.ul
+            ref={trackRef}
+            style={{ x }}
+            className="flex w-max gap-6 px-6 will-change-transform"
+          >
             {items.map((item, i) => (
-              <li key={i} className={`shrink-0 ${itemClassName}`}>
+              <li key={i} data-active={i === active} className={`group shrink-0 ${itemClassName}`}>
                 {item}
               </li>
             ))}
           </motion.ul>
-          <div className="mx-auto h-1 w-full max-w-6xl overflow-hidden rounded-full bg-line px-6" aria-hidden="true">
-            <motion.div className="h-full origin-left rounded-full bg-action" style={{ scaleX: smooth }} />
+          <div
+            className="mx-auto h-1 w-full max-w-6xl overflow-hidden rounded-full bg-line px-6"
+            aria-hidden="true"
+          >
+            <motion.div
+              className="h-full origin-left rounded-full bg-action"
+              style={{ scaleX: bar }}
+            />
           </div>
         </div>
       ) : (

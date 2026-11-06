@@ -1,5 +1,6 @@
 import type { FAQPage, Organization, Person } from 'schema-dts'
 
+import { BrandBand } from '@/components/home/BrandBand'
 import { Courses } from '@/components/home/Courses'
 import { Roadmap } from '@/components/home/Roadmap'
 import { Ecosystem, Why, Testimonials, Books } from '@/components/home/blocks-mid'
@@ -50,6 +51,7 @@ export default function HomePage() {
       <Partners />
       <Context />
       <About />
+      <BrandBand />
       <Formula />
       <Courses />
       <Roadmap />

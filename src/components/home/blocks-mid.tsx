@@ -92,7 +92,7 @@ export function Books() {
           <Reveal key={b.name} index={i} className={`${CARD_CLASS} flex flex-col gap-4`}>
             <div
               aria-hidden="true"
-              className="flex aspect-[3/2] items-center justify-center rounded-2xl bg-gradient-to-br from-gold-600 to-gold-400 p-6 text-center font-display text-2xl font-bold text-on-gold"
+              className="flex aspect-[3/2] items-center justify-center rounded-2xl bg-gradient-to-br from-[#102978] to-[#2457d6] p-6 text-center font-display text-2xl font-bold text-white"
             >
               {b.name}
             </div>

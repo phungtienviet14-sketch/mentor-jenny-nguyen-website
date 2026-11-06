@@ -16,7 +16,7 @@ const playfair = Playfair_Display({
 
 const beVietnam = Be_Vietnam_Pro({
   subsets: ['vietnamese', 'latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-be-vietnam',
   display: 'swap',
 })
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: 'light dark',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FFFCF5' },
-    { media: '(prefers-color-scheme: dark)', color: '#0B0B0D' },
+    { media: '(prefers-color-scheme: light)', color: '#F8FAFF' },
+    { media: '(prefers-color-scheme: dark)', color: '#0A1230' },
   ],
 }
 
