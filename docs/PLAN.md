@@ -92,3 +92,9 @@ Trạng thái: **CHỜ XÁC NHẬN – chưa viết code. Figma phải xong và 
 - Còn thiếu trước khi duyệt: ảnh thật (chân dung, sách, sự kiện, logo), bản tablet/mobile, trạng thái form (lỗi/thành công), prototype.
 - Đã thêm frame `Home / Mobile 375` (18 khối, menu hamburger, các hàng chuyển thành cột). Còn thiếu: tablet 768, trạng thái form, prototype.
 - Đã thêm 9 frame trạng thái form (desktop: Gift/Consult default, focus, error, submitting, success; mobile: default, error, success) và prototype: nút CTA mở modal, click ô Họ tên → focus → gửi → lỗi → gửi → đang gửi → thành công. Hai flow bắt đầu: Desktop và Mobile. Còn thiếu: tablet 768, nền mờ (scrim) cho overlay, ảnh thật.
+
+## 7. Tai lieu chi tiet (cap nhat)
+- Chuyen dong va thu vien: [MOTION_AND_TECH.md](MOTION_AND_TECH.md) - site tham chieu khong dung thu vien nao; chon Motion + CSS thuan + sticky.
+- SEO va cong cu cho doi marketing: [SEO.md](SEO.md).
+- Task chi tiet Phase 0-6 va cau hoi mo Q1-Q6: [TASKS.md](TASKS.md).
+- Tam dung code theo yeu cau; chua commit ma nguon (ban Next.js thu nghiem nam o thu muc tam, ngoai repo).

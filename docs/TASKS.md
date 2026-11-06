@@ -1,0 +1,104 @@
+# Kế hoạch chi tiết theo task (Phase 0 → 6)
+
+Tham chiếu: [PLAN.md](PLAN.md) (tổng quan), [MOTION_AND_TECH.md](MOTION_AND_TECH.md) (chuyển động & thư viện), [SEO.md](SEO.md) (SEO & công cụ). **Chưa viết code** cho tới khi các câu hỏi mở ở mục 1 được chốt và bạn xác nhận.
+
+## 1. Câu hỏi mở cần chốt trước khi code
+| # | Câu hỏi | Ảnh hưởng |
+|---|---|---|
+| Q1 | Đội marketing quen CMS nào (WordPress, Sanity, Payload, khác)? Họ cần tự sửa những gì (meta, blog, khóa học, FAQ)? | Chọn CMS (SEO.md mục 3) |
+| Q2 | Lead gửi về đâu: Google Sheets, CRM (HubSpot, Bitrix, Zalo OA), email? Ai nhận thông báo? | Phase 4 |
+| Q3 | Domain `mentorjennynguyen.com` do ai quản lý, hosting (Vercel/Cloudflare) | Phase 6, xác minh Search Console |
+| Q4 | Mức chuyển động: giống site tham chiếu đầy đủ (nền 3D + ghim ngang) hay bản rút gọn trên mobile? | Phase 3 |
+| Q5 | Có bao gồm trang con (Khóa học, Sách, Blog) trong đợt 1 không, hay chỉ trang chủ? | Phạm vi SEO |
+| Q6 | Nguồn ảnh thật, logo đối tác đã được phép, số liệu và cảm nhận đã xác nhận | Phase 3 |
+
+## 2. Cấu trúc dự án đề xuất
+```
+src/
+  app/            layout.tsx, page.tsx, sitemap.ts, robots.ts, opengraph-image.tsx, (api)/leads/route.ts
+  components/
+    sections/     01-Hero ... 17-Footer (mỗi khối 1 file, khớp Figma)
+    motion/       Reveal, PinnedTrack, AmbientBackground, Marquee
+    ui/           Button, Card, Field, Dialog, Accordion (shadcn)
+    seo/          JsonLd
+  content/        home.ts (nội dung từ docx), site.ts (liên hệ, social)
+  lib/            leads.ts (zod schema), analytics.ts, env.ts
+  styles/         tokens.css (từ Figma variables)
+tests/            unit (Vitest), e2e (Playwright)
+```
+
+## 3. Task chi tiết
+Ký hiệu: **V** = lệnh/kiểm chứng; mỗi task nhỏ hơn 1 ngày.
+
+### Phase 0 — Khởi tạo & chốt đầu vào
+| ID | Task | Đầu ra | V |
+|---|---|---|---|
+| 0.1 | Chốt Q1–Q6 | Bản quyết định trong PLAN.md | Bạn xác nhận |
+| 0.2 | Gom tài sản (ảnh, logo, font, nội dung thiếu) | Thư mục `assets/` + danh sách còn thiếu | Checklist Phụ lục C docx |
+| 0.3 | Xuất token từ Figma (màu, spacing, radius, text style) | `src/styles/tokens.css` | So khớp tên biến với Figma |
+
+### Phase 1 — Figma (đã làm phần lớn)
+| ID | Task | Trạng thái |
+|---|---|---|
+| 1.1 | Design system + desktop 1440 + mobile 375 | Xong |
+| 1.2 | Trạng thái form + prototype | Xong |
+| 1.3 | Bản tablet 768, ảnh thật, spec chuyển động | Còn thiếu |
+| 1.4 | **Cổng duyệt** của Jenny/team | Chờ |
+
+### Phase 2 — Nền tảng
+| ID | Task | Đầu ra | V |
+|---|---|---|---|
+| 2.1 | Khởi tạo Next.js + TS + Tailwind v4 trong repo (ESLint, Prettier) | `package.json`, cấu hình | `npm run build` |
+| 2.2 | Font `next/font` (Playfair Display, Be Vietnam Pro, subset vietnamese), tokens, layout | `layout.tsx` | Không CLS, chữ Việt đúng |
+| 2.3 | Khung SEO: Metadata API, `sitemap.ts`, `robots.ts`, `JsonLd` | Trang `/` có meta + schema | Rich Results Test |
+| 2.4 | CI GitHub Actions: lint, type-check, test, build, Lighthouse CI | `.github/workflows/ci.yml` | CI xanh trên PR |
+| 2.5 | Thiết lập test (Vitest, Testing Library, Playwright) | Test mẫu chạy được | `npm test` |
+| 2.6 | Cài `motion`, tạo `Reveal`, `Marquee` (CSS) | Component + test | Test reduced-motion |
+
+### Phase 3 — Giao diện 17 khối
+Mỗi khối: viết test render + đối chiếu ảnh chụp với Figma (desktop/mobile).
+| ID | Khối | Ghi chú kỹ thuật |
+|---|---|---|
+| 3.1 | 0 Menu + 1 Hero | Header sticky blur, nút đăng ký nổi, shimmer chữ, ảnh Hero `priority` |
+| 3.2 | 2 Chỉ số + 3 Logo | Đếm số (tùy chọn, tôn trọng reduced-motion), marquee CSS |
+| 3.3 | 4, 5, 6 | Reveal so le 90ms |
+| 3.4 | 7 Khóa học | `PinnedTrack` (≥ 761px) / scroll-snap (mobile) |
+| 3.5 | 8 Lộ trình | `PinnedTrack` + thanh tiến độ |
+| 3.6 | 9, 10, 11, 12 | Lưới thẻ, khối sách, carousel học viên bằng scroll-snap |
+| 3.7 | 13, 14, 15, 16, 17 | Accordion FAQ (Radix), form, footer |
+| 3.8 | `AmbientBackground` (nền vàng) | Orb + lưới 3D, giảm trên mobile |
+| V | Mọi khối | `npm run build`, ảnh chụp so Figma, Lighthouse mobile ≥ 90 |
+
+### Phase 4 — Chức năng & tích hợp
+| ID | Task | V |
+|---|---|---|
+| 4.1 | Schema Zod cho form (SĐT VN, email), thông báo lỗi giống Figma | Unit test các trường hợp biên |
+| 4.2 | API `/api/leads`: kiểm tra, honeypot, Turnstile, rate limit, lưu theo Q2, thông báo | Test tích hợp, không lộ key |
+| 4.3 | Dialog form + trạng thái focus/lỗi/đang gửi/thành công (theo Figma prototype) | Playwright: luồng gửi form |
+| 4.4 | GTM + GA4 + sự kiện (`cta_click`, `form_open`, `generate_lead`), banner cookie | Kiểm bằng GA DebugView |
+| 4.5 | CMS (nếu chọn ở Q1): schema nội dung, preview, webhook revalidate | Marketing sửa meta thử thành công |
+| 4.6 | Trang Chính sách bảo mật, Điều khoản | Có link trong footer và form |
+
+### Phase 5 — Chất lượng, SEO, bảo mật
+| ID | Task | V |
+|---|---|---|
+| 5.1 | Test e2e (menu, form, FAQ, mobile) + coverage ≥ 80% phần logic | `npm run test:coverage` |
+| 5.2 | A11y: tương phản, focus, bàn phím, reduced-motion | axe + kiểm tay |
+| 5.3 | Audit SEO: Lighthouse, Screaming Frog, Rich Results, kiểm JSON-LD | Báo cáo không lỗi nghiêm trọng |
+| 5.4 | Bảo mật: header (CSP, HSTS), phụ thuộc, bí mật | `npm audit`, rà soát secret |
+| 5.5 | Hiệu năng: bundle analyzer, FPS cuộn nền/ghim trên máy yếu | JS đầu < ~150 KB gzip, LCP < 2,5s |
+| 5.6 | So sánh chuyển động với site tham chiếu (ảnh chụp theo mốc cuộn + video) | Bạn duyệt |
+
+### Phase 6 — Ra mắt & bàn giao
+| ID | Task | V |
+|---|---|---|
+| 6.1 | Deploy (Vercel/Cloudflare), biến môi trường, domain, SSL | Trang chạy trên domain thật |
+| 6.2 | Nộp sitemap Search Console/Bing; xác minh GA4/GTM | Trạng thái "Đã gửi" |
+| 6.3 | Thay placeholder bằng nội dung đã xác nhận | Danh sách "chờ J" trống |
+| 6.4 | Tài liệu bàn giao cho marketing (sửa meta, thêm bài, đọc báo cáo) và vận hành | Buổi hướng dẫn |
+
+## 4. Quy ước làm việc
+- Nhánh `feat/<id>-<tên>`; PR nhỏ theo task; commit dạng conventional commits.
+- Mỗi PR: test xanh, Lighthouse CI không tụt, ảnh chụp so Figma đính kèm.
+- Thứ tự giao: trang chủ chạy được (Phase 2–3) → form (Phase 4) → SEO/QA (Phase 5) → ra mắt (Phase 6).
+- Ước tính: Phase 2: 1,5 ngày; 3: 6–7 ngày; 4: 3 ngày; 5: 2 ngày; 6: 1 ngày (tổng ~14–16 ngày, chưa tính chờ nội dung/ảnh).
