@@ -90,3 +90,4 @@ Trạng thái: **CHỜ XÁC NHẬN – chưa viết code. Figma phải xong và 
 - Đã chốt hướng thị giác: **nền tối + vàng ánh kim** (theo docx).
 - Figma: https://www.figma.com/design/nHvZGU6ebQlxBzCjsHnzI3 – design tokens (Color/Spacing/Radius), 9 text style (Playfair Display + Be Vietnam Pro), frame `Home / Desktop 1440` đủ 18 khối (0–17) với nội dung thật từ docx.
 - Còn thiếu trước khi duyệt: ảnh thật (chân dung, sách, sự kiện, logo), bản tablet/mobile, trạng thái form (lỗi/thành công), prototype.
+- Đã thêm frame `Home / Mobile 375` (18 khối, menu hamburger, các hàng chuyển thành cột). Còn thiếu: tablet 768, trạng thái form, prototype.
