@@ -80,3 +80,8 @@ Lưu ý: bản Next.js thử nghiệm trong thư mục tạm (ngoài repo) **s�
 - Đã xong: D1-D7 (Figma), bản Light, bản nháp pháp lý (docs/legal/). Xem TASKS.md mục 13-15.
 - Zalo hoãn; ảnh và nội dung bổ sung qua Payload nên Phase 3 không bị chặn bởi U1-U3.
 - Còn lại của bạn: xem danh sách cuối cuộc trò chuyện (cài/đăng nhập Vercel CLI, tạo Neon project, danh sách người dùng Payload, email gửi thư và DNS, admin duyệt pháp lý).
+
+## 17. Neon da tao (boi tro ly qua CLI)
+- Project: mentor-jenny-nguyen, id lingering-water-01461847, vung aws-ap-southeast-1 (Singapore), Postgres 18, nhanh mac dinh main (br-round-tree-azjv1eev), database neondb, to chuc 74 Phung Viet.
+- Chuoi ket noi (pooled va unpooled) luu o .env.local (bi gitignore), khong co trong repo. Da kiem tra ket noi ca hai thanh cong.
+- Viec con lai cua ban ve Neon: khong con. Con Vercel CLI (cai + dang nhap), danh sach nguoi dung Payload, email gui thu/DNS, GA4/GTM, admin duyet phap ly.
