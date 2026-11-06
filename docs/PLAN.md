@@ -91,3 +91,4 @@ Trạng thái: **CHỜ XÁC NHẬN – chưa viết code. Figma phải xong và 
 - Figma: https://www.figma.com/design/nHvZGU6ebQlxBzCjsHnzI3 – design tokens (Color/Spacing/Radius), 9 text style (Playfair Display + Be Vietnam Pro), frame `Home / Desktop 1440` đủ 18 khối (0–17) với nội dung thật từ docx.
 - Còn thiếu trước khi duyệt: ảnh thật (chân dung, sách, sự kiện, logo), bản tablet/mobile, trạng thái form (lỗi/thành công), prototype.
 - Đã thêm frame `Home / Mobile 375` (18 khối, menu hamburger, các hàng chuyển thành cột). Còn thiếu: tablet 768, trạng thái form, prototype.
+- Đã thêm 9 frame trạng thái form (desktop: Gift/Consult default, focus, error, submitting, success; mobile: default, error, success) và prototype: nút CTA mở modal, click ô Họ tên → focus → gửi → lỗi → gửi → đang gửi → thành công. Hai flow bắt đầu: Desktop và Mobile. Còn thiếu: tablet 768, nền mờ (scrim) cho overlay, ảnh thật.
