@@ -529,3 +529,33 @@ body {
 
   .ambient__stars { opacity: 0.7; }
 }
+
+/* ---------- Làm dịu nền để nội dung chính là tâm điểm ---------- */
+.ambient__obj--1 { opacity: 0.38; }
+.ambient__obj--2 { opacity: 0.26; }
+.ambient__obj--3,
+.ambient__obj--4 { opacity: 0.2; }
+.ambient__ring { border-width: 12px; }
+.ambient__sphere {
+  box-shadow:
+    0 0 36px 4px rgba(255, 205, 90, 0.22),
+    0 0 100px 36px rgba(255, 150, 50, 0.1);
+}
+.ambient__stars { width: 2px; height: 2px; color: rgba(244, 160, 40, 0.4); }
+.ambient__stars--2,
+.ambient__stars--3 { width: 2px; height: 2px; }
+.ambient__cloud { opacity: 0.45; }
+.ambient__cloud--b { opacity: 0.32; }
+.ambient__cloud--c { opacity: 0.36; }
+
+@media (prefers-color-scheme: dark) {
+  .ambient__obj--1 { opacity: 0.7; }
+  .ambient__obj--2 { opacity: 0.24; }
+  .ambient__obj--3,
+  .ambient__obj--4 { opacity: 0.26; }
+  .ambient__ring { border-width: 12px; }
+  .ambient__sphere { box-shadow: 0 0 60px rgba(214, 226, 255, 0.18); }
+  .ambient__stars { width: 3px; height: 3px; color: #fff; }
+  .ambient__stars--2,
+  .ambient__stars--3 { width: 4px; height: 4px; }
+}
