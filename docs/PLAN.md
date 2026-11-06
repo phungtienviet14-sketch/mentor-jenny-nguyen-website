@@ -98,3 +98,5 @@ Trạng thái: **CHỜ XÁC NHẬN – chưa viết code. Figma phải xong và 
 - SEO va cong cu cho doi marketing: [SEO.md](SEO.md).
 - Task chi tiet Phase 0-6 va cau hoi mo Q1-Q6: [TASKS.md](TASKS.md).
 - Tam dung code theo yeu cau; chua commit ma nguon (ban Next.js thu nghiem nam o thu muc tam, ngoai repo).
+
+- Danh gia muc san sang va ghi chu ban giao (Figma ID, bien, quyet dinh): [READINESS.md](READINESS.md) - doc file nay dau tien o phien moi.
