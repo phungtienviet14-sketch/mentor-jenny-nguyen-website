@@ -102,3 +102,20 @@ Mỗi khối: viết test render + đối chiếu ảnh chụp với Figma (desk
 - Mỗi PR: test xanh, Lighthouse CI không tụt, ảnh chụp so Figma đính kèm.
 - Thứ tự giao: trang chủ chạy được (Phase 2–3) → form (Phase 4) → SEO/QA (Phase 5) → ra mắt (Phase 6).
 - Ước tính: Phase 2: 1,5 ngày; 3: 6–7 ngày; 4: 3 ngày; 5: 2 ngày; 6: 1 ngày (tổng ~14–16 ngày, chưa tính chờ nội dung/ảnh).
+
+## 5. Quyết định đã chốt (Q1-Q6)
+
+| # | Quyết định | He quả kỹ thuật |
+|---|---|---|
+| Q1 | **Payload CMS** | Payload 3 chạy cùng ứng dụng Next.js (một repo, một lần deploy). Collections: Pages/Sections, Courses, Books, Posts (Tin tức AI), Testimonials, Events, Press, Leads, Media. Trường SEO (title, description, slug, canonical, OG image, noindex) trên mọi collection. Cần cơ sở dữ liệu (Postgres) và nơi lưu ảnh |
+| Q2 | Lead gửi qua **Zalo + email** | Mỗi lead: lưu vào collection Leads trong Payload (nguồn sự thật), gửi email (Resend hoặc SMTP), gửi Zalo. **Rủi ro cần xác minh trước Phase 4**: Zalo OA API chỉ nhắn được cho người đã tương tác với OA, ZNS cần mẫu tin được duyệt và tính phí; nếu không khả thi sẽ dùng webhook trung gian (n8n/Make) hoặc nhóm Zalo thủ công. Email là kênh bắt buộc, Zalo là kênh bổ sung |
+| Q3 | Bạn quản lý tên miền; hosting do tôi chọn | Đề xuất: **Vercel (vùng Singapore) + Neon Postgres (Singapore) + Cloudflare R2 hoặc Vercel Blob cho ảnh**. Lý do: Payload 3 + Next.js chạy tốt, preview theo PR, CI sẵn. Lưu ý: gói Vercel Hobby chỉ cho phi thương mại, trang bán khóa học nên dùng gói trả phí (khoảng 20 USD/tháng, cần kiểm tra giá hiện tại). Phương án thay: VPS Docker tại Việt Nam (rẻ, độ trễ thấp, nhưng tự vận hành). Bạn chỉ cần trỏ DNS khi tới Phase 6 |
+| Q4 | Mobile giữ **đủ nền 3D và cuộn ngang ghim** | Làm theo ý bạn nhưng bổ sung các biện pháp an toàn: dùng đơn vị `dvh`, giảm chiều dài ghim trên mobile, tự phát hiện máy yếu (đo FPS/`deviceMemory`) để giảm độ phức tạp nền, vẫn tôn trọng giảm chuyển động của hệ điều hành, **kiểm thử trên điện thoại thật** (iPhone Safari, Android tầm trung). Mục tiêu giữ Lighthouse mobile >= 85 (hạ từ 90 vì nền 3D) |
+| Q5 | Theo đề xuất của tôi | **Đợt 1**: trang chủ đầy đủ + khung trang từ CMS (mẫu trang khóa học, sách, bài blog, sitemap, schema) và 4 trang khóa học cơ bản. **Đợt 2**: nội dung blog và các trang sách/giải pháp do đội marketing đăng qua Payload |
+| Q6 | Ảnh thật, logo được phép, số liệu và cảm nhận đã xác nhận | **Chưa nhận được**: hiện chỉ có 3 file trong thư mục dự án. Cần gửi trước Phase 3: ảnh chân dung độ phân giải cao, ảnh bìa 2 sách, ảnh sự kiện, logo đối tác được phép, 3-6 cảm nhận học viên, số liệu xác nhận, link báo chí/VTV. Đến khi đủ, web dùng nội dung giữ chỗ có đánh dấu |
+
+### Thay đổi kế hoạch do các quyết định này
+- Phase 2 thêm: cài Payload vào Next.js, kết nối Postgres, tạo collections, tài khoản quản trị, phân quyền (marketing chỉ sửa nội dung, không đụng cấu hình).
+- Phase 4: thay "lưu lead vào Sheet" bằng collection Leads + email + Zalo; không lưu bí mật trong repo.
+- Phase 5: kiểm thử hiệu năng trên thiết bị thật cho nền 3D + ghim ngang mobile.
+- Ước tính tăng: +2 đến 3 ngày (Payload + thiết bị thật), tổng khoảng 16-19 ngày.
