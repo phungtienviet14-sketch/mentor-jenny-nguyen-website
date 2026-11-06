@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import { Be_Vietnam_Pro, Playfair_Display } from 'next/font/google'
 import type { ReactNode } from 'react'
 
+import { Header } from '@/components/home/Header'
+import { AmbientBackground } from '@/components/motion/AmbientBackground'
 import { SITE, SITE_URL } from '@/lib/site'
 
 import './globals.css'
@@ -49,6 +51,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="vi" className={`${playfair.variable} ${beVietnam.variable}`}>
       <body>
+        <AmbientBackground />
+        <Header />
         <main>{children}</main>
       </body>
     </html>

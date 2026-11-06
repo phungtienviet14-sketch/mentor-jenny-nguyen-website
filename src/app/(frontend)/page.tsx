@@ -1,11 +1,16 @@
-import Link from 'next/link'
-import type { Organization, Person } from 'schema-dts'
+import type { FAQPage, Organization, Person } from 'schema-dts'
 
-import { Reveal } from '@/components/motion/Reveal'
+import { Courses } from '@/components/home/Courses'
+import { Roadmap } from '@/components/home/Roadmap'
+import { Ecosystem, Why, Testimonials, Books } from '@/components/home/blocks-mid'
+import { Faq, FinalCta, Footer, Gifts, Press } from '@/components/home/blocks-bottom'
+import { About, Context, Formula, Hero, Partners, Stats } from '@/components/home/blocks-top'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { FAQ } from '@/content/home'
 import { SITE, absoluteUrl } from '@/lib/site'
 
-/** Trang giữ chỗ của Phase 2. 17 khối trang chủ được dựng ở Phase 3 theo Figma. */
+type WithCtx<T> = T & { '@context': 'https://schema.org' }
+
 export default function HomePage() {
   const person = {
     '@context': 'https://schema.org',
@@ -14,7 +19,7 @@ export default function HomePage() {
     url: absoluteUrl('/'),
     jobTitle: 'Mentor ứng dụng AI cho doanh nghiệp',
     worksFor: { '@type': 'Organization', name: SITE.org },
-  } satisfies Person & { '@context': 'https://schema.org' }
+  } satisfies WithCtx<Person>
 
   const organization = {
     '@context': 'https://schema.org',
@@ -23,29 +28,40 @@ export default function HomePage() {
     url: absoluteUrl('/'),
     telephone: SITE.phone,
     address: { '@type': 'PostalAddress', ...SITE.address },
-  } satisfies Organization & { '@context': 'https://schema.org' }
+  } satisfies WithCtx<Organization>
+
+  const faq = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ.items.map((f) => ({
+      '@type': 'Question' as const,
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer' as const, text: f.a },
+    })),
+  } satisfies WithCtx<FAQPage>
 
   return (
-    <section className="mx-auto flex min-h-dvh max-w-5xl flex-col justify-center gap-6 px-6 py-24">
+    <>
       <JsonLd data={person} />
       <JsonLd data={organization} />
-      <Reveal>
-        <p className="text-sm font-semibold tracking-[0.2em] text-gold-500 uppercase">{SITE.org}</p>
-      </Reveal>
-      <Reveal index={1}>
-        <h1 className="shimmer-text font-display text-5xl leading-tight font-bold md:text-7xl">{SITE.name}</h1>
-      </Reveal>
-      <Reveal index={2}>
-        <p className="max-w-2xl text-lg text-muted">{SITE.description}</p>
-      </Reveal>
-      <Reveal index={3}>
-        <Link
-          href="/admin"
-          className="inline-flex rounded-full bg-action px-8 py-3 font-semibold text-on-gold transition-colors hover:bg-action-hover active:bg-action-pressed"
-        >
-          Trang đang được xây dựng
-        </Link>
-      </Reveal>
-    </section>
+      <JsonLd data={faq} />
+      <Hero />
+      <Stats />
+      <Partners />
+      <Context />
+      <About />
+      <Formula />
+      <Courses />
+      <Roadmap />
+      <Ecosystem />
+      <Why />
+      <Testimonials />
+      <Books />
+      <Gifts />
+      <Press />
+      <Faq />
+      <FinalCta />
+      <Footer />
+    </>
   )
 }
