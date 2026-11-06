@@ -59,7 +59,12 @@ export function Faq() {
             <details className="group rounded-2xl border border-line-gold bg-surface/85 px-6 py-4 backdrop-blur-sm">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-fg">
                 {f.q}
-                <span aria-hidden="true" className="text-xl text-gold-500 transition-transform group-open:rotate-45">+</span>
+                <span
+                  aria-hidden="true"
+                  className="text-xl text-gold-500 transition-transform group-open:rotate-45"
+                >
+                  +
+                </span>
               </summary>
               <p className="mt-3 text-muted">{f.a}</p>
             </details>
@@ -81,28 +86,58 @@ export function FinalCta() {
   return (
     <section id="dang-ky" className={`${SECTION_CLASS} grid gap-10 md:grid-cols-2`}>
       <div className="flex flex-col gap-4">
-        <SectionHeading eyebrow={FINAL_CTA.eyebrow} title={FINAL_CTA.title} subtitle={FINAL_CTA.subtitle} />
+        <SectionHeading
+          eyebrow={FINAL_CTA.eyebrow}
+          title={FINAL_CTA.title}
+          subtitle={FINAL_CTA.subtitle}
+        />
         <Reveal index={3}>
           <p className="text-muted">{FINAL_CTA.body}</p>
         </Reveal>
       </div>
       <Reveal index={1}>
-        <form className={`${CARD_CLASS} flex flex-col gap-4 hover:translate-y-0 hover:shadow-none`} noValidate>
+        <form
+          className={`${CARD_CLASS} flex flex-col gap-4 hover:translate-y-0 hover:shadow-none`}
+          noValidate
+        >
           <label className="flex flex-col gap-1 text-sm font-medium text-fg">
             Họ tên
-            <input name="fullName" autoComplete="name" className={field} placeholder="Nguyễn Văn A" />
+            <input
+              name="fullName"
+              autoComplete="name"
+              className={field}
+              placeholder="Nguyễn Văn A"
+            />
           </label>
           <label className="flex flex-col gap-1 text-sm font-medium text-fg">
             Số điện thoại / Zalo
-            <input name="phone" type="tel" autoComplete="tel" inputMode="tel" className={field} placeholder="09xx xxx xxx" />
+            <input
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              inputMode="tel"
+              className={field}
+              placeholder="09xx xxx xxx"
+            />
           </label>
           <label className="flex flex-col gap-1 text-sm font-medium text-fg">
             Email
-            <input name="email" type="email" autoComplete="email" className={field} placeholder="ban@congty.vn" />
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              className={field}
+              placeholder="ban@congty.vn"
+            />
           </label>
           <label className="flex flex-col gap-1 text-sm font-medium text-fg">
             Công ty &amp; chức vụ
-            <input name="company" autoComplete="organization" className={field} placeholder="Công ty, chức vụ" />
+            <input
+              name="company"
+              autoComplete="organization"
+              className={field}
+              placeholder="Công ty, chức vụ"
+            />
           </label>
           <label className="flex flex-col gap-1 text-sm font-medium text-fg">
             Quan tâm
@@ -118,7 +153,11 @@ export function FinalCta() {
           <label className="flex items-start gap-3 text-xs text-muted">
             <input type="checkbox" name="consent" className="mt-0.5" />
             <span>
-              Tôi đồng ý để đội ngũ Jenny liên hệ theo <a href="/chinh-sach-bao-mat" className="underline">Chính sách bảo mật</a>.
+              Tôi đồng ý để đội ngũ Jenny liên hệ theo{' '}
+              <a href="/chinh-sach-bao-mat" className="underline">
+                Chính sách bảo mật
+              </a>
+              .
             </span>
           </label>
           <Button type="button" role="button" className="w-full">
@@ -143,7 +182,10 @@ export function Footer() {
           <p className="font-semibold text-fg">Liên hệ</p>
           {FOOTER.hotlines.map((h) => (
             <p key={h.tel}>
-              Hotline ({h.label}): <a href={`tel:${h.tel}`} className="text-fg underline">{h.phone}</a>
+              Hotline ({h.label}):{' '}
+              <a href={`tel:${h.tel}`} className="text-fg underline">
+                {h.phone}
+              </a>
             </p>
           ))}
           <p>Website: {FOOTER.websites.join(' · ')}</p>
@@ -159,7 +201,9 @@ export function Footer() {
           ))}
         </nav>
       </div>
-      <p className="border-t border-line px-6 py-5 text-center text-xs text-muted">{FOOTER.copyright}</p>
+      <p className="border-t border-line px-6 py-5 text-center text-xs text-muted">
+        {FOOTER.copyright}
+      </p>
     </footer>
   )
 }

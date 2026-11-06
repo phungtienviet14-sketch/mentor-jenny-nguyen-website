@@ -18,21 +18,38 @@ type Props = {
 }
 
 /** Tiêu đề khối: eyebrow (cam) + tiêu đề Playfair + dòng phụ. */
-export function SectionHeading({ eyebrow, title, subtitle, align = 'left', as: Tag = 'h2', compact = false }: Props) {
+export function SectionHeading({
+  eyebrow,
+  title,
+  subtitle,
+  align = 'left',
+  as: Tag = 'h2',
+  compact = false,
+}: Props) {
   const alignment = align === 'center' ? 'items-center text-center' : 'items-start text-left'
   return (
     <div className={`flex flex-col ${compact ? 'gap-1.5' : 'gap-3'} ${alignment}`}>
       {eyebrow && (
         <Reveal>
-          <p className="text-xs font-semibold tracking-[0.22em] text-accent-orange uppercase">{eyebrow}</p>
+          <p className="text-xs font-semibold tracking-[0.22em] text-accent-orange uppercase">
+            {eyebrow}
+          </p>
         </Reveal>
       )}
       <Reveal index={1}>
-        <Tag className={`font-display leading-tight font-bold text-fg ${compact ? 'text-3xl' : 'text-3xl md:text-5xl'}`}>{title}</Tag>
+        <Tag
+          className={`font-display leading-tight font-bold text-fg ${compact ? 'text-3xl' : 'text-3xl md:text-5xl'}`}
+        >
+          {title}
+        </Tag>
       </Reveal>
       {subtitle && (
         <Reveal index={2}>
-          <p className={`max-w-3xl text-muted ${compact ? 'line-clamp-2 text-sm' : 'text-lg md:text-xl'}`}>{subtitle}</p>
+          <p
+            className={`max-w-3xl text-muted ${compact ? 'line-clamp-2 text-sm' : 'text-lg md:text-xl'}`}
+          >
+            {subtitle}
+          </p>
         </Reveal>
       )}
     </div>

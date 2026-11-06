@@ -13,10 +13,15 @@ export function Hero() {
   const rest = HERO.title.slice(cut)
 
   return (
-    <section id="top" className={`${SECTION_CLASS} grid items-center gap-12 pt-12 md:grid-cols-[1.15fr_0.85fr] md:pt-20`}>
+    <section
+      id="top"
+      className={`${SECTION_CLASS} grid items-center gap-12 pt-12 md:grid-cols-[1.15fr_0.85fr] md:pt-20`}
+    >
       <div className="flex flex-col gap-6">
         <Reveal>
-          <p className="text-xs font-semibold tracking-[0.22em] text-accent-orange uppercase">{HERO.eyebrow}</p>
+          <p className="text-xs font-semibold tracking-[0.22em] text-accent-orange uppercase">
+            {HERO.eyebrow}
+          </p>
         </Reveal>
         <Reveal index={1}>
           <p className="text-sm font-semibold tracking-[0.18em] text-gold-500">{HERO.kicker}</p>
@@ -33,7 +38,9 @@ export function Hero() {
           <ul className="flex flex-col gap-2">
             {HERO.bullets.map((b) => (
               <li key={b} className="flex gap-3 text-fg">
-                <span aria-hidden="true" className="font-bold text-gold-500">✓</span>
+                <span aria-hidden="true" className="font-bold text-gold-500">
+                  ✓
+                </span>
                 {b}
               </li>
             ))}
@@ -62,7 +69,7 @@ export function Hero() {
           />
         </div>
         <div className="absolute -bottom-5 left-4 rounded-2xl border border-line-gold bg-surface px-5 py-3 shadow-lg">
-          <p className="font-display text-lg font-bold text-gold-500">{HERO.nameTag.name}</p>
+          <p className="font-serif text-lg font-bold text-gold-500">{HERO.nameTag.name}</p>
           <p className="text-xs text-muted">{HERO.nameTag.roles}</p>
         </div>
       </Reveal>
@@ -73,12 +80,18 @@ export function Hero() {
 /** Khối 2: dải chỉ số. */
 export function Stats() {
   return (
-    <section aria-label="Chỉ số nổi bật" className="border-y border-line-gold bg-surface/70 backdrop-blur-sm">
+    <section aria-label="Chỉ số nổi bật" className="bg-[var(--band-bg)] text-[var(--band-fg)]">
       <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-12 md:grid-cols-4">
         {STATS.map((s, i) => (
-          <Reveal key={s.label} index={i} className="flex flex-col gap-2">
-            <dt className="order-2 text-sm text-muted">{s.label}</dt>
-            <dd className="font-display text-4xl font-bold text-gold-500 md:text-5xl">{s.value}</dd>
+          <Reveal
+            key={s.label}
+            index={i}
+            className="flex flex-col gap-2 md:border-l md:border-white/20 md:pl-6 md:first:border-l-0 md:first:pl-0"
+          >
+            <dt className="order-2 text-sm text-white/85">{s.label}</dt>
+            <dd className="font-display text-4xl font-bold text-[var(--band-accent)] md:text-5xl">
+              {s.value}
+            </dd>
           </Reveal>
         ))}
       </dl>
@@ -90,10 +103,15 @@ export function Stats() {
 export function Partners() {
   return (
     <section aria-label="Đã đồng hành cùng" className="py-12">
-      <p className="mb-6 text-center text-xs font-semibold tracking-[0.22em] text-muted uppercase">Đã đồng hành cùng</p>
+      <p className="mb-6 text-center text-xs font-semibold tracking-[0.22em] text-muted uppercase">
+        Đã đồng hành cùng
+      </p>
       <Marquee label="Đơn vị đã đồng hành">
         {PARTNERS.map((p) => (
-          <span key={p} className="rounded-full border border-line-gold px-6 py-2 text-sm font-semibold whitespace-nowrap text-fg">
+          <span
+            key={p}
+            className="rounded-full border border-line-gold px-6 py-2 text-sm font-semibold whitespace-nowrap text-fg"
+          >
             {p}
           </span>
         ))}
@@ -107,7 +125,11 @@ export function Context() {
   return (
     <section id="boi-canh" className={`${SECTION_CLASS} grid gap-12 md:grid-cols-2`}>
       <div className="flex flex-col gap-6">
-        <SectionHeading eyebrow={CONTEXT.eyebrow} title={CONTEXT.title} subtitle={CONTEXT.subtitle} />
+        <SectionHeading
+          eyebrow={CONTEXT.eyebrow}
+          title={CONTEXT.title}
+          subtitle={CONTEXT.subtitle}
+        />
         <Reveal index={3}>
           <p className="text-muted">{CONTEXT.body}</p>
         </Reveal>
@@ -119,7 +141,9 @@ export function Context() {
             <ul className="flex flex-col gap-3">
               {CONTEXT.pains.map((p) => (
                 <li key={p} className="flex gap-3 text-fg">
-                  <span aria-hidden="true" className="font-bold text-accent-red">✕</span>
+                  <span aria-hidden="true" className="font-bold text-accent-red">
+                    ✕
+                  </span>
                   {p}
                 </li>
               ))}
@@ -162,7 +186,9 @@ export function About() {
               <ul className="flex flex-col gap-3 text-sm text-muted">
                 {ABOUT.roles.map((r) => (
                   <li key={r} className="flex gap-3">
-                    <span aria-hidden="true" className="text-gold-500">✦</span>
+                    <span aria-hidden="true" className="text-gold-500">
+                      ✦
+                    </span>
                     {r}
                   </li>
                 ))}
@@ -195,7 +221,9 @@ export function Formula() {
         ))}
       </ol>
       <Reveal>
-        <p className="shimmer-text text-center font-display text-xl font-bold md:text-3xl">{FORMULA.equation}</p>
+        <p className="shimmer-text text-center font-display text-xl font-bold md:text-3xl">
+          {FORMULA.equation}
+        </p>
       </Reveal>
     </section>
   )
