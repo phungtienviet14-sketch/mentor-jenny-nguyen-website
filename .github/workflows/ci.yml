@@ -84,4 +84,4 @@ jobs:
           name: next-build
           path: .next
       - run: npm start &
-      - run: npx --yes wait-on http://localhost:3000 && npx --yes @lhci/cli@0.14 collect --url=http://localhost:3000/ --numberOfRuns=1 --settings.preset=mobile && npx --yes @lhci/cli@0.14 assert --assertions.categories:performance=warn --assertions.categories:seo=warn --assertions.categories:accessibility=warn --assertions.categories:best-practices=warn
+      - run: npx --yes wait-on http://localhost:3000 && npx --yes @lhci/cli@0.14 collect --url=http://localhost:3000/ --numberOfRuns=1 && npx --yes @lhci/cli@0.14 assert --assertions.categories:performance=warn --assertions.categories:seo=warn --assertions.categories:accessibility=warn --assertions.categories:best-practices=warn
