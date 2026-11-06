@@ -328,7 +328,7 @@ body {
 .ambient__obj--1 {
   right: -6vw;
   top: 12vh;
-  opacity: 0.6;
+  opacity: 0.85;
 }
 
 .ambient__obj--2 {
@@ -399,11 +399,25 @@ body {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: radial-gradient(circle at 28% 23%, #fff 0%, #dbe7ff 18%, #8baaf0 48%, #315ab5 76%, #183979 100%);
+  /* Mặt trăng: hố thiên thạch (viền sáng + lòng tối), biển tối, ánh sáng một phía, bóng ở rìa */
+  background:
+    radial-gradient(circle at 30% 30%, rgba(60, 60, 64, 0.34) 0 4.5%, rgba(255, 255, 255, 0.2) 5.2% 6.4%, transparent 7%),
+    radial-gradient(circle at 62% 24%, rgba(60, 60, 64, 0.3) 0 3%, rgba(255, 255, 255, 0.18) 3.6% 4.6%, transparent 5.2%),
+    radial-gradient(circle at 74% 58%, rgba(60, 60, 64, 0.36) 0 6%, rgba(255, 255, 255, 0.2) 6.8% 8.2%, transparent 9%),
+    radial-gradient(circle at 40% 70%, rgba(60, 60, 64, 0.32) 0 5%, rgba(255, 255, 255, 0.18) 5.7% 7%, transparent 7.6%),
+    radial-gradient(circle at 20% 56%, rgba(60, 60, 64, 0.28) 0 2.6%, rgba(255, 255, 255, 0.16) 3.2% 4.2%, transparent 4.8%),
+    radial-gradient(circle at 54% 46%, rgba(60, 60, 64, 0.26) 0 2.2%, transparent 2.8%),
+    radial-gradient(circle at 84% 34%, rgba(60, 60, 64, 0.26) 0 2.4%, transparent 3%),
+    radial-gradient(ellipse 22% 17% at 36% 40%, rgba(88, 88, 94, 0.42), transparent 100%),
+    radial-gradient(ellipse 18% 24% at 58% 62%, rgba(88, 88, 94, 0.36), transparent 100%),
+    radial-gradient(ellipse 26% 14% at 64% 30%, rgba(88, 88, 94, 0.3), transparent 100%),
+    radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.5), transparent 46%),
+    radial-gradient(circle at 78% 82%, rgba(0, 0, 0, 0.5), transparent 62%),
+    radial-gradient(circle at 35% 30%, #f6f4ec 0%, #d6d4cb 42%, #a4a29c 74%, #6c6b68 100%);
   box-shadow:
-    inset -25px -30px 45px rgba(16, 41, 120, 0.33),
-    inset 9px 9px 28px rgba(255, 255, 255, 0.67),
-    35px 55px 65px rgba(22, 69, 184, 0.15);
+    inset -22px -26px 48px rgba(0, 0, 0, 0.45),
+    inset 8px 8px 24px rgba(255, 255, 255, 0.35),
+    0 0 70px rgba(214, 226, 255, 0.22);
 }
 
 /* Điện thoại: vật thể 3D nhỏ lại để không che chữ */
