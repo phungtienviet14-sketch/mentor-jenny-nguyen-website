@@ -119,3 +119,55 @@ Mỗi khối: viết test render + đối chiếu ảnh chụp với Figma (desk
 - Phase 4: thay "lưu lead vào Sheet" bằng collection Leads + email + Zalo; không lưu bí mật trong repo.
 - Phase 5: kiểm thử hiệu năng trên thiết bị thật cho nền 3D + ghim ngang mobile.
 - Ước tính tăng: +2 đến 3 ngày (Payload + thiết bị thật), tổng khoảng 16-19 ngày.
+
+## 6. Hosting (xem [HOSTING.md](HOSTING.md))
+Khuyến nghị phương án A: Vercel Pro + Neon Postgres + Cloudflare (DNS, CDN, R2, Turnstile), khoảng 20-25 USD/tháng. Không có phương án miễn phí hoàn toàn an toàn cho trang thương mại (Vercel Hobby cấm dùng thương mại). Chờ bạn chốt A/B/C và ngân sách (task H1).
+
+## 7. Mô hình dữ liệu Payload (Phase 2)
+| Collection | Trường chính | Dùng ở |
+|---|---|---|
+| Users | email, vai trò (admin, marketing, sales) | Đăng nhập quản trị; marketing chỉ sửa nội dung |
+| Media | tệp, alt (bắt buộc), caption | Ảnh toàn site |
+| Courses | tên, slug, tagline, mô tả, đối tượng, kết quả (mảng), hình thức, học phí, lịch khai giảng, SEO | Khối 7 + trang khóa học |
+| Books | tên, slug, bìa, mô tả, link mua, SEO | Khối 12 |
+| Testimonials | họ tên, chức vụ, nội dung, video, đã xin phép (checkbox bắt buộc) | Khối 11 |
+| Events / Press | tiêu đề, nhãn, ảnh, link nguồn, năm | Khối 14 |
+| Posts | tiêu đề, slug, nội dung, tác giả, ngày cập nhật, SEO | Tin tức AI (blog) |
+| Faqs | câu hỏi, trả lời, thứ tự | Khối 15 + schema FAQPage |
+| Leads | họ tên, SĐT, email, công ty, quan tâm, nguồn (UTM), trạng thái, đã gửi email/Zalo | Form khối 13, 16 (chỉ admin/sales đọc) |
+| Globals: SiteSettings | liên hệ, mạng xã hội, số liệu khối 2, menu, footer | Header/footer/chỉ số |
+| Globals: HomePage | thứ tự và nội dung từng khối, A/B tiêu đề Hero | Trang chủ |
+Nguyên tắc: nội dung chưa xác nhận có cờ `needsConfirmation` để không xuất bản nhầm; bản nháp (draft) và xem trước cho marketing.
+
+## 8. Phase 2 bổ sung (Payload)
+| ID | Task | V |
+|---|---|---|
+| 2.7 | Cài Payload 3 vào Next.js, kết nối Postgres, tài khoản quản trị đầu tiên | Đăng nhập `/admin` được |
+| 2.8 | Tạo collections/globals theo mục 7, phân quyền theo vai trò | Test quyền truy cập |
+| 2.9 | Nhập nội dung từ docx làm dữ liệu khởi tạo (seed) | Trang chủ đọc dữ liệu từ Payload |
+| 2.10 | Lưu ảnh lên R2/Blob, ảnh tối ưu qua `next/image` | Tải ảnh lên và hiển thị |
+| 2.11 | Preview + revalidate khi marketing bấm xuất bản | Sửa tiêu đề, trang cập nhật trong vài giây |
+| 2.12 | Ghi tài liệu `.env.example`, quy trình sao lưu | Không có bí mật trong repo |
+
+## 9. Phase 4 bổ sung (Lead qua Zalo + email)
+| ID | Task | V |
+|---|---|---|
+| 4.7 | **Spike Zalo (1/2 ngày)**: đọc tài liệu Zalo OA/ZNS, xác định cách gửi thông báo nội bộ khả thi (OA đã xác thực? mẫu ZNS? webhook n8n/Make?) | Ghi kết luận vào TASKS.md |
+| 4.8 | Email thông báo lead (Resend/SMTP) + email xác nhận cho khách | Nhận được email thử |
+| 4.9 | Zalo theo kết luận spike; thất bại Zalo không làm mất lead (lead đã lưu, thử lại nền) | Test: tắt Zalo vẫn lưu lead |
+| 4.10 | Trạng thái lead trong Payload (mới, đã gọi, đã chốt) cho đội tư vấn | Đổi trạng thái được |
+
+## 10. Mốc giao hàng (milestones)
+| Mốc | Nội dung | Điều kiện hoàn thành |
+|---|---|---|
+| M0 | Chốt quyết định + tài sản + hosting (H1) | Danh sách chờ rõ ràng |
+| M1 | Nền tảng + Payload + CI (Phase 2) | Trang giữ chỗ chạy trên preview, đăng nhập quản trị được |
+| M2 | Trang chủ 17 khối + chuyển động (Phase 3) | So Figma và site tham chiếu, bạn duyệt |
+| M3 | Form + lead + analytics (Phase 4) | Gửi form thử thành công tới email (và Zalo nếu khả thi) |
+| M4 | QA, SEO, hiệu năng thiết bị thật (Phase 5) | Lighthouse mobile >= 85, không lỗi nghiêm trọng |
+| M5 | Ra mắt + bàn giao marketing (Phase 6) | Domain thật, sitemap đã gửi, tài liệu bàn giao |
+
+## 11. Bước tiếp theo đề xuất
+1. Bạn chốt hosting (H1) và gửi tài sản/nội dung (Q6).
+2. Tôi làm Phase 2 (nền tảng + Payload) trên nhánh `feat/2-foundation`, mở PR để bạn xem trước khi vào Phase 3.
+3. Song song làm spike Zalo (4.7) để biết sớm khả thi.
