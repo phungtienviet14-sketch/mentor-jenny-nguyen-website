@@ -171,3 +171,10 @@ Nguyên tắc: nội dung chưa xác nhận có cờ `needsConfirmation` để k
 1. Bạn chốt hosting (H1) và gửi tài sản/nội dung (Q6).
 2. Tôi làm Phase 2 (nền tảng + Payload) trên nhánh `feat/2-foundation`, mở PR để bạn xem trước khi vào Phase 3.
 3. Song song làm spike Zalo (4.7) để biết sớm khả thi.
+
+## 12. Hosting đã chốt (H1)
+Phương án A: **Vercel Pro + Neon Postgres + Cloudflare (DNS, CDN, R2, Turnstile)**. Ngân sách ước tính khoảng 20-25 USD/tháng (kiểm tra lại giá chính thức khi mua).
+Việc bạn cần làm (không gửi mật khẩu/khóa qua chat):
+1. Tạo tài khoản Vercel (nâng lên Pro trước khi ra mắt thật; giai đoạn dựng có thể dùng preview), Neon, Cloudflare.
+2. Khi tới Phase 2, tạo dự án Neon và dán chuỗi kết nối vào biến môi trường của Vercel (tôi sẽ hướng dẫn từng bước), không đưa vào repo.
+3. Tới Phase 6: trỏ DNS tên miền về Cloudflare theo hướng dẫn.
