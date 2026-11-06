@@ -85,3 +85,8 @@ Trạng thái: **CHỜ XÁC NHẬN – chưa viết code. Figma phải xong và 
 ## 5. Repo & quy trình
 - Repo GitHub **private**: `mentor-jenny-nguyen-website`; nhánh `main` + `feat/*`, PR có preview, conventional commits.
 - Thư mục: `docs/` (kế hoạch, nội dung gốc); sau này `app/`, `components/`, `content/`, `public/`.
+
+## 6. Cập nhật tiến độ (Phase 1 – Figma)
+- Đã chốt hướng thị giác: **nền tối + vàng ánh kim** (theo docx).
+- Figma: https://www.figma.com/design/nHvZGU6ebQlxBzCjsHnzI3 – design tokens (Color/Spacing/Radius), 9 text style (Playfair Display + Be Vietnam Pro), frame `Home / Desktop 1440` đủ 18 khối (0–17) với nội dung thật từ docx.
+- Còn thiếu trước khi duyệt: ảnh thật (chân dung, sách, sự kiện, logo), bản tablet/mobile, trạng thái form (lỗi/thành công), prototype.
