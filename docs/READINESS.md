@@ -75,3 +75,8 @@ Lưu ý: bản Next.js thử nghiệm trong thư mục tạm (ngoài repo) **s�
 - **Quyết định đã chốt:** Payload CMS; lead qua email + Zalo (Zalo chưa xác minh); hosting A; mobile giữ đủ nền 3D + ghim ngang; chọn Motion + CSS thuần, không GSAP/Lenis/Three.
 - **Lưu ý làm việc trong môi trường này:** hook GateGuard chặn lần tạo file mới đầu tiên và lệnh Bash đầu tiên: cần nêu 4 dữ kiện (nơi gọi, file trùng, dữ liệu, yêu cầu nguyên văn) rồi thử lại cùng thao tác. Lệnh Bash có `rm -rf` cũng bị chặn tương tự.
 - **Việc kế tiếp sau khi compact:** (1) bạn xử lý mục 3.1; (2) tôi làm D1–D7 trong Figma; (3) bắt đầu Phase 2 trên nhánh `feat/2-foundation` khi U5 và U8 xong.
+
+## 16. Cập nhật 2026-11-06 (sau D1-D7)
+- Đã xong: D1-D7 (Figma), bản Light, bản nháp pháp lý (docs/legal/). Xem TASKS.md mục 13-15.
+- Zalo hoãn; ảnh và nội dung bổ sung qua Payload nên Phase 3 không bị chặn bởi U1-U3.
+- Còn lại của bạn: xem danh sách cuối cuộc trò chuyện (cài/đăng nhập Vercel CLI, tạo Neon project, danh sách người dùng Payload, email gửi thư và DNS, admin duyệt pháp lý).

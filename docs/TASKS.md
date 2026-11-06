@@ -178,3 +178,36 @@ Việc bạn cần làm (không gửi mật khẩu/khóa qua chat):
 1. Tạo tài khoản Vercel (nâng lên Pro trước khi ra mắt thật; giai đoạn dựng có thể dùng preview), Neon, Cloudflare.
 2. Khi tới Phase 2, tạo dự án Neon và dán chuỗi kết nối vào biến môi trường của Vercel (tôi sẽ hướng dẫn từng bước), không đưa vào repo.
 3. Tới Phase 6: trỏ DNS tên miền về Cloudflare theo hướng dẫn.
+
+## 13. Giao diện sáng / tối tự động (yêu cầu mới)
+**Quyết định:** giao diện **tự chuyển sáng hoặc tối theo cấu hình hệ điều hành/Chrome của người xem** (`prefers-color-scheme`). Không có nút chuyển thủ công ở đợt 1 (nếu muốn có nút ghi đè, thêm ở đợt sau).
+
+| Hạng mục | Cách làm |
+|---|---|
+| Token | Bộ biến Figma `Color` có 2 chế độ **Dark** và **Light**. CSS: giá trị sáng đặt ở `:root`, giá trị tối đặt trong `@media (prefers-color-scheme: dark)`; khai báo `color-scheme: light dark`. Không dùng JavaScript nên không nhấp nháy khi tải trang |
+| Tailwind v4 | Màu dùng biến CSS (ví dụ `bg-[var(--color-bg-base)]` hoặc map vào theme), không rải `dark:` khắp nơi |
+| Màu vàng | Chữ và viền vàng dùng `color/gold/*` (sáng: vàng đậm #8A6A0F để đủ tương phản, tối: #D4AF37). **Nền nút vàng** dùng riêng `color/action/gold` (cùng #D4AF37 ở cả hai chế độ) với chữ tối |
+| Logo | Dùng 2 file có sẵn: `đỏ_xóa nền.png` cho nền sáng, `trắng_xóa nền.png` cho nền tối, qua `<picture>` + `media="(prefers-color-scheme: dark)"` |
+| `theme-color` | 2 thẻ meta theo `media` sáng/tối; ảnh OG dùng 1 bản |
+| Nền ambient/3D | Có bản sáng (cam kem, quả cầu vàng nhạt, lưới vàng nâu mờ) — xem Figma `D1 ... — Light` |
+| Kiểm thử | Playwright chạy 2 dự án `colorScheme: light` và `dark`; ảnh chụp so Figma cho cả hai; Lighthouse và axe (tương phản) cho cả hai |
+| Payload admin | Giao diện quản trị dùng theme riêng của Payload, không nằm trong phạm vi |
+
+Bảng màu chế độ Sáng (đã nhập vào Figma): nền #FFFCF5, bề mặt #FFFFFF, nâng #F6EEDC, chữ #1A160F, chữ phụ #5E574A, vàng 500 #8A6A0F, vàng 400 #7A5C0A, vàng 600 #6B520A, cam #B45309, viền vàng #E2D3A3, viền nhẹ #E8E0CC, lỗi #C62828, thành công #1B7F3B. **Tỷ lệ tương phản mới ước tính, cần đo lại bằng công cụ (axe/Lighthouse) khi code.**
+
+Task thêm: 2.13 tokens CSS hai chế độ; 3.9 logo theo theme; 5.2 mở rộng kiểm tra tương phản cho cả hai chế độ; 5.7 ảnh chụp so Figma cho Light và Dark.
+
+## 14. Cập nhật tiến độ thiết kế (D1-D7) và việc còn lại
+Đã làm trong Figma (trang `Page 1`, các frame Dark ở cột trái, **bản Light cách 9000px về bên phải**, cùng tên + hậu tố "— Light"):
+- D1 nền ambient đen-vàng và vật thể 3D (có spec): Dark `8:2`, Light `14:1079`, ghi chú `8:58`.
+- D2 cuộn ngang ghim, 3 trạng thái p=0/0.5/1 (khóa học desktop `9:2`, `9:41`, `9:80`; lộ trình `9:119`, `9:145`; mobile `9:171`, `9:210`, `9:249`), ghi chú `9:275`. Bản Light của D2: chưa tạo (cùng cấu trúc, chỉ đổi chế độ).
+- D3 menu mobile mở `10:2`, trạng thái nút/thẻ `10:34`; D4 Hero mobile ảnh lên trên `10:85`.
+- D5 mẫu trang khóa học `13:2`, bài viết `13:91`, 404 `13:154` (desktop) / `13:177` (mobile), cảm ơn `13:201` / `13:235`.
+- D6 cookie banner `13:270` (desktop), `13:282` (mobile), hộp tùy chỉnh `13:294`.
+- D7 spec chuyển động: nằm trong `MOTION_AND_TECH.md` và các ghi chú Figma (`8:58`, `9:275`, `10:34`).
+- Biến Figma: collection `Color` có chế độ **Dark** và **Light**; thêm `color/action/gold`, `color/action/gold-hover`, `color/action/gold-pressed`; 17 biến có giá trị Light.
+Chưa làm / cần lưu ý: ảnh thật (CMS sẽ bổ sung), bản Light cho khung D2 và bản mobile Light của cookie đã có; spacing/radius chưa bind biến.
+
+## 15. Cap nhat cuoi (Q1-Q7)
+- Nội dung/ảnh/số liệu thiếu sẽ bổ sung sau qua Payload (placeholder có cờ). Zalo hoãn, làm email trước. Admin xác nhận Chính sách bảo mật/Điều khoản (bản nháp ở docs/legal/). Tablet: co giãn, không vẽ thêm.
+- CLI: Neon đã đăng nhập; Cloudflare (wrangler) đã đăng nhập nhưng token thiếu một số scope, cần wrangler login lại nếu lỗi; Google (gcloud) đã đăng nhập; Vercel CLI chưa cài và chưa đăng nhập.
