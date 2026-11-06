@@ -3,6 +3,7 @@ import { Be_Vietnam_Pro, Playfair_Display } from 'next/font/google'
 import type { ReactNode } from 'react'
 
 import { Header } from '@/components/home/Header'
+import { ConsentManager } from '@/components/analytics/ConsentManager'
 import { AmbientBackground } from '@/components/motion/AmbientBackground'
 import { SITE, SITE_URL } from '@/lib/site'
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AmbientBackground />
         <Header />
         <main>{children}</main>
+        <ConsentManager />
       </body>
     </html>
   )
