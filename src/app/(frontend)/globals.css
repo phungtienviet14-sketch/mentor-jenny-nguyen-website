@@ -1,0 +1,231 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens (khớp biến Figma, collection "Color").
+ * :root = bản Sáng; bản Tối bật tự động theo cấu hình hệ điều hành/trình duyệt
+ * của người xem (prefers-color-scheme), không dùng JS nên không bị nháy.
+ * Chữ vàng dùng --gold-*; nút nền vàng dùng --action-gold với chữ tối ở cả hai chế độ.
+ */
+:root {
+  color-scheme: light dark;
+
+  --bg-base: #fffcf5;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f6eedc;
+  --bg-cream: #fffcf5;
+
+  --gold-400: #7a5c0a;
+  --gold-500: #8a6a0f;
+  --gold-600: #6b520a;
+
+  --text-primary: #1a160f;
+  --text-muted: #5e574a;
+  --text-on-gold: #1a160f;
+  --text-on-cream: #1a160f;
+
+  --accent-red: #c62828;
+  --accent-orange: #b45309;
+
+  --border-gold: #e2d3a3;
+  --border-subtle: #e8e0cc;
+
+  --state-error: #c62828;
+  --state-success: #1b7f3b;
+
+  --action-gold: #d4af37;
+  --action-gold-hover: #e0bf4f;
+  --action-gold-pressed: #b8932a;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-base: #0b0b0d;
+    --bg-surface: #141417;
+    --bg-elevated: #1c1c21;
+    --bg-cream: #f5f1e8;
+
+    --gold-400: #e0bf4f;
+    --gold-500: #d4af37;
+    --gold-600: #b8932a;
+
+    --text-primary: #f5f1e8;
+    --text-muted: #a8a39a;
+    --text-on-gold: #0b0b0d;
+    --text-on-cream: #0b0b0d;
+
+    --accent-red: #ff6b6b;
+    --accent-orange: #f28c28;
+
+    --border-gold: rgba(212, 175, 55, 0.35);
+    --border-subtle: rgba(245, 241, 232, 0.12);
+
+    --state-error: #ff6b6b;
+    --state-success: #4ade80;
+  }
+}
+
+@theme inline {
+  --color-base: var(--bg-base);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-cream: var(--bg-cream);
+  --color-gold-400: var(--gold-400);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
+  --color-fg: var(--text-primary);
+  --color-muted: var(--text-muted);
+  --color-on-gold: var(--text-on-gold);
+  --color-on-cream: var(--text-on-cream);
+  --color-accent-red: var(--accent-red);
+  --color-accent-orange: var(--accent-orange);
+  --color-line-gold: var(--border-gold);
+  --color-line: var(--border-subtle);
+  --color-error: var(--state-error);
+  --color-success: var(--state-success);
+  --color-action: var(--action-gold);
+  --color-action-hover: var(--action-gold-hover);
+  --color-action-pressed: var(--action-gold-pressed);
+  --font-display: var(--font-playfair), serif;
+  --font-sans: var(--font-be-vietnam), system-ui, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
+html {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
+}
+
+/* ---------- Reveal (hiện dần khi cuộn) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.85s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Không có JS hoặc người dùng giảm chuyển động: luôn hiển thị */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Marquee (logo đối tác chạy ngang) ---------- */
+.marquee {
+  overflow: hidden;
+  display: flex;
+}
+
+.marquee__track {
+  display: flex;
+  flex: none;
+  min-width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--space-xl);
+  padding-inline-end: var(--space-xl);
+  animation: marquee-scroll var(--marquee-duration, 32s) linear infinite;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+  }
+
+  .marquee__track {
+    animation: none;
+  }
+
+  .marquee__track[aria-hidden='true'] {
+    display: none;
+  }
+}
+
+/* ---------- Chữ ánh vàng (shimmer) ---------- */
+.shimmer-text {
+  background: linear-gradient(
+    100deg,
+    var(--gold-600) 0%,
+    var(--gold-400) 40%,
+    var(--gold-500) 50%,
+    var(--gold-400) 60%,
+    var(--gold-600) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-text {
+    animation: none;
+  }
+}
