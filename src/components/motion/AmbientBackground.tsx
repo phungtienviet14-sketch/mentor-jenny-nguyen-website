@@ -34,7 +34,7 @@ const CRATERS: [number, number, number][] = [
  */
 function MoonSvg() {
   return (
-    <svg viewBox="0 0 300 300" width="100%" height="100%" focusable="false">
+    <svg className="sky-moon" viewBox="0 0 300 300" width="100%" height="100%" focusable="false">
       <defs>
         <clipPath id="moon-clip">
           <circle cx="150" cy="150" r="150" />
@@ -91,6 +91,64 @@ function MoonSvg() {
 }
 
 /**
+ * Mặt trời (chế độ sáng): thân cầu vàng cam, hạt plasma tối loang bằng nhiễu, tối dần về rìa.
+ * Quầng sáng (corona) do CSS box-shadow của phần tử cha.
+ */
+function SunSvg() {
+  return (
+    <svg className="sky-sun" viewBox="0 0 300 300" width="100%" height="100%" focusable="false">
+      <defs>
+        <clipPath id="sun-clip">
+          <circle cx="150" cy="150" r="150" />
+        </clipPath>
+        <radialGradient id="sun-body" cx="0.42" cy="0.4" r="0.75">
+          <stop offset="0" stopColor="#fffbe3" />
+          <stop offset="0.3" stopColor="#ffe28a" />
+          <stop offset="0.68" stopColor="#f7b02a" />
+          <stop offset="1" stopColor="#e2691a" />
+        </radialGradient>
+        <radialGradient id="sun-limb" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0.72" stopColor="#a63a00" stopOpacity="0" />
+          <stop offset="1" stopColor="#a63a00" stopOpacity="0.55" />
+        </radialGradient>
+        <filter id="sun-plasma" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" seed="3" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0.78  0 0 0 0 0.32  0 0 0 0 0.02  -3 0 0 0 1.75"
+          />
+        </filter>
+      </defs>
+      <g clipPath="url(#sun-clip)">
+        <rect width="300" height="300" fill="url(#sun-body)" />
+        <rect width="300" height="300" filter="url(#sun-plasma)" opacity="0.55" />
+        <circle cx="150" cy="150" r="150" fill="url(#sun-limb)" />
+      </g>
+    </svg>
+  )
+}
+
+/** Số ngẫu nhiên có hạt giống (kết quả giống nhau ở server và client, không lệch hydration). */
+function seeded(seed: number) {
+  let t = seed
+  return () => {
+    t = (t * 1664525 + 1013904223) % 4294967296
+    return t / 4294967296
+  }
+}
+
+/** Một lớp sao/bụi sáng: nhiều chấm bằng box-shadow (màu lấy từ `color` của lớp). */
+function dots(count: number, seed: number) {
+  const rnd = seeded(seed)
+  return Array.from(
+    { length: count },
+    () => `${(rnd() * 100).toFixed(1)}vw ${(rnd() * 100).toFixed(1)}vh`,
+  ).join(',')
+}
+const STAR_LAYERS = [dots(26, 11), dots(18, 23), dots(12, 37)]
+const CLOUDS = ['ambient__cloud--a', 'ambient__cloud--b', 'ambient__cloud--c']
+
+/**
  * Nền môi trường cố định: 3 quầng sáng, lưới phối cảnh và 4 vật thể 3D CSS.
  * Mọi thành phần trôi theo hàm sin của scrollY (làm mượt lerp 0.085) đúng như site tham chiếu;
  * ghi thẳng `style.transform` trong rAF, không qua React state. Tắt khi giảm chuyển động.
@@ -105,6 +163,7 @@ export function AmbientBackground() {
     const orbs = Array.from(root.querySelectorAll<HTMLElement>('[data-orb]'))
     const objects = Array.from(root.querySelectorAll<HTMLElement>('[data-obj]'))
     const grid = root.querySelector<HTMLElement>('[data-grid]')
+    const stars = Array.from(root.querySelectorAll<HTMLElement>('[data-star]'))
 
     let target = window.scrollY
     let current = target
@@ -122,6 +181,10 @@ export function AmbientBackground() {
       })
       orbs.forEach((el, i) => {
         el.style.transform = `translate3d(${Math.sin(y / 900 + i) * 95}px,${Math.sin(y / 1100 + i) * 140}px,0)`
+      })
+      stars.forEach((el, i) => {
+        const depth = (i + 1) * 0.6
+        el.style.transform = `translate3d(${Math.sin(y / 1800 + i) * 18 * depth}px,${Math.sin(y / 1500 + i) * 24 * depth}px,0)`
       })
       if (grid) {
         grid.style.transform = `translate3d(0,${Math.sin(y / 1600) * 32}px,-120px) rotateX(65deg) rotateZ(${Math.sin(y / 1600) * 4}deg)`
@@ -143,11 +206,23 @@ export function AmbientBackground() {
 
   return (
     <div ref={rootRef} className="ambient" aria-hidden="true">
+      {STAR_LAYERS.map((shadow, i) => (
+        <span
+          key={i}
+          data-star
+          className={`ambient__stars ambient__stars--${i + 1}`}
+          style={{ boxShadow: shadow }}
+        />
+      ))}
+      {CLOUDS.map((c) => (
+        <span key={c} className={`ambient__cloud ${c}`} />
+      ))}
       <span data-orb className="ambient__orb ambient__orb--a" />
       <span data-orb className="ambient__orb ambient__orb--b" />
       <span data-orb className="ambient__orb ambient__orb--c" />
       <span data-grid className="ambient__grid" />
       <div data-obj className="ambient__obj ambient__sphere ambient__obj--1">
+        <SunSvg />
         <MoonSvg />
       </div>
       <div data-obj className="ambient__obj ambient__ring ambient__obj--2" />
