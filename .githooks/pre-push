@@ -1,0 +1,4 @@
+#!/bin/sh
+# Pre-push nhẹ: chỉ kiểm tra kiểu (vài giây). Lint, test, build, E2E, Lighthouse do CI chạy trên PR.
+# Bỏ qua khi cần: git push --no-verify
+npm run --silent typecheck
