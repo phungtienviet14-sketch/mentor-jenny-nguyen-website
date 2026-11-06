@@ -328,7 +328,7 @@ body {
 .ambient__obj--1 {
   right: -6vw;
   top: 12vh;
-  opacity: 0.6;
+  opacity: 0.85;
 }
 
 .ambient__obj--2 {
@@ -399,11 +399,8 @@ body {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: radial-gradient(circle at 28% 23%, #fff 0%, #dbe7ff 18%, #8baaf0 48%, #315ab5 76%, #183979 100%);
-  box-shadow:
-    inset -25px -30px 45px rgba(16, 41, 120, 0.33),
-    inset 9px 9px 28px rgba(255, 255, 255, 0.67),
-    35px 55px 65px rgba(22, 69, 184, 0.15);
+  /* Mặt trăng vẽ bằng SVG trong AmbientBackground; ở đây chỉ còn quầng sáng */
+  box-shadow: 0 0 70px rgba(214, 226, 255, 0.22);
 }
 
 /* Điện thoại: vật thể 3D nhỏ lại để không che chữ */
