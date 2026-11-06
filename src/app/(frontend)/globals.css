@@ -566,13 +566,20 @@ body {
 .ambient__sat {
   position: absolute;
   left: 50%;
-  top: -6px;
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
+  top: -13px;
+  width: 26px;
+  height: 26px;
+  margin-left: -13px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff, #c93e45 70%);
-  box-shadow: 0 0 12px 3px rgba(201, 62, 69, 0.45);
+  /* Chế độ sáng (nền là mặt trời): vệ tinh là mặt trăng thu nhỏ, có hố và bóng một phía */
+  background:
+    radial-gradient(circle at 32% 40%, rgba(70, 70, 76, 0.55) 0 11%, transparent 13%),
+    radial-gradient(circle at 68% 30%, rgba(70, 70, 76, 0.45) 0 8%, transparent 10%),
+    radial-gradient(circle at 58% 70%, rgba(70, 70, 76, 0.5) 0 13%, transparent 15%),
+    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.6), transparent 46%),
+    radial-gradient(circle at 80% 84%, rgba(0, 0, 0, 0.55), transparent 62%),
+    radial-gradient(circle at 35% 30%, #f6f4ec, #cfcdc4 55%, #8a8984);
+  box-shadow: 0 0 5px 1px rgba(60, 70, 110, 0.2);
   animation: sat-face 16s linear infinite;
 }
 
@@ -600,9 +607,24 @@ body {
 
   .ambient__orbit { border-color: rgba(214, 226, 255, 0.38); }
 
+  /* Chế độ tối (nền là mặt trăng): vệ tinh là mặt trời thu nhỏ có quầng sáng */
   .ambient__sat {
-    background: radial-gradient(circle at 35% 30%, #fff, #f1c64d 70%);
-    box-shadow: 0 0 12px 3px rgba(241, 198, 77, 0.5);
+    top: -22px;
+    width: 44px;
+    height: 44px;
+    margin-left: -22px;
+    /* Quầng sáng vẽ ngay trong nền (không dùng box-shadow để khỏi bị lớp 3D cắt) */
+    background: radial-gradient(
+      circle closest-side,
+      #fffbe3 0,
+      #ffe28a 18%,
+      #f7b02a 40%,
+      #e2691a 58%,
+      rgba(255, 170, 60, 0.5) 63%,
+      rgba(255, 170, 60, 0.14) 82%,
+      transparent 100%
+    );
+    box-shadow: none;
   }
 }
 
