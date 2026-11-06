@@ -85,3 +85,18 @@ Lưu ý: bản Next.js thử nghiệm trong thư mục tạm (ngoài repo) **s�
 - Project: mentor-jenny-nguyen, id lingering-water-01461847, vung aws-ap-southeast-1 (Singapore), Postgres 18, nhanh mac dinh main (br-round-tree-azjv1eev), database neondb, to chuc 74 Phung Viet.
 - Chuoi ket noi (pooled va unpooled) luu o .env.local (bi gitignore), khong co trong repo. Da kiem tra ket noi ca hai thanh cong.
 - Viec con lai cua ban ve Neon: khong con. Con Vercel CLI (cai + dang nhap), danh sach nguoi dung Payload, email gui thu/DNS, GA4/GTM, admin duyet phap ly.
+
+## 18. Điểm dừng để compact (trước khi code Phase 2)
+**Đã có:**
+- Admin Payload: phungtienviet14@gmail.com, jennynguyen6899@gmail.com (tài khoản marketing: chưa có, thêm sau trong /admin).
+- Email gửi thư: phungtienviet14@gmail.com. Lưu ý: Resend không gửi được từ địa chỉ @gmail.com (cần tên miền đã xác minh). Phương án cho Phase 4: **Gmail SMTP + App Password** (cần bật xác minh 2 bước và tạo App Password trong tài khoản Google; giới hạn gửi khoảng 500 thư/ngày, đủ cho lead). Khi có tên miền riêng thì chuyển sang gửi từ tên miền (Resend/SMTP) để tránh thư rác. **App Password chỉ dán vào biến môi trường, không gửi qua chat.**
+- Vercel CLI 65.12.0 đã cài và đăng nhập (tài khoản phungtienviet14-sketch, team mặc định `phungtienviet14-sketchs-projects`, gói **hobby**: phải nâng Pro trước khi ra mắt thật vì Hobby cấm dùng thương mại).
+- Neon: project `lingering-water-01461847`, chuỗi kết nối trong `.env.local` (gitignore).
+- Nhánh `feat/2-foundation` đã tạo (chưa có mã nguồn).
+
+**Lưu ý kỹ thuật Phase 2:**
+- Node cục bộ là v24.18.0, nhưng `create-payload-app@3.93.0` yêu cầu `^22.23.4 || >=24.22.1` (chỉ cảnh báo EBADENGINE, có thể gây lỗi). Nên nâng Node lên >= 24.22.1 (hoặc 22.23.4+) trước khi cài Payload; nếu bạn chưa nâng được, tôi thử chạy với cảnh báo.
+- `create-payload-app` có template `blank` (dùng cái này, không dùng `website`/`ecommerce` vì nặng) và cờ `-n`, `-t`, `--use-npm`; xem `npx create-payload-app --help`. Dự kiến lệnh: tạo trong thư mục scratchpad rồi chép vào repo (repo đã có docs/, README, .gitignore).
+- Việc làm ở Phase 2: tasks 2.1-2.13 trong TASKS.md (Payload + Postgres, Tailwind v4, tokens Sáng/Tối, font, khung SEO, collections + phân quyền admin/marketing, seed từ docx, CI, test), mở PR cho bạn xem.
+
+**Việc của bạn còn lại:** GA4 + Tag Manager (ID), App Password Gmail (khi tới Phase 4), nâng Node (nếu có thể), tên miền/DNS (Phase 6), admin duyệt pháp lý, email người dùng marketing (khi có).
