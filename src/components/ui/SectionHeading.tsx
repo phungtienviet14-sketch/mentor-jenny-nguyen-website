@@ -53,7 +53,9 @@ export function SectionHeading({
         >
           {title}
           {accent && (
-            <span className={`heading-accent block ${onDark ? 'text-gold-strong' : 'text-gold-text'}`}>
+            <span
+              className={`heading-accent block ${onDark ? 'text-gold-strong' : 'text-gold-text'}`}
+            >
               {accent}
             </span>
           )}

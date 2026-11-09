@@ -13,12 +13,19 @@ export function Roadmap() {
     >
       <span className="hstep-n font-display text-6xl leading-none">{s.no}</span>
       <p className="text-xs font-bold tracking-[0.2em] text-gold-text uppercase">{s.tag}</p>
-      <h3 className="font-display text-2xl leading-tight font-normal tracking-wide text-fg uppercase">{s.title}</h3>
+      <h3 className="font-display text-2xl leading-tight font-normal tracking-wide text-fg uppercase">
+        {s.title}
+      </h3>
     </article>
   ))
   steps.push(
-    <article key="cta" className={`${CARD_CLASS} flex h-full flex-col justify-center gap-5 bg-[var(--band-bg)] text-white`}>
-      <p className="font-display text-3xl leading-tight font-normal tracking-wide text-gold-strong uppercase">Sẵn sàng bước đầu tiên?</p>
+    <article
+      key="cta"
+      className={`${CARD_CLASS} flex h-full flex-col justify-center gap-5 bg-[var(--band-bg)] text-white`}
+    >
+      <p className="font-display text-3xl leading-tight font-normal tracking-wide text-gold-strong uppercase">
+        Sẵn sàng bước đầu tiên?
+      </p>
       <Button href={ROADMAP.cta.href} variant="light" className="w-fit">
         {ROADMAP.cta.label}
         <ArrowIcon />
@@ -31,7 +38,14 @@ export function Roadmap() {
       <PinnedTrack
         label="Lộ trình bứt phá cùng AI"
         itemClassName="w-[74vw] max-w-[340px]"
-        header={<SectionHeading compact eyebrow={ROADMAP.eyebrow} title={ROADMAP.title} accent={ROADMAP.accent} />}
+        header={
+          <SectionHeading
+            compact
+            eyebrow={ROADMAP.eyebrow}
+            title={ROADMAP.title}
+            accent={ROADMAP.accent}
+          />
+        }
         items={steps}
       />
     </div>

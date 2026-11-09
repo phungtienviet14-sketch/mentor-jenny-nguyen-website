@@ -22,7 +22,14 @@ export function PageIntro() {
   if (gone) return null
   return (
     <div className="page-intro" aria-hidden="true">
-      <Image src="/brand/logo-red.png" alt="" width={160} height={63} priority className="page-intro__logo h-14 w-auto" />
+      <Image
+        src="/brand/logo-red.png"
+        alt=""
+        width={160}
+        height={63}
+        priority
+        className="page-intro__logo h-14 w-auto"
+      />
     </div>
   )
 }

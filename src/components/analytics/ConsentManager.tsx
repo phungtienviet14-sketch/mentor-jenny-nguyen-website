@@ -49,7 +49,7 @@ export function ConsentManager() {
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      const a = (e.target as Element | null)?.closest?.('a[href^="#dang-ky"]')
+      const a = (e.target as Element | null)?.closest?.('a[href$="#dang-ky"]')
       if (a) track('cta_click', { label: a.textContent?.trim().slice(0, 60) })
     }
     document.addEventListener('click', onClick)

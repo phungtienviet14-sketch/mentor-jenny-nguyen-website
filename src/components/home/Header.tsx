@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/Button'
@@ -44,13 +45,22 @@ export function Header() {
     <header
       data-scrolled={scrolled}
       className={`sticky top-0 z-40 border-b transition-[translate,background-color,box-shadow,border-color] duration-300 motion-reduce:transition-none ${
-        scrolled ? 'border-line bg-white/95 shadow-[0_10px_30px_-20px_rgb(16_41_120/0.4)] backdrop-blur-xl' : 'border-transparent bg-white'
+        scrolled
+          ? 'border-line bg-white/95 shadow-[0_10px_30px_-20px_rgb(16_41_120/0.4)] backdrop-blur-xl'
+          : 'border-transparent bg-white'
       } ${isHidden ? '-translate-y-full' : 'translate-y-0'}`}
     >
       <div className="mx-auto flex h-[var(--header-h)] max-w-6xl items-center justify-between gap-6 px-6">
-        <a href="#top" aria-label="Mentor Jenny Nguyễn, về đầu trang" className="flex items-center">
-          <Image src="/brand/logo-red.png" alt="Mentor Jenny Nguyễn" width={160} height={63} className="h-9 w-auto" priority />
-        </a>
+        <Link href="/" aria-label="Mentor Jenny Nguyễn, về đầu trang" className="flex items-center">
+          <Image
+            src="/brand/logo-red.png"
+            alt="Mentor Jenny Nguyễn"
+            width={160}
+            height={63}
+            className="h-9 w-auto"
+            priority
+          />
+        </Link>
 
         <nav aria-label="Điều hướng chính" className="hidden items-center gap-7 lg:flex">
           {NAV.slice(0, -1).map((item) => (
@@ -80,11 +90,19 @@ export function Header() {
       </div>
 
       {open && (
-        <nav id="menu-di-dong" aria-label="Menu di động" className="border-t border-line bg-white px-6 py-4 lg:hidden">
+        <nav
+          id="menu-di-dong"
+          aria-label="Menu di động"
+          className="border-t border-line bg-white px-6 py-4 lg:hidden"
+        >
           <ul className="flex flex-col gap-1">
             {NAV.map((item) => (
               <li key={item.href}>
-                <a href={item.href} onClick={() => setOpen(false)} className="block rounded-lg px-3 py-3 text-base font-semibold text-fg hover:bg-elevated">
+                <a
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-lg px-3 py-3 text-base font-semibold text-fg hover:bg-elevated"
+                >
                   {item.label}
                 </a>
               </li>

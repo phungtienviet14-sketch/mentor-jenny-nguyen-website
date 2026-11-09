@@ -71,3 +71,39 @@ test('tắt JavaScript: nội dung vẫn hiện (không bị ẩn bởi Reveal)'
   expect(opacity).toBe('1')
   await ctx.close()
 })
+
+const PROGRAM_SLUGS = [
+  'ai-video-kenh-ve-tinh',
+  'thuong-hieu-ca-nhan',
+  'toi-uu-doanh-nghiep',
+  'marketing-voi-ai',
+  'ai-video-co-ban',
+  'workshop-ai-cho-ceo',
+  'nhap-mon-ai',
+  'dao-tao-in-house',
+]
+
+test('8 trang chi tiết chương trình hiển thị đủ: h1, form đăng ký, JSON-LD Course', async ({ page }) => {
+  for (const slug of PROGRAM_SLUGS) {
+    const res = await page.goto(`/chuong-trinh/${slug}`)
+    expect(res?.status(), slug).toBe(200)
+    await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
+    await expect(page.locator('#dang-ky form')).toHaveCount(1)
+    await expect(page.locator('#noi-dung')).toHaveCount(1)
+    await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1)
+  }
+})
+
+test('slug lạ trả về 404 và sitemap liệt kê các trang chương trình', async ({ page, request }) => {
+  const res = await page.goto('/chuong-trinh/khong-ton-tai')
+  expect(res?.status()).toBe(404)
+  const xml = await (await request.get('/sitemap.xml')).text()
+  for (const slug of PROGRAM_SLUGS) expect(xml).toContain(`/chuong-trinh/${slug}`)
+})
+
+test('thẻ khóa học ở trang chủ dẫn tới trang chi tiết', async ({ page }) => {
+  await page.goto('/')
+  await page.locator('#khoa-hoc a[href="/chuong-trinh/ai-video-kenh-ve-tinh"]').first().click()
+  await expect(page).toHaveURL(/\/chuong-trinh\/ai-video-kenh-ve-tinh$/)
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Từ ý tưởng đến video AI')
+})

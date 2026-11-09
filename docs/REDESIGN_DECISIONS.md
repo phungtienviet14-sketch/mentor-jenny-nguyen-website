@@ -99,4 +99,5 @@ Reveal khi cuộn · đếm số (count-up) ở Stats · marquee · lộ trình 
 - **Khác kế hoạch:** M15 (nền nhẹ cố định) đổi thành parallax nhẹ cho chữ nền Hero, vì mọi khối đều có nền đặc nên lớp nền cố định sẽ bị che. Lộ trình trên mobile dùng cuộn ngang native có snap (không ghim). Chưa dùng `LazyMotion`.
 - **Nút liên hệ:** Messenger và email để trống trong `CONTACT` (`src/content/home.ts`) nên tự ẩn; Zalo đang dùng `zalo.me/<số trợ lý>` tạm. Điền link thật khi khách cung cấp.
 - Khung "Marketing bổ sung" hiển thị công khai trên site; cân nhắc ẩn trước khi go-live nếu marketing chưa bổ sung kịp.
-- Chưa làm: trang con (chi tiết khóa học, Workshop, Nhập môn AI, in-house), bản mobile tinh chỉnh theo Figma (chưa có Figma mobile), Lighthouse mobile chưa đo tay.
+- G5: 8 trang chi tiết `/chuong-trinh/[slug]` (4 khóa chủ lực, AI Video từ cơ bản, Workshop AI cho CEO, Nhập môn AI, Đào tạo in-house) dựng từ Google Doc (`src/content/programs.ts`), có JSON-LD Course và có trong sitemap. Các giá trị `[...]` là khung marketing bổ sung. Menu dùng `/#id` để chạy được từ trang con. Chưa có Figma cho trang con và mobile nên bố cục theo cùng phong cách trang chủ.
+- Chưa làm: đo Lighthouse mobile bằng tay; ảnh thật; xác nhận SĐT/Zalo/Messenger/email.

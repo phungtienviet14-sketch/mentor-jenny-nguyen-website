@@ -15,6 +15,7 @@ import {
   SUPPORT_PROGRAMS,
   type Course,
 } from '@/content/home'
+import { programHref } from '@/content/programs'
 
 function CourseCard({ course }: { course: Course }) {
   return (
@@ -27,13 +28,18 @@ function CourseCard({ course }: { course: Course }) {
         Ảnh khóa học
       </div>
       <div className="flex flex-1 flex-col gap-2 p-6">
-        <h3 className="font-display text-2xl leading-tight font-normal tracking-wide text-fg uppercase">{course.name}</h3>
+        <h3 className="font-display text-2xl leading-tight font-normal tracking-wide text-fg uppercase">
+          {course.name}
+        </h3>
         <p className="font-semibold text-gold-text">{course.hook}</p>
         <p className="text-sm text-muted">
           <strong className="text-fg">Phù hợp:</strong> {course.audience}
         </p>
         <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-4">
-          <a href="#dang-ky" className="link-arrow inline-flex items-center gap-2 text-sm font-bold text-gold-500">
+          <a
+            href={programHref(course.slug)}
+            className="link-arrow inline-flex items-center gap-2 text-sm font-bold text-gold-500"
+          >
             {COURSE_CTAS.detail}
             <ArrowIcon />
           </a>
@@ -63,10 +69,18 @@ export function Courses() {
   return (
     <section id="khoa-hoc" className="bg-elevated">
       <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
-        <SectionHeading eyebrow={COURSES_INTRO.eyebrow} title={COURSES_INTRO.title} accent={COURSES_INTRO.accent} />
+        <SectionHeading
+          eyebrow={COURSES_INTRO.eyebrow}
+          title={COURSES_INTRO.title}
+          accent={COURSES_INTRO.accent}
+        />
 
         <Reveal className="flex justify-center">
-          <div role="tablist" aria-label="Nhóm khóa học" className="inline-flex flex-wrap justify-center gap-2 rounded-full border border-line bg-white p-1.5">
+          <div
+            role="tablist"
+            aria-label="Nhóm khóa học"
+            className="inline-flex flex-wrap justify-center gap-2 rounded-full border border-line bg-white p-1.5"
+          >
             {tabs.map((t, i) => (
               <button
                 key={t}
@@ -79,7 +93,9 @@ export function Courses() {
                 onClick={() => setActive(i)}
                 onKeyDown={(e) => onKey(e, i)}
                 className={`rounded-full px-5 py-2 text-sm font-bold transition-colors duration-300 ${
-                  active === i ? 'bg-[image:var(--action-gradient)] text-white shadow-md' : 'text-fg hover:bg-elevated'
+                  active === i
+                    ? 'bg-[image:var(--action-gradient)] text-white shadow-md'
+                    : 'text-fg hover:bg-elevated'
                 }`}
               >
                 {t}
@@ -88,7 +104,13 @@ export function Courses() {
           </div>
         </Reveal>
 
-        <div id={`${baseId}-panel-0`} role="tabpanel" aria-labelledby={`${baseId}-tab-0`} hidden={active !== 0} className="tab-panel">
+        <div
+          id={`${baseId}-panel-0`}
+          role="tabpanel"
+          aria-labelledby={`${baseId}-tab-0`}
+          hidden={active !== 0}
+          className="tab-panel"
+        >
           <ul className="grid gap-6 md:grid-cols-2">
             {COURSES.map((c) => (
               <li key={c.name}>
@@ -98,7 +120,13 @@ export function Courses() {
           </ul>
         </div>
 
-        <div id={`${baseId}-panel-1`} role="tabpanel" aria-labelledby={`${baseId}-tab-1`} hidden={active !== 1} className="tab-panel">
+        <div
+          id={`${baseId}-panel-1`}
+          role="tabpanel"
+          aria-labelledby={`${baseId}-tab-1`}
+          hidden={active !== 1}
+          className="tab-panel"
+        >
           <ul className="grid gap-6 md:grid-cols-3">
             {ONLINE_COURSES.items.map((c) => (
               <li key={c.name}>
@@ -113,14 +141,27 @@ export function Courses() {
           </ul>
         </div>
 
-        <div id={`${baseId}-panel-2`} role="tabpanel" aria-labelledby={`${baseId}-tab-2`} hidden={active !== 2} className="tab-panel">
+        <div
+          id={`${baseId}-panel-2`}
+          role="tabpanel"
+          aria-labelledby={`${baseId}-tab-2`}
+          hidden={active !== 2}
+          className="tab-panel"
+        >
           <ul className="grid gap-6 md:grid-cols-3">
             {SUPPORT_PROGRAMS.map((p) => (
               <li key={p.name} className={`${CARD_CLASS} flex flex-col gap-3`}>
-                <span className="w-fit rounded-full bg-gold-strong px-3 py-1 text-[11px] font-extrabold tracking-widest text-gold-600">BỔ TRỢ</span>
-                <h3 className="font-display text-2xl leading-tight font-normal tracking-wide text-fg uppercase">{p.name}</h3>
+                <span className="w-fit rounded-full bg-gold-strong px-3 py-1 text-[11px] font-extrabold tracking-widest text-gold-600">
+                  BỔ TRỢ
+                </span>
+                <h3 className="font-display text-2xl leading-tight font-normal tracking-wide text-fg uppercase">
+                  {p.name}
+                </h3>
                 <p className="text-sm text-muted">{p.text}</p>
-                <a href={p.href} className="link-arrow mt-auto inline-flex items-center gap-2 pt-2 text-sm font-bold text-gold-500">
+                <a
+                  href={p.href}
+                  className="link-arrow mt-auto inline-flex items-center gap-2 pt-2 text-sm font-bold text-gold-500"
+                >
                   {p.cta}
                   <ArrowIcon />
                 </a>

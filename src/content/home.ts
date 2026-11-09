@@ -27,13 +27,13 @@ export const CONTACT = {
 }
 
 export const NAV = [
-  { label: 'Trang chủ', href: '#top' },
-  { label: 'Về Jenny', href: '#ve-jenny' },
-  { label: 'Khóa học', href: '#khoa-hoc' },
-  { label: 'Giải pháp doanh nghiệp', href: '#giai-phap' },
-  { label: 'Sách', href: '#sach' },
-  { label: 'Sự kiện', href: '#su-kien' },
-  { label: 'Liên hệ', href: '#dang-ky' },
+  { label: 'Trang chủ', href: '/#top' },
+  { label: 'Về Jenny', href: '/#ve-jenny' },
+  { label: 'Khóa học', href: '/#khoa-hoc' },
+  { label: 'Giải pháp doanh nghiệp', href: '/#giai-phap' },
+  { label: 'Sách', href: '/#sach' },
+  { label: 'Sự kiện', href: '/#su-kien' },
+  { label: 'Liên hệ', href: '/#dang-ky' },
 ]
 
 export const HERO = {
@@ -70,7 +70,8 @@ export const CONTEXT = {
     'Biết AI nhưng chưa biết dùng.',
     'Muốn tăng trưởng nhưng thiếu hệ thống.',
   ],
-  closing: 'AI không thay thế tư duy của bạn. AI giúp bạn làm việc thông minh hơn khi có đúng phương pháp.',
+  closing:
+    'AI không thay thế tư duy của bạn. AI giúp bạn làm việc thông minh hơn khi có đúng phương pháp.',
   cta: { label: 'Khám phá phương pháp của Jenny', href: '#khoa-hoc' },
 }
 
@@ -100,16 +101,47 @@ export const ECOSYSTEM = {
   accent: 'học tập, sáng tạo & kinh doanh',
   subtitle: 'Từ đào tạo đến triển khai thực tế.',
   items: [
-    { title: 'Đào tạo AI Video & xây kênh tự động', text: 'Làm chủ công cụ AI để sản xuất video và phát triển kênh.', cta: 'Khám phá khóa học', href: '#khoa-hoc' },
-    { title: 'Sản xuất video & TVC AI', text: 'AI vào hình ảnh, video quảng cáo cho thương hiệu.', cta: 'Xem giải pháp', href: '#doanh-nghiep' },
-    { title: 'Xây dựng thương hiệu cá nhân', text: 'Định vị chuyên gia, xây hệ thống truyền thông với AI.', cta: 'Tìm hiểu thêm', href: '#khoa-hoc' },
-    { title: 'Hệ sinh thái KocViet & MCN V-Hub', text: 'Sáng tạo nội dung, KOC, livestream và thương mại điện tử.', cta: 'Khám phá hệ sinh thái', href: '#giai-phap' },
-    { title: 'Phần mềm & AI Agent', text: 'Công cụ AI và giải pháp tự động hóa vận hành.', cta: 'Xem giải pháp AI', href: '#doanh-nghiep' },
-    { title: 'Sách & tài nguyên thực chiến', text: 'Kiến thức, tài liệu, prompt và phương pháp ứng dụng AI.', cta: 'Khám phá tài nguyên', href: '#sach' },
+    {
+      title: 'Đào tạo AI Video & xây kênh tự động',
+      text: 'Làm chủ công cụ AI để sản xuất video và phát triển kênh.',
+      cta: 'Khám phá khóa học',
+      href: '#khoa-hoc',
+    },
+    {
+      title: 'Sản xuất video & TVC AI',
+      text: 'AI vào hình ảnh, video quảng cáo cho thương hiệu.',
+      cta: 'Xem giải pháp',
+      href: '#doanh-nghiep',
+    },
+    {
+      title: 'Xây dựng thương hiệu cá nhân',
+      text: 'Định vị chuyên gia, xây hệ thống truyền thông với AI.',
+      cta: 'Tìm hiểu thêm',
+      href: '#khoa-hoc',
+    },
+    {
+      title: 'Hệ sinh thái KocViet & MCN V-Hub',
+      text: 'Sáng tạo nội dung, KOC, livestream và thương mại điện tử.',
+      cta: 'Khám phá hệ sinh thái',
+      href: '#giai-phap',
+    },
+    {
+      title: 'Phần mềm & AI Agent',
+      text: 'Công cụ AI và giải pháp tự động hóa vận hành.',
+      cta: 'Xem giải pháp AI',
+      href: '#doanh-nghiep',
+    },
+    {
+      title: 'Sách & tài nguyên thực chiến',
+      text: 'Kiến thức, tài liệu, prompt và phương pháp ứng dụng AI.',
+      cta: 'Khám phá tài nguyên',
+      href: '#sach',
+    },
   ],
 }
 
 export type Course = {
+  slug: string
   tag: string
   name: string
   hook: string
@@ -124,15 +156,45 @@ export const COURSES_INTRO = {
 }
 
 export const COURSES: Course[] = [
-  { tag: 'KHÓA 01', name: 'AI Video & Kênh vệ tinh tự động', hook: 'Biến ý tưởng thành video. Xây hệ thống nội dung bằng AI.', audience: 'Creator, marketer, chủ kinh doanh muốn xây kênh nội dung.' },
-  { tag: 'KHÓA 02', name: 'Thương hiệu cá nhân với AI', hook: 'Xây dựng dấu ấn riêng trong kỷ nguyên số.', audience: 'Chuyên gia, doanh nhân, nhà đào tạo.' },
-  { tag: 'KHÓA 03', name: 'Tối ưu doanh nghiệp với AI', hook: 'Giảm việc thủ công. Tăng hiệu quả vận hành.', audience: 'Chủ doanh nghiệp, quản lý, trưởng bộ phận.' },
-  { tag: 'KHÓA 04', name: 'Marketing với AI', hook: 'Làm marketing nhanh hơn, có hệ thống hơn.', audience: 'Nhân sự marketing, chủ kinh doanh, agency.' },
+  {
+    slug: 'ai-video-kenh-ve-tinh',
+    tag: 'KHÓA 01',
+    name: 'AI Video & Kênh vệ tinh tự động',
+    hook: 'Biến ý tưởng thành video. Xây hệ thống nội dung bằng AI.',
+    audience: 'Creator, marketer, chủ kinh doanh muốn xây kênh nội dung.',
+  },
+  {
+    slug: 'thuong-hieu-ca-nhan',
+    tag: 'KHÓA 02',
+    name: 'Thương hiệu cá nhân với AI',
+    hook: 'Xây dựng dấu ấn riêng trong kỷ nguyên số.',
+    audience: 'Chuyên gia, doanh nhân, nhà đào tạo.',
+  },
+  {
+    slug: 'toi-uu-doanh-nghiep',
+    tag: 'KHÓA 03',
+    name: 'Tối ưu doanh nghiệp với AI',
+    hook: 'Giảm việc thủ công. Tăng hiệu quả vận hành.',
+    audience: 'Chủ doanh nghiệp, quản lý, trưởng bộ phận.',
+  },
+  {
+    slug: 'marketing-voi-ai',
+    tag: 'KHÓA 04',
+    name: 'Marketing với AI',
+    hook: 'Làm marketing nhanh hơn, có hệ thống hơn.',
+    audience: 'Nhân sự marketing, chủ kinh doanh, agency.',
+  },
 ]
 
 export const ONLINE_COURSES = {
   items: [
-    { tag: 'ONLINE', name: 'AI Video từ cơ bản', hook: 'Tự tạo video bằng AI từ con số 0.', audience: 'Người mới, creator, chủ kinh doanh.' },
+    {
+      slug: 'ai-video-co-ban',
+      tag: 'ONLINE',
+      name: 'AI Video từ cơ bản',
+      hook: 'Tự tạo video bằng AI từ con số 0.',
+      audience: 'Người mới, creator, chủ kinh doanh.',
+    },
   ] as Course[],
   /** Số khung trống chờ marketing bổ sung khóa online khác. */
   placeholders: 2,
@@ -141,9 +203,24 @@ export const ONLINE_COURSES = {
 export const COURSE_CTAS = { detail: 'Xem chi tiết', register: 'Đăng ký tư vấn' }
 
 export const SUPPORT_PROGRAMS = [
-  { name: 'Workshop AI cho CEO', text: 'Cơ hội ứng dụng AI vào quản trị, marketing, vận hành.', cta: 'Xem lịch workshop', href: '#su-kien' },
-  { name: 'Nhập môn AI miễn phí', text: 'Làm quen công cụ AI phổ biến và thực hành cơ bản.', cta: 'Học miễn phí', href: '#qua-tang' },
-  { name: 'Đào tạo AI in-house', text: 'Thiết kế theo nhu cầu doanh nghiệp, phòng ban.', cta: 'Nhận tư vấn', href: '#doanh-nghiep' },
+  {
+    name: 'Workshop AI cho CEO',
+    text: 'Cơ hội ứng dụng AI vào quản trị, marketing, vận hành.',
+    cta: 'Xem lịch workshop',
+    href: '/chuong-trinh/workshop-ai-cho-ceo',
+  },
+  {
+    name: 'Nhập môn AI miễn phí',
+    text: 'Làm quen công cụ AI phổ biến và thực hành cơ bản.',
+    cta: 'Học miễn phí',
+    href: '/chuong-trinh/nhap-mon-ai',
+  },
+  {
+    name: 'Đào tạo AI in-house',
+    text: 'Thiết kế theo nhu cầu doanh nghiệp, phòng ban.',
+    cta: 'Nhận tư vấn',
+    href: '/chuong-trinh/dao-tao-in-house',
+  },
 ]
 
 export const ROADMAP = {
@@ -192,7 +269,11 @@ export const INHOUSE = {
   eyebrow: 'Doanh nghiệp & tổ chức',
   title: 'Đào tạo AI',
   accent: 'in-house',
-  points: ['Thiết kế theo nhu cầu thực tế của doanh nghiệp', 'Theo phòng ban hoặc đội ngũ', 'Thực hành trên dữ liệu và quy trình của chính doanh nghiệp'],
+  points: [
+    'Thiết kế theo nhu cầu thực tế của doanh nghiệp',
+    'Theo phòng ban hoặc đội ngũ',
+    'Thực hành trên dữ liệu và quy trình của chính doanh nghiệp',
+  ],
   cta: { label: 'Nhận tư vấn doanh nghiệp', href: '#dang-ky' },
 }
 
@@ -208,8 +289,18 @@ export const BOOKS = {
   title: 'Sách',
   accent: 'của Jenny',
   items: [
-    { label: 'Sách nổi bật', name: 'ChatGPT Toàn Tập', desc: 'Hướng dẫn ứng dụng AI tạo sinh từ nền tảng đến thực hành cho người không chuyên kỹ thuật.', ctas: ['Đặt mua sách', 'Đọc thử'] },
-    { label: 'Sách', name: 'Xây dựng thương hiệu với AI', desc: 'Cẩm nang dùng AI để xây thương hiệu cá nhân và doanh nghiệp, có quy trình từng bước.', ctas: ['Đặt mua sách'] },
+    {
+      label: 'Sách nổi bật',
+      name: 'ChatGPT Toàn Tập',
+      desc: 'Hướng dẫn ứng dụng AI tạo sinh từ nền tảng đến thực hành cho người không chuyên kỹ thuật.',
+      ctas: ['Đặt mua sách', 'Đọc thử'],
+    },
+    {
+      label: 'Sách',
+      name: 'Xây dựng thương hiệu với AI',
+      desc: 'Cẩm nang dùng AI để xây thương hiệu cá nhân và doanh nghiệp, có quy trình từng bước.',
+      ctas: ['Đặt mua sách'],
+    },
   ],
 }
 
@@ -231,10 +322,23 @@ export const FAQ = {
   title: 'Giải đáp trước khi',
   accent: 'anh chị đăng ký',
   items: [
-    { q: 'Tôi không rành công nghệ, có học được không?', a: 'Được. Các khóa thiết kế cho người làm kinh doanh, không cần biết lập trình.' },
-    { q: 'Học xong có áp dụng được ngay không?', a: 'Có. Anh chị thực hành trên sản phẩm của mình và mang về quy trình để làm tiếp.' },
-    { q: 'Sau khóa học có được hỗ trợ không?', a: 'Đội ngũ tư vấn sẽ cho anh chị biết chính sách hỗ trợ sau khóa khi đăng ký.', confirm: true },
-    { q: 'Doanh nghiệp muốn đào tạo riêng cho nhân viên?', a: 'Jenny nhận đào tạo in-house theo từng phòng ban. Để lại thông tin, đội ngũ sẽ liên hệ khảo sát nhu cầu.' },
+    {
+      q: 'Tôi không rành công nghệ, có học được không?',
+      a: 'Được. Các khóa thiết kế cho người làm kinh doanh, không cần biết lập trình.',
+    },
+    {
+      q: 'Học xong có áp dụng được ngay không?',
+      a: 'Có. Anh chị thực hành trên sản phẩm của mình và mang về quy trình để làm tiếp.',
+    },
+    {
+      q: 'Sau khóa học có được hỗ trợ không?',
+      a: 'Đội ngũ tư vấn sẽ cho anh chị biết chính sách hỗ trợ sau khóa khi đăng ký.',
+      confirm: true,
+    },
+    {
+      q: 'Doanh nghiệp muốn đào tạo riêng cho nhân viên?',
+      a: 'Jenny nhận đào tạo in-house theo từng phòng ban. Để lại thông tin, đội ngũ sẽ liên hệ khảo sát nhu cầu.',
+    },
   ],
 }
 
@@ -255,17 +359,18 @@ export const FINAL_CTA = {
 }
 
 export const FOOTER = {
-  intro: 'Mentor Jenny Nguyễn – Thở cùng AI. Đào tạo và giải pháp AI thực chiến cho doanh nghiệp Việt.',
+  intro:
+    'Mentor Jenny Nguyễn – Thở cùng AI. Đào tạo và giải pháp AI thực chiến cho doanh nghiệp Việt.',
   hotlines: CONTACT.phones,
   websites: [CONTACT.website, 'netviettv.com.vn'],
   office: CONTACT.office,
   socials: ['Facebook', 'TikTok', 'YouTube', 'Zalo OA'],
   links: [
-    { label: 'Về Jenny', href: '#ve-jenny' },
-    { label: 'Khóa học', href: '#khoa-hoc' },
-    { label: 'Giải pháp doanh nghiệp', href: '#giai-phap' },
-    { label: 'Sách', href: '#sach' },
-    { label: 'Sự kiện', href: '#su-kien' },
+    { label: 'Về Jenny', href: '/#ve-jenny' },
+    { label: 'Khóa học', href: '/#khoa-hoc' },
+    { label: 'Giải pháp doanh nghiệp', href: '/#giai-phap' },
+    { label: 'Sách', href: '/#sach' },
+    { label: 'Sự kiện', href: '/#su-kien' },
     { label: 'Chính sách bảo mật', href: '/chinh-sach-bao-mat' },
     { label: 'Điều khoản', href: '/dieu-khoan-su-dung' },
   ],

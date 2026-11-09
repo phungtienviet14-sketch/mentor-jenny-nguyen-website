@@ -4,7 +4,16 @@ import { ArrowIcon, SparkIcon } from '@/components/ui/Icons'
 import { Marquee } from '@/components/ui/Marquee'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { CARD_CLASS, SECTION_CLASS, SectionHeading } from '@/components/ui/SectionHeading'
-import { ACTIVITIES, BLOG, BOOKS, COMMUNITY, EVENTS, INHOUSE, TESTIMONIALS, VIDEOS } from '@/content/home'
+import {
+  ACTIVITIES,
+  BLOG,
+  BOOKS,
+  COMMUNITY,
+  EVENTS,
+  INHOUSE,
+  TESTIMONIALS,
+  VIDEOS,
+} from '@/content/home'
 
 /** Khối 12: cộng đồng Thở cùng AI (nội dung do marketing bổ sung). */
 export function Community() {
@@ -17,14 +26,26 @@ export function Community() {
           <Placeholder hint="Ảnh 3" className="aspect-[4/3]" />
         </Reveal>
         <div className="flex flex-col gap-6">
-          <SectionHeading eyebrow={COMMUNITY.eyebrow} title={COMMUNITY.title} accent={COMMUNITY.accent} align="left" />
+          <SectionHeading
+            eyebrow={COMMUNITY.eyebrow}
+            title={COMMUNITY.title}
+            accent={COMMUNITY.accent}
+            align="left"
+          />
           <Reveal>
             <p className="text-soft">{COMMUNITY.lead}</p>
           </Reveal>
           <ol className="flex flex-col gap-3">
             {COMMUNITY.activities.map((a, i) => (
-              <Reveal as="li" key={a} index={i} className="flex items-center gap-4 rounded-2xl border border-dashed border-gold-accent bg-white px-5 py-4">
-                <span className="font-display text-3xl text-gold-accent">{String(i + 1).padStart(2, '0')}</span>
+              <Reveal
+                as="li"
+                key={a}
+                index={i}
+                className="flex items-center gap-4 rounded-2xl border border-dashed border-gold-accent bg-white px-5 py-4"
+              >
+                <span className="font-display text-3xl text-gold-accent">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
                 <span className="font-semibold text-gold-text">{a}</span>
               </Reveal>
             ))}
@@ -49,16 +70,25 @@ export function Events() {
         <SectionHeading eyebrow={EVENTS.eyebrow} title={EVENTS.title} accent={EVENTS.accent} />
         <ul className="flex flex-col gap-4">
           {Array.from({ length: EVENTS.count }, (_, i) => (
-            <Reveal as="li" key={i} index={i} className={`${CARD_CLASS} flex flex-col items-start gap-5 !p-5 md:flex-row md:items-center`}>
+            <Reveal
+              as="li"
+              key={i}
+              index={i}
+              className={`${CARD_CLASS} flex flex-col items-start gap-5 !p-5 md:flex-row md:items-center`}
+            >
               <div className="grid h-20 w-24 shrink-0 place-content-center rounded-2xl border-2 border-dashed border-gold-accent text-center text-gold-text">
                 <b className="font-display text-2xl font-normal">dd.mm</b>
                 <span className="text-xs">năm</span>
               </div>
               <div className="flex-1">
-                <h3 className="font-display text-xl font-normal tracking-wide text-fg uppercase">[Tên sự kiện / khóa khai giảng]</h3>
+                <h3 className="font-display text-xl font-normal tracking-wide text-fg uppercase">
+                  [Tên sự kiện / khóa khai giảng]
+                </h3>
                 <p className="text-sm text-muted">[Thời gian · Địa điểm]</p>
               </div>
-              <span className="rounded-full border border-dashed border-gold-accent bg-gold-accent/10 px-3 py-1 text-xs font-bold text-gold-text">Marketing bổ sung</span>
+              <span className="rounded-full border border-dashed border-gold-accent bg-gold-accent/10 px-3 py-1 text-xs font-bold text-gold-text">
+                Marketing bổ sung
+              </span>
               <Button href="#dang-ky" className="px-5 py-2 text-xs">
                 Đăng ký
               </Button>
@@ -74,10 +104,16 @@ export function Events() {
 export function Activities() {
   return (
     <section aria-label={ACTIVITIES.caption} className="bg-[var(--band-bg)] py-8">
-      <p className="mb-5 text-center text-xs font-bold tracking-[0.22em] text-gold-strong uppercase">{ACTIVITIES.caption}</p>
+      <p className="mb-5 text-center text-xs font-bold tracking-[0.22em] text-gold-strong uppercase">
+        {ACTIVITIES.caption}
+      </p>
       <Marquee duration={50} label={ACTIVITIES.caption}>
         {Array.from({ length: ACTIVITIES.count }, (_, i) => (
-          <Placeholder key={i} hint="Ảnh · tên chương trình · thời gian" className="mr-4 aspect-[3/2] w-64 shrink-0 !rounded-2xl border-gold-strong text-gold-strong md:w-80" />
+          <Placeholder
+            key={i}
+            hint="Ảnh · tên chương trình · thời gian"
+            className="mr-4 aspect-[3/2] w-64 shrink-0 !rounded-2xl border-gold-strong text-gold-strong md:w-80"
+          />
         ))}
       </Marquee>
     </section>
@@ -121,9 +157,18 @@ export function InHouse() {
     <section id="doanh-nghiep" className="bg-white">
       <div className={SECTION_CLASS}>
         <Reveal className="grid overflow-hidden rounded-[2rem] bg-[var(--band-bg)] shadow-2xl shadow-[rgb(16_41_120/0.3)] md:grid-cols-2">
-          <Placeholder hint="Ảnh đào tạo doanh nghiệp" className="min-h-64 !rounded-none border-gold-strong text-gold-strong" />
+          <Placeholder
+            hint="Ảnh đào tạo doanh nghiệp"
+            className="min-h-64 !rounded-none border-gold-strong text-gold-strong"
+          />
           <div className="flex flex-col items-start gap-5 p-8 md:p-12">
-            <SectionHeading eyebrow={INHOUSE.eyebrow} title={INHOUSE.title} accent={INHOUSE.accent} align="left" onDark />
+            <SectionHeading
+              eyebrow={INHOUSE.eyebrow}
+              title={INHOUSE.title}
+              accent={INHOUSE.accent}
+              align="left"
+              onDark
+            />
             <ul className="flex flex-col gap-2 text-white/90">
               {INHOUSE.points.map((p) => (
                 <li key={p} className="flex gap-2">
@@ -148,7 +193,11 @@ export function Testimonials() {
   return (
     <section id="cam-nhan" className="bg-elevated">
       <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
-        <SectionHeading eyebrow={TESTIMONIALS.eyebrow} title={TESTIMONIALS.title} accent={TESTIMONIALS.accent} />
+        <SectionHeading
+          eyebrow={TESTIMONIALS.eyebrow}
+          title={TESTIMONIALS.title}
+          accent={TESTIMONIALS.accent}
+        />
         <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
           {Array.from({ length: TESTIMONIALS.count }, (_, i) => (
             <Reveal key={i} index={i}>
@@ -169,15 +218,28 @@ export function Books() {
         <SectionHeading eyebrow={BOOKS.eyebrow} title={BOOKS.title} accent={BOOKS.accent} />
         <ul className="grid gap-6 md:grid-cols-2">
           {BOOKS.items.map((b, i) => (
-            <Reveal as="li" key={b.name} index={i} className={`${CARD_CLASS} flex flex-col gap-4 overflow-hidden !p-0`}>
+            <Reveal
+              as="li"
+              key={b.name}
+              index={i}
+              className={`${CARD_CLASS} flex flex-col gap-4 overflow-hidden !p-0`}
+            >
               <Placeholder hint={`Bìa sách · ${b.name}`} className="aspect-video !rounded-none" />
               <div className="flex flex-1 flex-col gap-2 p-6">
-                <span className="text-xs font-bold tracking-[0.2em] text-gold-text uppercase">{b.label}</span>
-                <h3 className="font-display text-2xl font-normal tracking-wide text-fg uppercase">{b.name}</h3>
+                <span className="text-xs font-bold tracking-[0.2em] text-gold-text uppercase">
+                  {b.label}
+                </span>
+                <h3 className="font-display text-2xl font-normal tracking-wide text-fg uppercase">
+                  {b.name}
+                </h3>
                 <p className="text-sm text-muted">{b.desc}</p>
                 <div className="mt-auto flex flex-wrap gap-5 pt-3">
                   {b.ctas.map((c) => (
-                    <a key={c} href="#dang-ky" className="link-arrow inline-flex items-center gap-2 text-sm font-bold text-gold-500">
+                    <a
+                      key={c}
+                      href="#dang-ky"
+                      className="link-arrow inline-flex items-center gap-2 text-sm font-bold text-gold-500"
+                    >
                       {c}
                       <ArrowIcon />
                     </a>
@@ -202,7 +264,9 @@ export function Blog() {
           <Reveal className="flex flex-col gap-3">
             <Placeholder hint="Bài viết nổi bật" className="aspect-video" />
             <span className="text-xs font-bold text-muted">Blog · [dd/mm/yyyy]</span>
-            <h3 className="font-display text-2xl font-normal tracking-wide text-gold-text uppercase">[Tiêu đề bài viết nổi bật]</h3>
+            <h3 className="font-display text-2xl font-normal tracking-wide text-gold-text uppercase">
+              [Tiêu đề bài viết nổi bật]
+            </h3>
           </Reveal>
           <ul className="flex flex-col gap-4">
             {Array.from({ length: BLOG.rows }, (_, i) => (
