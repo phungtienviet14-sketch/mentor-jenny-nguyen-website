@@ -3,7 +3,14 @@ import Image from 'next/image'
 import { LeadForm } from '@/components/home/LeadForm'
 import { Reveal } from '@/components/motion/Reveal'
 import { Button } from '@/components/ui/Button'
-import { ArrowIcon, FacebookIcon, MailIcon, PhoneIcon, TiktokIcon, YoutubeIcon } from '@/components/ui/Icons'
+import {
+  ArrowIcon,
+  FacebookIcon,
+  MailIcon,
+  PhoneIcon,
+  TiktokIcon,
+  YoutubeIcon,
+} from '@/components/ui/Icons'
 import { Placeholder } from '@/components/ui/Placeholder'
 import { SECTION_CLASS, SectionHeading } from '@/components/ui/SectionHeading'
 import { CONTACT, FAQ, FINAL_CTA, FOOTER, GIFT } from '@/content/home'
@@ -14,9 +21,14 @@ export function GiftBand() {
     <section id="qua-tang" className="bg-white">
       <div className="mx-auto w-full max-w-6xl px-6 py-12">
         <Reveal className="flex flex-col items-center gap-6 rounded-[2rem] bg-gold-strong p-8 text-center md:flex-row md:text-left">
-          <Placeholder hint="Ảnh quà tặng" className="size-32 shrink-0 !rounded-3xl border-gold-600 text-gold-600" />
+          <Placeholder
+            hint="Ảnh quà tặng"
+            className="size-32 shrink-0 !rounded-3xl border-gold-600 text-gold-600"
+          />
           <div className="flex-1">
-            <h2 className="font-display text-3xl font-normal tracking-wide text-gold-600 uppercase md:text-4xl">{GIFT.title}</h2>
+            <h2 className="font-display text-3xl font-normal tracking-wide text-gold-600 uppercase md:text-4xl">
+              {GIFT.title}
+            </h2>
             <p className="mt-1 text-gold-600">{GIFT.text}</p>
           </div>
           <Button href={GIFT.cta.href} className="!bg-[var(--band-bg)] !bg-none text-white">
@@ -41,7 +53,10 @@ export function Faq() {
               <details className="faq-item group rounded-2xl border border-line bg-white px-6 py-4">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-fg">
                   {f.q}
-                  <span aria-hidden="true" className="faq-plus text-2xl leading-none text-gold-text">
+                  <span
+                    aria-hidden="true"
+                    className="faq-plus text-2xl leading-none text-gold-text"
+                  >
                     +
                   </span>
                 </summary>
@@ -63,7 +78,12 @@ export function FinalCta() {
     <section id="dang-ky" className="bg-white">
       <div className={`${SECTION_CLASS} grid items-start gap-12 md:grid-cols-2`}>
         <div className="flex flex-col gap-6">
-          <SectionHeading eyebrow={FINAL_CTA.eyebrow} title={FINAL_CTA.title} accent={FINAL_CTA.accent} align="left" />
+          <SectionHeading
+            eyebrow={FINAL_CTA.eyebrow}
+            title={FINAL_CTA.title}
+            accent={FINAL_CTA.accent}
+            align="left"
+          />
           <Reveal>
             <p className="text-lg text-soft">{FINAL_CTA.body}</p>
           </Reveal>
@@ -71,16 +91,30 @@ export function FinalCta() {
             <ul className="flex flex-col gap-3 text-fg">
               {CONTACT.phones.map((p) => (
                 <li key={p.tel}>
-                  <a href={`tel:${p.tel}`} className="inline-flex items-center gap-3 font-semibold hover:text-gold-500">
-                    <PhoneIcon className="rounded-full border border-line-gold p-2 text-gold-500" width={36} height={36} />
+                  <a
+                    href={`tel:${p.tel}`}
+                    className="inline-flex items-center gap-3 font-semibold hover:text-gold-500"
+                  >
+                    <PhoneIcon
+                      className="rounded-full border border-line-gold p-2 text-gold-500"
+                      width={36}
+                      height={36}
+                    />
                     {p.label}: {p.phone}
                   </a>
                 </li>
               ))}
               {CONTACT.email && (
                 <li>
-                  <a href={`mailto:${CONTACT.email}`} className="inline-flex items-center gap-3 font-semibold hover:text-gold-500">
-                    <MailIcon className="rounded-full border border-line-gold p-2 text-gold-500" width={36} height={36} />
+                  <a
+                    href={`mailto:${CONTACT.email}`}
+                    className="inline-flex items-center gap-3 font-semibold hover:text-gold-500"
+                  >
+                    <MailIcon
+                      className="rounded-full border border-line-gold p-2 text-gold-500"
+                      width={36}
+                      height={36}
+                    />
                     {CONTACT.email}
                   </a>
                 </li>
@@ -106,22 +140,42 @@ export function Footer() {
     <footer className="bg-[var(--band-bg)] text-white/80">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-3">
         <div className="flex flex-col gap-4">
-          <Image src="/brand/logo-white.png" alt="Mentor Jenny Nguyễn" width={160} height={63} className="h-10 w-auto" />
+          <Image
+            src="/brand/logo-white.png"
+            alt="Mentor Jenny Nguyễn"
+            width={160}
+            height={63}
+            className="h-10 w-auto"
+          />
           <p className="text-sm">{FOOTER.intro}</p>
           <div className="flex items-center gap-3 text-gold-strong">
-            <a href="#" aria-label="Facebook" className="rounded-full border border-white/20 p-2 hover:bg-white/10">
+            <a
+              href="#"
+              aria-label="Facebook"
+              className="rounded-full border border-white/20 p-2 hover:bg-white/10"
+            >
               <FacebookIcon width={18} height={18} />
             </a>
-            <a href="#" aria-label="TikTok" className="rounded-full border border-white/20 p-2 hover:bg-white/10">
+            <a
+              href="#"
+              aria-label="TikTok"
+              className="rounded-full border border-white/20 p-2 hover:bg-white/10"
+            >
               <TiktokIcon width={18} height={18} />
             </a>
-            <a href="#" aria-label="YouTube" className="rounded-full border border-white/20 p-2 hover:bg-white/10">
+            <a
+              href="#"
+              aria-label="YouTube"
+              className="rounded-full border border-white/20 p-2 hover:bg-white/10"
+            >
               <YoutubeIcon width={18} height={18} />
             </a>
           </div>
         </div>
         <div className="flex flex-col gap-2 text-sm">
-          <p className="font-display text-lg font-normal tracking-wide text-gold-strong uppercase">Liên hệ</p>
+          <p className="font-display text-lg font-normal tracking-wide text-gold-strong uppercase">
+            Liên hệ
+          </p>
           {FOOTER.hotlines.map((h) => (
             <p key={h.tel}>
               Hotline ({h.label}):{' '}
@@ -134,7 +188,9 @@ export function Footer() {
           <p>Văn phòng: {FOOTER.office}</p>
         </div>
         <nav aria-label="Liên kết chân trang" className="flex flex-col gap-2 text-sm">
-          <p className="font-display text-lg font-normal tracking-wide text-gold-strong uppercase">Liên kết</p>
+          <p className="font-display text-lg font-normal tracking-wide text-gold-strong uppercase">
+            Liên kết
+          </p>
           {FOOTER.links.map((l) => (
             <a key={l.label} href={l.href} className="hover:text-gold-strong">
               {l.label}

@@ -7,7 +7,16 @@ import { Button } from '@/components/ui/Button'
 import { ArrowIcon, SparkIcon } from '@/components/ui/Icons'
 import { Marquee } from '@/components/ui/Marquee'
 import { CARD_CLASS, SECTION_CLASS, SectionHeading } from '@/components/ui/SectionHeading'
-import { ABOUT, CONTEXT, CTA, ECOSYSTEM, HERO, MARQUEE_WORDS, PARTNERS, STATS } from '@/content/home'
+import {
+  ABOUT,
+  CONTEXT,
+  CTA,
+  ECOSYSTEM,
+  HERO,
+  MARQUEE_WORDS,
+  PARTNERS,
+  STATS,
+} from '@/content/home'
 
 /** Khối 3 + 4: Hero và dải chỉ số (đếm số khi cuộn tới). */
 export function Hero() {
@@ -29,7 +38,9 @@ export function Hero() {
             </h1>
           </Reveal>
           <Reveal index={2}>
-            <p className="role-line text-sm font-bold tracking-[0.2em] text-gold-500 uppercase">{HERO.role}</p>
+            <p className="role-line text-sm font-bold tracking-[0.2em] text-gold-500 uppercase">
+              {HERO.role}
+            </p>
           </Reveal>
           <Reveal index={3}>
             <p className="max-w-xl text-lg text-soft">
@@ -48,7 +59,10 @@ export function Hero() {
             </div>
           </Reveal>
           <Reveal index={5}>
-            <a href={CTA.gift.href} className="link-arrow inline-flex items-center gap-2 text-sm font-bold text-gold-500">
+            <a
+              href={CTA.gift.href}
+              className="link-arrow inline-flex items-center gap-2 text-sm font-bold text-gold-500"
+            >
               <SparkIcon width={16} height={16} />
               {CTA.gift.label}
             </a>
@@ -89,7 +103,9 @@ export function Hero() {
                 s.text
               )}
             </dd>
-            <dt className="order-2 text-xs font-bold tracking-[0.16em] text-white/90 uppercase">{s.label}</dt>
+            <dt className="order-2 text-xs font-bold tracking-[0.16em] text-white/90 uppercase">
+              {s.label}
+            </dt>
           </Reveal>
         ))}
       </dl>
@@ -101,7 +117,9 @@ export function Hero() {
 export function Partners() {
   return (
     <section aria-label={PARTNERS.caption} className="bg-white py-10">
-      <p className="mb-5 text-center text-xs font-bold tracking-[0.22em] text-muted uppercase">{PARTNERS.caption}</p>
+      <p className="mb-5 text-center text-xs font-bold tracking-[0.22em] text-muted uppercase">
+        {PARTNERS.caption}
+      </p>
       <Marquee label="Đơn vị đã đồng hành" duration={40}>
         {PARTNERS.items.map((p) => (
           <span
@@ -121,11 +139,18 @@ export function Context() {
   return (
     <section id="boi-canh" className="bg-elevated">
       <div className={`${SECTION_CLASS} flex flex-col gap-12`}>
-        <SectionHeading eyebrow={CONTEXT.eyebrow} title={CONTEXT.title} accent={CONTEXT.accent} subtitle={CONTEXT.body} />
+        <SectionHeading
+          eyebrow={CONTEXT.eyebrow}
+          title={CONTEXT.title}
+          accent={CONTEXT.accent}
+          subtitle={CONTEXT.body}
+        />
         <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {CONTEXT.pains.map((p, i) => (
             <Reveal as="li" key={p} index={i} className={`${CARD_CLASS} flex flex-col gap-3 !p-6`}>
-              <span className="font-display text-4xl text-gold-accent">{String(i + 1).padStart(2, '0')}</span>
+              <span className="font-display text-4xl text-gold-accent">
+                {String(i + 1).padStart(2, '0')}
+              </span>
               <span className="font-semibold text-fg">{p}</span>
             </Reveal>
           ))}
@@ -161,13 +186,20 @@ export function About() {
             />
           </div>
           <div className="absolute -right-3 -bottom-4 rounded-2xl bg-[var(--band-bg)] px-5 py-3 text-white shadow-lg">
-            <b className="block font-display text-2xl font-normal text-gold-strong">{ABOUT.badge.value}</b>
+            <b className="block font-display text-2xl font-normal text-gold-strong">
+              {ABOUT.badge.value}
+            </b>
             <span className="text-xs tracking-widest uppercase">{ABOUT.badge.label}</span>
           </div>
         </Reveal>
 
         <div className="flex flex-col gap-6">
-          <SectionHeading eyebrow={ABOUT.eyebrow} title={ABOUT.title} accent={ABOUT.accent} align="left" />
+          <SectionHeading
+            eyebrow={ABOUT.eyebrow}
+            title={ABOUT.title}
+            accent={ABOUT.accent}
+            align="left"
+          />
           <Reveal>
             <p className="text-lg text-soft">{ABOUT.body}</p>
           </Reveal>
@@ -227,14 +259,31 @@ export function Ecosystem() {
   return (
     <section id="giai-phap" className="bg-white">
       <div className={`${SECTION_CLASS} flex flex-col gap-12`}>
-        <SectionHeading eyebrow={ECOSYSTEM.eyebrow} title={ECOSYSTEM.title} accent={ECOSYSTEM.accent} subtitle={ECOSYSTEM.subtitle} />
+        <SectionHeading
+          eyebrow={ECOSYSTEM.eyebrow}
+          title={ECOSYSTEM.title}
+          accent={ECOSYSTEM.accent}
+          subtitle={ECOSYSTEM.subtitle}
+        />
         <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {ECOSYSTEM.items.map((it, i) => (
-            <Reveal as="li" key={it.title} index={i % 3} className={`${CARD_CLASS} flex flex-col gap-3`}>
-              <span className="font-display text-4xl text-gold-accent">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="font-display text-xl leading-tight font-normal tracking-wide text-fg uppercase">{it.title}</h3>
+            <Reveal
+              as="li"
+              key={it.title}
+              index={i % 3}
+              className={`${CARD_CLASS} flex flex-col gap-3`}
+            >
+              <span className="font-display text-4xl text-gold-accent">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="font-display text-xl leading-tight font-normal tracking-wide text-fg uppercase">
+                {it.title}
+              </h3>
               <p className="text-sm text-muted">{it.text}</p>
-              <a href={it.href} className="link-arrow mt-auto inline-flex items-center gap-2 pt-2 text-sm font-bold text-gold-500">
+              <a
+                href={it.href}
+                className="link-arrow mt-auto inline-flex items-center gap-2 pt-2 text-sm font-bold text-gold-500"
+              >
                 {it.cta}
                 <ArrowIcon />
               </a>
