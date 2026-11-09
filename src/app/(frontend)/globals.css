@@ -134,22 +134,30 @@ body {
 }
 
 /* ---------- Reveal (hiện dần khi cuộn) ---------- */
-.reveal {
+/* Chỉ ẩn khi đã có JS (class `js` do script nội tuyến trong <head> thêm), nên không JS thì vẫn thấy nội dung. */
+.js .reveal {
   opacity: 0;
   transform: translateY(35px);
   transition:
-    opacity 0.7s var(--ease-out),
-    transform 0.85s var(--ease-out);
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
 
-.reveal.is-visible {
+.js .reveal.is-visible {
   opacity: 1;
   transform: none;
+  will-change: auto;
 }
 
-/* Không có JS hoặc người dùng giảm chuyển động: luôn hiển thị */
+/* JS lỗi/ quá chậm (không thấy data-motion-ready sau 4s): tự hiện hết */
+.reveal-fallback:not([data-motion-ready]) .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 @media (scripting: none) {
   .reveal {
     opacity: 1;
@@ -162,7 +170,7 @@ body {
     scroll-behavior: auto;
   }
 
-  .reveal {
+  .js .reveal {
     opacity: 1;
     transform: none;
     transition: none;
@@ -582,6 +590,64 @@ body[data-consent-open] .fab {
 
   .reveal .heading-accent::after {
     transform: scaleX(1);
+    transition: none;
+  }
+}
+
+/* Màn mở đầu (M2): chỉ CSS, tự mờ đi sau ~0.9s kể cả khi JS lỗi */
+.page-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  animation: intro-out 0.5s var(--ease-out) 0.45s forwards;
+}
+
+.page-intro__logo {
+  animation: intro-logo 0.6s var(--ease-out) both;
+}
+
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes intro-logo {
+  from {
+    opacity: 0;
+    translate: 0 15px;
+  }
+}
+
+/* Ảnh hero: phóng nhẹ 1.06 → 1 khi hiện (M5) */
+.js .hero-img {
+  scale: 1.06;
+  transition: scale 1.2s var(--ease-out);
+}
+
+.js .reveal.is-visible .hero-img {
+  scale: 1;
+}
+
+/* Marquee: tạm dừng bằng nút (WCAG 2.2.2) hoặc khi focus vào bên trong */
+.marquee[data-paused='true'] .marquee__track,
+.marquee:focus-within .marquee__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-intro,
+  .page-intro__logo {
+    animation: none;
+    display: none;
+  }
+
+  .js .hero-img {
+    scale: 1;
     transition: none;
   }
 }

@@ -22,3 +22,15 @@ test('robots và sitemap trả về hợp lệ', async ({ request }) => {
   expect(sitemap.ok()).toBe(true)
   expect(await sitemap.text()).toContain('<loc>')
 })
+
+test('không có lỗi console hoặc hydration khi tải và cuộn trang', async ({ page }) => {
+  const errors: string[] = []
+  page.on('console', (m) => {
+    if (m.type() === 'error' && !m.text().includes('_next/hmr')) errors.push(m.text())
+  })
+  page.on('pageerror', (e) => errors.push(e.message))
+  await page.goto('/')
+  await page.evaluate(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' }))
+  await page.waitForTimeout(500)
+  expect(errors).toEqual([])
+})

@@ -1,10 +1,14 @@
 import type { Metadata, Viewport } from 'next'
 import { Anton, Dancing_Script, Montserrat } from 'next/font/google'
+import Script from 'next/script'
 import type { ReactNode } from 'react'
 
 import { ContactFab } from '@/components/home/ContactFab'
 import { Header } from '@/components/home/Header'
 import { Topbar } from '@/components/home/Topbar'
+import { MotionProvider } from '@/components/motion/MotionProvider'
+import { PageIntro } from '@/components/motion/PageIntro'
+import { ScrollBar } from '@/components/motion/ScrollBar'
 import { ConsentManager } from '@/components/analytics/ConsentManager'
 import { SITE, SITE_URL } from '@/lib/site'
 
@@ -54,15 +58,26 @@ export const viewport: Viewport = {
   themeColor: '#FFFFFF',
 }
 
+/**
+ * Chạy trước khi vẽ: đánh dấu có JS (để CSS mới ẩn phần tử Reveal) và, nếu sau 4 giây JS vẫn chưa
+ * khởi động xong (MotionProvider chưa gắn data-motion-ready) thì cho hiện toàn bộ nội dung.
+ */
+const MOTION_GUARD = `(function(){var h=document.documentElement;h.classList.add('js');setTimeout(function(){if(!h.hasAttribute('data-motion-ready'))h.classList.add('reveal-fallback')},4000)})()`
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="vi" className={`${anton.variable} ${montserrat.variable} ${dancing.variable}`}>
+    <html lang="vi" suppressHydrationWarning className={`${anton.variable} ${montserrat.variable} ${dancing.variable}`}>
       <body>
-        <Topbar />
-        <Header />
-        <main>{children}</main>
-        <ContactFab />
-        <ConsentManager />
+        <Script id="motion-guard" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: MOTION_GUARD }} />
+        <MotionProvider>
+          <PageIntro />
+          <ScrollBar />
+          <Topbar />
+          <Header />
+          <main>{children}</main>
+          <ContactFab />
+          <ConsentManager />
+        </MotionProvider>
       </body>
     </html>
   )

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import { CountUp } from '@/components/motion/CountUp'
+import { Parallax } from '@/components/motion/Parallax'
 import { Reveal } from '@/components/motion/Reveal'
 import { Button } from '@/components/ui/Button'
 import { ArrowIcon, SparkIcon } from '@/components/ui/Icons'
@@ -12,9 +13,11 @@ import { ABOUT, CONTEXT, CTA, ECOSYSTEM, HERO, MARQUEE_WORDS, PARTNERS, STATS } 
 export function Hero() {
   return (
     <section id="top" className="hero-bg relative overflow-hidden">
-      <span aria-hidden="true" className="hero-mark">
-        {HERO.mark}
-      </span>
+      <Parallax speed={0.18} className="pointer-events-none absolute inset-0">
+        <span aria-hidden="true" className="hero-mark">
+          {HERO.mark}
+        </span>
+      </Parallax>
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-12 px-6 pt-14 pb-16 md:grid-cols-[1.1fr_0.9fr] md:pt-20 md:pb-24">
         <div className="flex flex-col gap-5">
           <Reveal>
@@ -62,7 +65,7 @@ export function Hero() {
               height={1309}
               priority
               sizes="(min-width: 768px) 420px, 90vw"
-              className="h-auto w-full"
+              className="hero-img h-auto w-full"
             />
           </div>
           <p className="absolute -bottom-5 left-4 max-w-[17rem] rounded-2xl border border-gold-accent bg-white/95 px-5 py-3 text-sm text-soft shadow-lg">

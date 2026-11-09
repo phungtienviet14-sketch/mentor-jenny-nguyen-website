@@ -1,6 +1,6 @@
 # Quyết định giao diện mới (bản Sáng v4) — chốt trước khi code
 
-> Trạng thái: Figma đã vẽ, **chờ khách duyệt** rồi mới sửa code Next.js.
+> Trạng thái: Figma đã duyệt; **đã triển khai code** (G0–G4) trên nhánh `claude/redesign-ui-layout-43a82a`. Xem mục 10 về điểm khác Figma.
 > Figma: file `GIbPvIxwVLXxIdGj0k9NBs`, trang `54:2` "Home v4 · Sáng (chốt, rút gọn + nút liên hệ)", frame `53:3` (1280 × 16435).
 > Nội dung: Google Doc `1XNqxT4HYU2LjRUCtR1PAl3_tpZI2meVfn3YkKPHIhyQ` (bản mới) — thay cho docx cũ `docs/NOI_DUNG_TRANG_CHU_Mentor_Jenny_Nguyen.docx`.
 
@@ -93,3 +93,10 @@ Reveal khi cuộn · đếm số (count-up) ở Stats · marquee · lộ trình 
 - Đụng tới: `src/app/globals.css` (token màu + lớp NTK), `src/content/home.ts` (nội dung từ Google Doc), `src/app/(frontend)/page.tsx` + component khối, component nút liên hệ nổi (client component); giữ form `/api/leads`, cookie banner, sự kiện GTM.
 - Thứ tự: (1) token màu + font + nền → (2) khối tĩnh theo thứ tự trang → (3) chuyển động → (4) nút liên hệ nổi → (5) mobile → (6) trang con.
 - Kiểm tra: chạy dev, chụp từng khối so với Figma, test mobile, `tsc`/lint/build.
+
+## 10. Đã triển khai và điểm khác Figma
+- G0 đồng bộ `main` (next 16.4.5 + CSP). G1 token màu/font, bỏ chế độ tối + nền 3D. G2 23 khối. G3 nút liên hệ nổi. G4 chuyển động M1–M14.
+- **Khác kế hoạch:** M15 (nền nhẹ cố định) đổi thành parallax nhẹ cho chữ nền Hero, vì mọi khối đều có nền đặc nên lớp nền cố định sẽ bị che. Lộ trình trên mobile dùng cuộn ngang native có snap (không ghim). Chưa dùng `LazyMotion`.
+- **Nút liên hệ:** Messenger và email để trống trong `CONTACT` (`src/content/home.ts`) nên tự ẩn; Zalo đang dùng `zalo.me/<số trợ lý>` tạm. Điền link thật khi khách cung cấp.
+- Khung "Marketing bổ sung" hiển thị công khai trên site; cân nhắc ẩn trước khi go-live nếu marketing chưa bổ sung kịp.
+- Chưa làm: trang con (chi tiết khóa học, Workshop, Nhập môn AI, in-house), bản mobile tinh chỉnh theo Figma (chưa có Figma mobile), Lighthouse mobile chưa đo tay.
