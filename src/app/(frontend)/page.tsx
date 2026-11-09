@@ -1,11 +1,19 @@
 import type { FAQPage, Organization, Person } from 'schema-dts'
 
-import { BrandBand } from '@/components/home/BrandBand'
 import { Courses } from '@/components/home/Courses'
 import { Roadmap } from '@/components/home/Roadmap'
-import { Ecosystem, Why, Testimonials, Books } from '@/components/home/blocks-mid'
-import { Faq, FinalCta, Footer, Gifts, Press } from '@/components/home/blocks-bottom'
-import { About, Context, Formula, Hero, Partners, Stats } from '@/components/home/blocks-top'
+import {
+  Activities,
+  Blog,
+  Books,
+  Community,
+  Events,
+  InHouse,
+  Testimonials,
+  Videos,
+} from '@/components/home/blocks-mid'
+import { Faq, FinalCta, Footer, GiftBand } from '@/components/home/blocks-bottom'
+import { About, Context, Ecosystem, Hero, MarqueeBand, Partners } from '@/components/home/blocks-top'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { FAQ } from '@/content/home'
 import { SITE, absoluteUrl } from '@/lib/site'
@@ -47,20 +55,22 @@ export default function HomePage() {
       <JsonLd data={organization} />
       <JsonLd data={faq} />
       <Hero />
-      <Stats />
       <Partners />
       <Context />
       <About />
-      <BrandBand />
-      <Formula />
+      <MarqueeBand />
+      <Ecosystem />
       <Courses />
       <Roadmap />
-      <Ecosystem />
-      <Why />
+      <Community />
+      <Events />
+      <Activities />
+      <Videos />
+      <InHouse />
       <Testimonials />
       <Books />
-      <Gifts />
-      <Press />
+      <Blog />
+      <GiftBand />
       <Faq />
       <FinalCta />
       <Footer />

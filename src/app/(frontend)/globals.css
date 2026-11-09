@@ -22,7 +22,7 @@
   --gold-accent: #c69a53;
   --gold-accent-strong: #f1c64d;
   --gold-accent-soft: #ffe9a8;
-  --gold-accent-text: #8a6a2a;
+  --gold-accent-text: #946a10;
 
   --text-primary: #102978;
   --text-muted: #5d6b88;
@@ -109,6 +109,7 @@
   --color-action-pressed: var(--action-gold-pressed);
   --font-display: var(--font-anton), 'Be Vietnam Pro', Impact, sans-serif;
   --font-serif: var(--font-dancing), cursive;
+  --font-script: var(--font-dancing), cursive;
   --font-sans: var(--font-montserrat), system-ui, sans-serif;
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -237,3 +238,350 @@ body {
   }
 }
 
+
+/* ---------- Thành phần kiểu NTK (bản Sáng v4) ---------- */
+
+/* Nút: vệt sáng quét qua khi hover (M9) */
+.btn-sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.45) 50%, transparent 65%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.btn-sheen:hover::after {
+  transform: translateX(120%);
+  transition: transform 0.7s var(--ease-out);
+}
+
+/* Thẻ: nổi lên, viền vàng khi hover (M10) */
+.card-lift {
+  transition:
+    translate 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out);
+}
+
+.card-lift:hover {
+  translate: 0 -6px;
+  border-color: var(--gold-accent);
+  box-shadow: 0 28px 50px -28px rgb(16 41 120 / 0.45);
+}
+
+/* Link menu: gạch chân vàng vẽ từ trái */
+.nav-link {
+  position: relative;
+  padding-block: 4px;
+  transition: color 0.25s var(--ease-out);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--gold-accent-strong);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--gold-500);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.link-arrow svg {
+  transition: translate 0.25s var(--ease-out);
+}
+
+.link-arrow:hover svg {
+  translate: 4px 0;
+}
+
+/* Gạch chân vàng dưới nhấn của tiêu đề, vẽ khi Reveal (M11) */
+.heading-accent {
+  position: relative;
+  width: fit-content;
+  margin-inline: inherit;
+}
+
+.reveal .heading-accent::after {
+  content: '';
+  display: block;
+  height: 4px;
+  margin-top: 8px;
+  width: 100%;
+  border-radius: 2px;
+  background: var(--gold-accent-strong);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-out) 0.35s;
+}
+
+.reveal.is-visible .heading-accent::after {
+  transform: scaleX(1);
+}
+
+/* Hero */
+.hero-bg {
+  background:
+    radial-gradient(45% 60% at 72% 45%, rgb(198 154 83 / 0.2), transparent 70%),
+    radial-gradient(40% 50% at 0% 100%, rgb(22 69 184 / 0.1), transparent 70%),
+    linear-gradient(180deg, #fff, var(--bg-glow));
+}
+
+.hero-mark {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  translate: -50% 0;
+  font-family: var(--font-anton), Impact, sans-serif;
+  font-size: clamp(6rem, 22vw, 20rem);
+  line-height: 1;
+  white-space: nowrap;
+  color: rgb(22 69 184 / 0.06);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-halo {
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  border: 1px solid rgb(198 154 83 / 0.7);
+  background: radial-gradient(closest-side, rgb(22 69 184 / 0.18), rgb(22 69 184 / 0.04) 70%, transparent);
+  animation: halo-spin 40s linear infinite;
+}
+
+@keyframes halo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.role-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.role-line::before {
+  content: '';
+  width: 40px;
+  height: 2px;
+  background: var(--gold-accent);
+}
+
+.stats-band {
+  background: linear-gradient(180deg, #1645b8, #102978);
+  box-shadow: 0 -20px 60px -30px rgb(16 41 120 / 0.5);
+}
+
+/* Khung ảnh vòm (Về Jenny) */
+.arch-frame {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 999px 999px 24px 24px;
+  background:
+    radial-gradient(70% 55% at 50% 30%, rgb(198 154 83 / 0.5), transparent 70%),
+    linear-gradient(170deg, #2a6bf0, #102978);
+  box-shadow: 0 30px 60px -30px rgb(16 41 120 / 0.5);
+}
+
+/* Chữ rỗng viền xanh trên băng vàng */
+.band-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--gold-600);
+}
+
+/* Ảnh khóa học (placeholder gradient) */
+.course-img {
+  background:
+    radial-gradient(70% 60% at 50% 0%, rgb(255 255 255 / 0.25), transparent 70%),
+    linear-gradient(160deg, #2a6bf0, #102978);
+}
+
+/* Chuyển tab (M13) */
+.tab-panel:not([hidden]) {
+  animation: tab-in 0.35s var(--ease-out);
+}
+
+@keyframes tab-in {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+}
+
+/* Số bước lộ trình: chữ rỗng viền xanh */
+.hstep-n {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(22 69 184 / 0.35);
+}
+
+/* FAQ: mở mượt, dấu + xoay (M12) */
+.faq-item[open] .faq-plus {
+  transform: rotate(45deg);
+}
+
+.faq-plus {
+  transition: transform 0.3s var(--ease-out);
+}
+
+.faq-item[open] .faq-body {
+  animation: faq-open 0.35s var(--ease-out);
+}
+
+@keyframes faq-open {
+  from {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+}
+
+/* ---------- Nút liên hệ nổi (M14) ---------- */
+.fab {
+  position: fixed;
+  right: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  transition: translate 0.3s var(--ease-out);
+}
+
+body[data-consent-open] .fab {
+  translate: 0 -120px;
+}
+
+.fab__tip {
+  background: var(--band-bg);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px -10px rgb(16 41 120 / 0.6);
+  opacity: 0;
+  translate: 8px 0;
+  transition:
+    opacity 0.25s var(--ease-out),
+    translate 0.25s var(--ease-out);
+  pointer-events: none;
+}
+
+.fab:hover .fab__tip,
+.fab:focus-within .fab__tip {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.fab__b {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow:
+    0 12px 26px -10px rgb(16 41 120 / 0.55),
+    0 0 0 4px rgb(255 255 255 / 0.9);
+  transition: scale 0.25s var(--ease-out);
+  animation: fab-pop 0.5s var(--ease-out) 1.5s backwards;
+}
+
+.fab__b:hover {
+  scale: 1.1;
+}
+
+.fab__z {
+  background: #0068ff;
+}
+
+.fab__m {
+  background: linear-gradient(135deg, #00b2ff, #a033ff);
+}
+
+.fab__p {
+  background: linear-gradient(135deg, #2a6bf0, #1645b8);
+}
+
+.fab__e {
+  background: #f1c64d;
+  color: #102978;
+}
+
+/* Vòng sóng nhẹ, chỉ 3 lần rồi dừng */
+.fab__p::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #2a6bf0;
+  animation: fab-ring 2.4s ease-out 2.5s 3 both;
+  pointer-events: none;
+}
+
+@keyframes fab-pop {
+  from {
+    opacity: 0;
+    scale: 0.4;
+  }
+}
+
+@keyframes fab-ring {
+  from {
+    opacity: 0.8;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 1.7;
+  }
+}
+
+@media (max-width: 767px) {
+  .fab {
+    right: 14px;
+    gap: 10px;
+  }
+
+  .fab__b {
+    width: 48px;
+    height: 48px;
+  }
+
+  .fab__tip {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-sheen::after,
+  .hero-halo,
+  .fab__b,
+  .fab__p::after,
+  .tab-panel:not([hidden]),
+  .faq-item[open] .faq-body {
+    animation: none;
+    transition: none;
+  }
+
+  .reveal .heading-accent::after {
+    transform: scaleX(1);
+    transition: none;
+  }
+}

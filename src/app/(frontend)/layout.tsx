@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from 'next'
 import { Anton, Dancing_Script, Montserrat } from 'next/font/google'
 import type { ReactNode } from 'react'
 
+import { ContactFab } from '@/components/home/ContactFab'
 import { Header } from '@/components/home/Header'
+import { Topbar } from '@/components/home/Topbar'
 import { ConsentManager } from '@/components/analytics/ConsentManager'
 import { SITE, SITE_URL } from '@/lib/site'
 
@@ -56,8 +58,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="vi" className={`${anton.variable} ${montserrat.variable} ${dancing.variable}`}>
       <body>
+        <Topbar />
         <Header />
         <main>{children}</main>
+        <ContactFab />
         <ConsentManager />
       </body>
     </html>

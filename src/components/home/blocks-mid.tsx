@@ -1,116 +1,221 @@
 import { Reveal } from '@/components/motion/Reveal'
 import { Button } from '@/components/ui/Button'
+import { ArrowIcon, SparkIcon } from '@/components/ui/Icons'
+import { Marquee } from '@/components/ui/Marquee'
+import { Placeholder } from '@/components/ui/Placeholder'
 import { CARD_CLASS, SECTION_CLASS, SectionHeading } from '@/components/ui/SectionHeading'
-import { BOOKS, ECOSYSTEM, TESTIMONIALS, WHY } from '@/content/home'
+import { ACTIVITIES, BLOG, BOOKS, COMMUNITY, EVENTS, INHOUSE, TESTIMONIALS, VIDEOS } from '@/content/home'
 
-/** Khối 9: hệ sinh thái NetViet (giải pháp doanh nghiệp). */
-export function Ecosystem() {
+/** Khối 12: cộng đồng Thở cùng AI (nội dung do marketing bổ sung). */
+export function Community() {
   return (
-    <section id="giai-phap" className={`${SECTION_CLASS} flex flex-col gap-10`}>
-      <SectionHeading eyebrow={ECOSYSTEM.eyebrow} title={ECOSYSTEM.title} subtitle={`${ECOSYSTEM.subtitle} ${ECOSYSTEM.body}`} />
-      <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {ECOSYSTEM.brands.map((b, i) => (
-          <Reveal as="li" key={b.brand} index={i % 3} className={CARD_CLASS}>
-            <p className="font-display text-xl font-bold text-gold-500">{b.brand}</p>
-            <p className="mt-1 text-sm font-semibold text-fg">{b.solution}</p>
-            <p className="mt-3 text-sm text-muted">{b.text}</p>
-          </Reveal>
-        ))}
-      </ul>
-      <Reveal>
-        <h3 className="mb-4 font-display text-xl font-bold text-fg">{ECOSYSTEM.processTitle}</h3>
-        <ol className="grid gap-4 md:grid-cols-4">
-          {ECOSYSTEM.process.map((s, i) => (
-            <li key={s} className="flex gap-3 rounded-2xl border border-line bg-surface/70 p-4 text-sm text-fg">
-              <span className="font-display text-2xl font-bold text-gold-500">{i + 1}</span>
-              {s}
-            </li>
-          ))}
-        </ol>
-      </Reveal>
-      <Reveal>
-        <p className="text-sm text-muted">{ECOSYSTEM.partners}</p>
-      </Reveal>
-      <Reveal>
-        <Button href={ECOSYSTEM.cta.href}>{ECOSYSTEM.cta.label}</Button>
-      </Reveal>
-    </section>
-  )
-}
-
-/** Khối 10: vì sao chọn Jenny. */
-export function Why() {
-  return (
-    <section id="khac-biet" className={`${SECTION_CLASS} flex flex-col gap-10`}>
-      <SectionHeading eyebrow={WHY.eyebrow} title={WHY.title} />
-      <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {WHY.reasons.map((r, i) => (
-          <Reveal as="li" key={r.title} index={i % 3} className={CARD_CLASS}>
-            <h3 className="font-display text-xl font-bold text-fg">{r.title}</h3>
-            <p className="mt-2 text-sm text-muted">{r.text}</p>
-          </Reveal>
-        ))}
-      </ul>
-      <Reveal>
-        <p className="rounded-3xl border border-line-gold bg-elevated p-6 font-display text-lg leading-relaxed text-fg">{WHY.pledge}</p>
-      </Reveal>
-    </section>
-  )
-}
-
-/** Khối 11: học viên nói gì. Chưa có cảm nhận thật đã xin phép nên hiển thị khung chờ, không bịa nội dung. */
-export function Testimonials() {
-  return (
-    <section id="hoc-vien" className={`${SECTION_CLASS} flex flex-col gap-10`}>
-      <SectionHeading eyebrow={TESTIMONIALS.eyebrow} title={TESTIMONIALS.title} />
-      {TESTIMONIALS.items.length === 0 ? (
-        <Reveal>
-          <p className="rounded-3xl border border-dashed border-line-gold p-8 text-center text-muted">{TESTIMONIALS.emptyNote}</p>
+    <section id="cong-dong" className="bg-elevated">
+      <div className={`${SECTION_CLASS} grid items-center gap-12 md:grid-cols-2`}>
+        <Reveal className="grid grid-cols-2 gap-4">
+          <Placeholder hint="Ảnh cộng đồng" className="col-span-2 aspect-[3/2]" />
+          <Placeholder hint="Ảnh 2" className="aspect-[4/3]" />
+          <Placeholder hint="Ảnh 3" className="aspect-[4/3]" />
         </Reveal>
-      ) : (
-        <ul className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
-          {TESTIMONIALS.items.map((t) => (
-            <li key={t.name} className={`${CARD_CLASS} w-[80vw] max-w-sm shrink-0 snap-start`}>
-              <blockquote className="text-fg">“{t.quote}”</blockquote>
-              <p className="mt-4 font-semibold text-gold-500">{t.name}</p>
-              <p className="text-sm text-muted">{t.role}</p>
-            </li>
+        <div className="flex flex-col gap-6">
+          <SectionHeading eyebrow={COMMUNITY.eyebrow} title={COMMUNITY.title} accent={COMMUNITY.accent} align="left" />
+          <Reveal>
+            <p className="text-soft">{COMMUNITY.lead}</p>
+          </Reveal>
+          <ol className="flex flex-col gap-3">
+            {COMMUNITY.activities.map((a, i) => (
+              <Reveal as="li" key={a} index={i} className="flex items-center gap-4 rounded-2xl border border-dashed border-gold-accent bg-white px-5 py-4">
+                <span className="font-display text-3xl text-gold-accent">{String(i + 1).padStart(2, '0')}</span>
+                <span className="font-semibold text-gold-text">{a}</span>
+              </Reveal>
+            ))}
+          </ol>
+          <Reveal>
+            <Button href={COMMUNITY.cta.href}>
+              {COMMUNITY.cta.label}
+              <ArrowIcon />
+            </Button>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/** Khối 13: lịch sự kiện, dạng vé. Nội dung do marketing bổ sung. */
+export function Events() {
+  return (
+    <section id="su-kien" className="bg-white">
+      <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
+        <SectionHeading eyebrow={EVENTS.eyebrow} title={EVENTS.title} accent={EVENTS.accent} />
+        <ul className="flex flex-col gap-4">
+          {Array.from({ length: EVENTS.count }, (_, i) => (
+            <Reveal as="li" key={i} index={i} className={`${CARD_CLASS} flex flex-col items-start gap-5 !p-5 md:flex-row md:items-center`}>
+              <div className="grid h-20 w-24 shrink-0 place-content-center rounded-2xl border-2 border-dashed border-gold-accent text-center text-gold-text">
+                <b className="font-display text-2xl font-normal">dd.mm</b>
+                <span className="text-xs">năm</span>
+              </div>
+              <div className="flex-1">
+                <h3 className="font-display text-xl font-normal tracking-wide text-fg uppercase">[Tên sự kiện / khóa khai giảng]</h3>
+                <p className="text-sm text-muted">[Thời gian · Địa điểm]</p>
+              </div>
+              <span className="rounded-full border border-dashed border-gold-accent bg-gold-accent/10 px-3 py-1 text-xs font-bold text-gold-text">Marketing bổ sung</span>
+              <Button href="#dang-ky" className="px-5 py-2 text-xs">
+                Đăng ký
+              </Button>
+            </Reveal>
           ))}
         </ul>
-      )}
+      </div>
     </section>
   )
 }
 
-/** Khối 12: sách. Bìa và link mua thật bổ sung qua Payload (Books). */
+/** Khối 14: dải ảnh hoạt động & dấu ấn (ảnh thật do marketing bổ sung). */
+export function Activities() {
+  return (
+    <section aria-label={ACTIVITIES.caption} className="bg-[var(--band-bg)] py-8">
+      <p className="mb-5 text-center text-xs font-bold tracking-[0.22em] text-gold-strong uppercase">{ACTIVITIES.caption}</p>
+      <Marquee duration={50} label={ACTIVITIES.caption}>
+        {Array.from({ length: ACTIVITIES.count }, (_, i) => (
+          <Placeholder key={i} hint="Ảnh · tên chương trình · thời gian" className="mr-4 aspect-[3/2] w-64 shrink-0 !rounded-2xl border-gold-strong text-gold-strong md:w-80" />
+        ))}
+      </Marquee>
+    </section>
+  )
+}
+
+/** Khối 15: video nổi bật. */
+export function Videos() {
+  return (
+    <section id="video" className="bg-elevated">
+      <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
+        <SectionHeading eyebrow={VIDEOS.eyebrow} title={VIDEOS.title} accent={VIDEOS.accent} />
+        <div className="grid gap-5 md:grid-cols-[1.6fr_1fr]">
+          <Reveal className="flex flex-col gap-3">
+            <Placeholder hint="Video lớn (YouTube)" className="aspect-video" />
+            <h3 className="font-semibold text-gold-text">[Tiêu đề video]</h3>
+          </Reveal>
+          <div className="grid gap-5">
+            {Array.from({ length: VIDEOS.sideCount }, (_, i) => (
+              <Reveal key={i} index={i + 1} className="flex flex-col gap-3">
+                <Placeholder hint={`Video ${i + 2}`} className="aspect-video" />
+                <h3 className="font-semibold text-gold-text">[Tiêu đề video]</h3>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+        <Reveal className="flex justify-center">
+          <Button href={VIDEOS.cta.href} variant="ghost">
+            {VIDEOS.cta.label}
+            <ArrowIcon />
+          </Button>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+/** Khối 16: đào tạo AI in-house (khối navy). */
+export function InHouse() {
+  return (
+    <section id="doanh-nghiep" className="bg-white">
+      <div className={SECTION_CLASS}>
+        <Reveal className="grid overflow-hidden rounded-[2rem] bg-[var(--band-bg)] shadow-2xl shadow-[rgb(16_41_120/0.3)] md:grid-cols-2">
+          <Placeholder hint="Ảnh đào tạo doanh nghiệp" className="min-h-64 !rounded-none border-gold-strong text-gold-strong" />
+          <div className="flex flex-col items-start gap-5 p-8 md:p-12">
+            <SectionHeading eyebrow={INHOUSE.eyebrow} title={INHOUSE.title} accent={INHOUSE.accent} align="left" onDark />
+            <ul className="flex flex-col gap-2 text-white/90">
+              {INHOUSE.points.map((p) => (
+                <li key={p} className="flex gap-2">
+                  <SparkIcon width={14} height={14} className="mt-1.5 shrink-0 text-gold-strong" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <Button href={INHOUSE.cta.href} variant="light">
+              {INHOUSE.cta.label}
+              <ArrowIcon />
+            </Button>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+/** Khối 17: cảm nhận học viên. Chưa có cảm nhận thật đã xin phép: chỉ hiện khung chờ ảnh. */
+export function Testimonials() {
+  return (
+    <section id="cam-nhan" className="bg-elevated">
+      <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
+        <SectionHeading eyebrow={TESTIMONIALS.eyebrow} title={TESTIMONIALS.title} accent={TESTIMONIALS.accent} />
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+          {Array.from({ length: TESTIMONIALS.count }, (_, i) => (
+            <Reveal key={i} index={i}>
+              <Placeholder hint="Ảnh feedback" className="aspect-[3/4]" />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/** Khối 18: sách của Jenny. */
 export function Books() {
   return (
-    <section id="sach" className={`${SECTION_CLASS} flex flex-col gap-10`}>
-      <SectionHeading eyebrow={BOOKS.eyebrow} title={BOOKS.title} subtitle={BOOKS.body} />
-      <div className="grid gap-6 md:grid-cols-2">
-        {BOOKS.items.map((b, i) => (
-          <Reveal key={b.name} index={i} className={`${CARD_CLASS} flex flex-col gap-4`}>
-            <div
-              aria-hidden="true"
-              className="flex aspect-[3/2] items-center justify-center rounded-2xl bg-gradient-to-br from-[#102978] to-[#2457d6] p-6 text-center font-display text-2xl font-bold text-white"
-            >
-              {b.name}
-            </div>
-            <p className="text-xs font-semibold tracking-[0.18em] text-accent-orange">{b.label}</p>
-            <h3 className="font-display text-2xl font-bold text-fg">{b.name}</h3>
-            <p className="text-sm text-muted">{b.desc}</p>
-            <p className="text-sm text-fg">
-              <strong>Phù hợp:</strong> {b.fit}
-            </p>
-            <div className="mt-auto flex flex-wrap gap-2">
-              {b.ctas.map((c, j) => (
-                <Button key={c} href="#dang-ky" variant={j === 0 ? 'primary' : 'ghost'} className="px-5 py-2.5 text-xs">
-                  {c} ↗
-                </Button>
-              ))}
-            </div>
+    <section id="sach" className="bg-white">
+      <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
+        <SectionHeading eyebrow={BOOKS.eyebrow} title={BOOKS.title} accent={BOOKS.accent} />
+        <ul className="grid gap-6 md:grid-cols-2">
+          {BOOKS.items.map((b, i) => (
+            <Reveal as="li" key={b.name} index={i} className={`${CARD_CLASS} flex flex-col gap-4 overflow-hidden !p-0`}>
+              <Placeholder hint={`Bìa sách · ${b.name}`} className="aspect-video !rounded-none" />
+              <div className="flex flex-1 flex-col gap-2 p-6">
+                <span className="text-xs font-bold tracking-[0.2em] text-gold-text uppercase">{b.label}</span>
+                <h3 className="font-display text-2xl font-normal tracking-wide text-fg uppercase">{b.name}</h3>
+                <p className="text-sm text-muted">{b.desc}</p>
+                <div className="mt-auto flex flex-wrap gap-5 pt-3">
+                  {b.ctas.map((c) => (
+                    <a key={c} href="#dang-ky" className="link-arrow inline-flex items-center gap-2 text-sm font-bold text-gold-500">
+                      {c}
+                      <ArrowIcon />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+/** Khối 19: blog (bài viết do marketing bổ sung). */
+export function Blog() {
+  return (
+    <section id="blog" className="bg-elevated">
+      <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
+        <SectionHeading eyebrow={BLOG.eyebrow} title={BLOG.title} accent={BLOG.accent} />
+        <div className="grid gap-6 md:grid-cols-[1.2fr_1fr]">
+          <Reveal className="flex flex-col gap-3">
+            <Placeholder hint="Bài viết nổi bật" className="aspect-video" />
+            <span className="text-xs font-bold text-muted">Blog · [dd/mm/yyyy]</span>
+            <h3 className="font-display text-2xl font-normal tracking-wide text-gold-text uppercase">[Tiêu đề bài viết nổi bật]</h3>
           </Reveal>
-        ))}
+          <ul className="flex flex-col gap-4">
+            {Array.from({ length: BLOG.rows }, (_, i) => (
+              <Reveal as="li" key={i} index={i} className="flex items-center gap-4">
+                <Placeholder hint="Ảnh bài" className="aspect-video w-36 shrink-0 !p-2" />
+                <div>
+                  <span className="text-xs font-bold text-muted">[dd/mm/yyyy]</span>
+                  <h3 className="font-semibold text-gold-text">[Tiêu đề bài viết]</h3>
+                </div>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   )
