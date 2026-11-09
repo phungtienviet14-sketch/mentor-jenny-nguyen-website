@@ -56,7 +56,15 @@ export function ConsentManager() {
     return () => document.removeEventListener('click', onClick)
   }, [])
 
-  if (!GTM_ID || choice !== 'unset') return null
+  const bannerOpen = Boolean(GTM_ID) && choice === 'unset'
+
+  // Báo cho nút liên hệ nổi nhích lên, không bị banner che.
+  useEffect(() => {
+    document.body.toggleAttribute('data-consent-open', bannerOpen)
+    return () => document.body.removeAttribute('data-consent-open')
+  }, [bannerOpen])
+
+  if (!bannerOpen) return null
 
   const decide = (value: 'granted' | 'denied') => {
     localStorage.setItem(KEY, value)

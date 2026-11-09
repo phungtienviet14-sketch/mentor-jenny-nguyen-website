@@ -1,14 +1,16 @@
 import type { ComponentProps } from 'react'
 
-type Variant = 'primary' | 'ghost'
+type Variant = 'primary' | 'ghost' | 'light'
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-bold tracking-wide transition-colors focus-visible:outline-offset-4'
+  'btn-sheen relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3 text-sm font-bold tracking-wide transition-[translate,background-color,box-shadow,color] duration-300 hover:-translate-y-0.5 focus-visible:outline-offset-4 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
 const variants: Record<Variant, string> = {
-  // Nút đỏ thương hiệu, chữ trắng ở cả hai chế độ (đã đo tương phản).
+  // Nút xanh thương hiệu (gradient), chữ trắng. Vệt sáng quét qua khi hover (.btn-sheen).
   primary:
-    'bg-action text-on-gold shadow-md shadow-action/25 hover:-translate-y-0.5 hover:bg-action-hover active:bg-action-pressed motion-reduce:hover:translate-y-0',
-  ghost: 'border border-gold-500 text-gold-500 hover:bg-elevated',
+    'bg-[image:var(--action-gradient)] text-on-gold shadow-lg shadow-action/30 hover:shadow-xl hover:shadow-action/35 active:bg-action-pressed',
+  ghost: 'border border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-white',
+  // Nút trắng trên nền navy/xanh.
+  light: 'bg-white text-gold-600 shadow-lg shadow-black/15 hover:bg-gold-soft',
 }
 
 type ButtonProps = ComponentProps<'a'> & { variant?: Variant }

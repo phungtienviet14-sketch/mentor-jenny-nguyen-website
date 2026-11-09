@@ -10,8 +10,10 @@ import {
   type ReactNode,
 } from 'react'
 
+import { MOTION } from '@/lib/motion-tokens'
+
 /** Desktop/tablet: ghim từ 761px (giống site tham chiếu). Luôn tắt khi người dùng bật giảm chuyển động. */
-const QUERY_DESKTOP = '(min-width: 761px) and (prefers-reduced-motion: no-preference)'
+const QUERY_DESKTOP = `(min-width: ${MOTION.pinMinWidth}px) and (prefers-reduced-motion: no-preference)`
 /** Cho phép ghim cả trên mobile (khối có thẻ đủ thấp để vừa một màn hình). */
 const QUERY_ALL = '(prefers-reduced-motion: no-preference)'
 
@@ -71,11 +73,28 @@ export function PinnedTrack({
     const ro = new ResizeObserver(measure)
     if (track) ro.observe(track)
     window.addEventListener('resize', measure)
+    // Font tải xong làm đổi bề rộng thẻ: đo lại để không cắt thẻ cuối.
+    void document.fonts?.ready.then(measure)
     return () => {
       ro.disconnect()
       window.removeEventListener('resize', measure)
     }
   }, [pinned, measure])
+
+  // Bàn phím: Tab vào thẻ nằm ngoài tầm nhìn thì cuộn trang tới đúng vị trí của thẻ đó.
+  const onFocus = useCallback(
+    (e: React.FocusEvent<HTMLUListElement>) => {
+      const outer = outerRef.current
+      if (!outer || items.length < 2) return
+      const li = (e.target as HTMLElement).closest('li')
+      const index = li ? Array.from(li.parentElement?.children ?? []).indexOf(li) : -1
+      if (index < 0) return
+      const top = outer.getBoundingClientRect().top + window.scrollY
+      const range = outer.offsetHeight - window.innerHeight
+      window.scrollTo({ top: top + (index / (items.length - 1)) * range, behavior: 'auto' })
+    },
+    [items.length],
+  )
 
   const { scrollYProgress } = useScroll({ target: outerRef, offset: ['start start', 'end end'] })
   const smooth = useSpring(scrollYProgress, {
@@ -104,11 +123,12 @@ export function PinnedTrack({
       style={pinned ? { height: overflow + viewportH } : undefined}
     >
       {pinned ? (
-        <div className="sticky top-0 flex h-dvh flex-col justify-center gap-4 overflow-hidden pt-[68px] pb-3">
+        <div className="sticky top-0 flex h-dvh flex-col justify-center gap-4 overflow-hidden pt-[var(--header-h)] pb-3">
           {header && <div className="mx-auto w-full max-w-6xl px-6">{header}</div>}
           <motion.ul
             ref={trackRef}
             style={{ x }}
+            onFocusCapture={onFocus}
             className="flex w-max gap-6 px-6 will-change-transform"
           >
             {items.map((item, i) => (

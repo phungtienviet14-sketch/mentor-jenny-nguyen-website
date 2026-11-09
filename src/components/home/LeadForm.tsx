@@ -126,7 +126,7 @@ export function LeadForm({
   if (status === 'success') {
     return (
       <div className={`${className} flex flex-col items-center gap-2 text-center`} role="status" data-testid="lead-success">
-        <p className="font-serif text-2xl font-bold text-fg">Cảm ơn bạn đã đăng ký</p>
+        <p className="font-display text-2xl font-normal text-fg uppercase">Cảm ơn bạn đã đăng ký</p>
         <p className="text-muted">Đội ngũ Jenny sẽ liên hệ với bạn sớm nhất có thể.</p>
       </div>
     )

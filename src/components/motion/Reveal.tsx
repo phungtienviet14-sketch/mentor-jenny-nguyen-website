@@ -1,6 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState, type CSSProperties, type ElementType, type ReactNode } from 'react'
+import { useEffect, useRef, type CSSProperties, type ElementType, type ReactNode } from 'react'
+
+import { MOTION } from '@/lib/motion-tokens'
 
 type RevealProps = {
   children: ReactNode
@@ -10,44 +12,60 @@ type RevealProps = {
   className?: string
 }
 
-export const REVEAL_STAGGER_MS = 90
+export const REVEAL_STAGGER_MS = MOTION.staggerMs
+
+/** Một IntersectionObserver dùng chung cho mọi Reveal trên trang (thay vì mỗi phần tử một cái). */
+let sharedObserver: IntersectionObserver | null = null
+const pending = new WeakMap<Element, () => void>()
+
+function getObserver(): IntersectionObserver {
+  if (!sharedObserver) {
+    sharedObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
+          pending.get(entry.target)?.()
+          pending.delete(entry.target)
+          sharedObserver?.unobserve(entry.target)
+        }
+      },
+      { threshold: MOTION.revealThreshold },
+    )
+  }
+  return sharedObserver
+}
 
 /**
- * Hiện dần khi cuộn tới (IntersectionObserver, ngưỡng 0.12).
- * Giảm chuyển động / không có JS: CSS luôn hiển thị nội dung.
+ * Hiện dần khi cuộn tới (M1). Ẩn chỉ khi trang có JS (class `js` trên <html>); giảm chuyển động,
+ * không có JS hoặc JS lỗi quá 4 giây: CSS luôn hiển thị nội dung.
  */
 export function Reveal({ children, index = 0, as: Tag = 'div', className = '' }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null)
-  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    const show = () => el.classList.add('is-visible')
     if (
       typeof IntersectionObserver === 'undefined' ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
-      // Không cần quan sát: hiện ngay bằng DOM để tránh setState đồng bộ trong effect.
-      el.classList.add('is-visible')
+      show()
       return
     }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.12 },
-    )
+    const observer = getObserver()
+    pending.set(el, show)
     observer.observe(el)
-    return () => observer.disconnect()
+    return () => {
+      pending.delete(el)
+      observer.unobserve(el)
+    }
   }, [])
 
   const style = { '--reveal-delay': `${index * REVEAL_STAGGER_MS}ms` } as CSSProperties
 
   return (
-    <Tag ref={ref} className={`reveal ${visible ? 'is-visible' : ''} ${className}`.trim()} style={style}>
+    <Tag ref={ref} className={`reveal ${className}`.trim()} style={style}>
       {children}
     </Tag>
   )
