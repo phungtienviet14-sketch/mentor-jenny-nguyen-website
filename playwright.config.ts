@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test'
 const PORT = 3000
 const baseURL = `http://localhost:${PORT}`
 
-/** Chạy cả hai chế độ giao diện: sáng và tối (theo prefers-color-scheme). */
+/** Chỉ có giao diện sáng: desktop và mobile. */
 export default defineConfig({
   testDir: './tests/e2e',
   forbidOnly: !!process.env.CI,
@@ -13,7 +13,6 @@ export default defineConfig({
   use: { baseURL, trace: 'on-first-retry' },
   projects: [
     { name: 'light', use: { ...devices['Desktop Chrome'], colorScheme: 'light' } },
-    { name: 'dark', use: { ...devices['Desktop Chrome'], colorScheme: 'dark' } },
     { name: 'mobile-light', use: { ...devices['Pixel 7'], colorScheme: 'light' } },
   ],
   webServer: {

@@ -1,24 +1,31 @@
 import type { Metadata, Viewport } from 'next'
-import { Be_Vietnam_Pro, Playfair_Display } from 'next/font/google'
+import { Anton, Dancing_Script, Montserrat } from 'next/font/google'
 import type { ReactNode } from 'react'
 
 import { Header } from '@/components/home/Header'
 import { ConsentManager } from '@/components/analytics/ConsentManager'
-import { AmbientBackground } from '@/components/motion/AmbientBackground'
 import { SITE, SITE_URL } from '@/lib/site'
 
 import './globals.css'
 
-const playfair = Playfair_Display({
+const anton = Anton({
   subsets: ['vietnamese', 'latin'],
-  variable: '--font-playfair',
+  weight: '400',
+  variable: '--font-anton',
   display: 'swap',
 })
 
-const beVietnam = Be_Vietnam_Pro({
+const montserrat = Montserrat({
   subsets: ['vietnamese', 'latin'],
   weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-be-vietnam',
+  variable: '--font-montserrat',
+  display: 'swap',
+})
+
+const dancing = Dancing_Script({
+  subsets: ['vietnamese', 'latin'],
+  weight: ['600', '700'],
+  variable: '--font-dancing',
   display: 'swap',
 })
 
@@ -39,20 +46,16 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
 }
 
-/** Màu thanh trình duyệt theo chế độ sáng/tối của người xem. */
+/** Chỉ có giao diện sáng; màu thanh trình duyệt theo nền trắng. */
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#F8FAFF' },
-    { media: '(prefers-color-scheme: dark)', color: '#0A1230' },
-  ],
+  colorScheme: 'light',
+  themeColor: '#FFFFFF',
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="vi" className={`${playfair.variable} ${beVietnam.variable}`}>
+    <html lang="vi" className={`${anton.variable} ${montserrat.variable} ${dancing.variable}`}>
       <body>
-        <AmbientBackground />
         <Header />
         <main>{children}</main>
         <ConsentManager />

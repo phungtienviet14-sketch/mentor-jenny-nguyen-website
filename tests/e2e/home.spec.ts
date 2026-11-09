@@ -9,11 +9,10 @@ test('trang chủ có tiêu đề, meta và dữ liệu có cấu trúc', async 
   await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(3)
 })
 
-test('theo chế độ sáng/tối của trình duyệt', async ({ page }, testInfo) => {
+test('giao diện chỉ có bản sáng, nền trắng', async ({ page }) => {
   await page.goto('/')
   const bg = await page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor)
-  const dark = testInfo.project.name === 'dark'
-  expect(bg).toBe(dark ? 'rgb(10, 18, 48)' : 'rgb(248, 250, 255)')
+  expect(bg).toBe('rgb(255, 255, 255)')
 })
 
 test('robots và sitemap trả về hợp lệ', async ({ request }) => {

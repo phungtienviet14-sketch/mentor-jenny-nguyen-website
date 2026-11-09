@@ -15,8 +15,7 @@ export function Header() {
       <header className="sticky top-0 z-40 border-b border-line bg-base/70 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-6">
           <a href="#top" aria-label="Mentor Jenny Nguyễn, về đầu trang" className="flex items-center">
-            <Image src="/brand/logo-red.png" alt="Mentor Jenny Nguyễn" width={160} height={63} className="h-9 w-auto dark:hidden" priority />
-            <Image src="/brand/logo-white.png" alt="" width={160} height={63} className="hidden h-9 w-auto dark:block" priority />
+            <Image src="/brand/logo-red.png" alt="Mentor Jenny Nguyễn" width={160} height={63} className="h-9 w-auto" priority />
           </a>
 
           <nav aria-label="Điều hướng chính" className="hidden items-center gap-6 lg:flex">
