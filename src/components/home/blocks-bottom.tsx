@@ -151,7 +151,7 @@ export function Footer() {
             alt="Mentor Jenny Nguyễn"
             width={160}
             height={63}
-            className="h-10 w-auto"
+            className="h-10 w-auto self-start"
           />
           <p className="text-sm">{FOOTER.intro}</p>
           <div className="flex items-center gap-3 text-gold-strong">
