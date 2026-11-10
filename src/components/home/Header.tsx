@@ -7,12 +7,14 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { CTA, NAV } from '@/content/home'
 import { MOTION } from '@/lib/motion-tokens'
+import { filterEventLinks } from '@/lib/event-links'
 
 /**
  * Thanh menu sticky (M4): trong suốt trên cùng, đổ bóng sau 40px cuộn,
  * ẩn khi cuộn xuống sâu và hiện lại khi cuộn lên (không ẩn khi menu mobile đang mở).
  */
-export function Header() {
+export function Header({ showEvents = false }: { showEvents?: boolean }) {
+  const nav = filterEventLinks(NAV, showEvents)
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
@@ -63,7 +65,7 @@ export function Header() {
         </Link>
 
         <nav aria-label="Điều hướng chính" className="hidden items-center gap-7 lg:flex">
-          {NAV.slice(0, -1).map((item) => (
+          {nav.slice(0, -1).map((item) => (
             <a key={item.href} href={item.href} className="nav-link text-sm font-semibold text-fg">
               {item.label}
             </a>
@@ -96,7 +98,7 @@ export function Header() {
           className="border-t border-line bg-white px-6 py-4 lg:hidden"
         >
           <ul className="flex flex-col gap-1">
-            {NAV.map((item) => (
+            {nav.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}

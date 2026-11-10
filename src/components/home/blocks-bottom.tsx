@@ -14,6 +14,7 @@ import {
 import { Placeholder } from '@/components/ui/Placeholder'
 import { SECTION_CLASS, SectionHeading } from '@/components/ui/SectionHeading'
 import { CONTACT, FAQ, FINAL_CTA, FOOTER, GIFT } from '@/content/home'
+import { filterEventLinks } from '@/lib/event-links'
 
 const SOCIALS = [
   ['facebook', 'Facebook', FacebookIcon],
@@ -141,7 +142,7 @@ export function FinalCta() {
 }
 
 /** Khối 23: footer navy. */
-export function Footer() {
+export function Footer({ showEvents = false }: { showEvents?: boolean }) {
   return (
     <footer className="bg-[var(--band-bg)] text-white/80">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-3">
@@ -191,7 +192,7 @@ export function Footer() {
           <p className="font-display text-lg font-normal tracking-wide text-gold-strong uppercase">
             Liên kết
           </p>
-          {FOOTER.links.map((l) => (
+          {filterEventLinks(FOOTER.links, showEvents).map((l) => (
             <a key={l.label} href={l.href} className="hover:text-gold-strong">
               {l.label}
             </a>

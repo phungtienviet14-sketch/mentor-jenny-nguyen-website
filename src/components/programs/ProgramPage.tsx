@@ -6,11 +6,14 @@ import { Button } from '@/components/ui/Button'
 import { ArrowIcon, SparkIcon } from '@/components/ui/Icons'
 import { CARD_CLASS, SECTION_CLASS, SectionHeading } from '@/components/ui/SectionHeading'
 import type { Program } from '@/content/programs'
+import { EVENTS_HREF } from '@/lib/event-links'
 
 const isTodo = (v: string) => v.startsWith('[')
 
 /** Trang chi tiết khóa học / chương trình, dựng từ dữ liệu `PROGRAMS` (Google Doc). */
-export function ProgramPage({ program: p }: { program: Program }) {
+export function ProgramPage({ program: p, showEvents = false }: { program: Program; showEvents?: boolean }) {
+  // Khi phần Sự kiện đang tắt, link "Xem lịch" chuyển thành nút hỏi lịch qua form đăng ký.
+  const secondary = !showEvents && p.secondary.href === EVENTS_HREF ? { label: 'Hỏi lịch Workshop', href: '#dang-ky' } : p.secondary
   return (
     <>
       <section id="top" className="hero-bg relative overflow-hidden">
@@ -49,8 +52,8 @@ export function ProgramPage({ program: p }: { program: Program }) {
                   {p.primary.label}
                   <ArrowIcon />
                 </Button>
-                <Button href={p.secondary.href} variant="ghost">
-                  {p.secondary.label}
+                <Button href={secondary.href} variant="ghost">
+                  {secondary.label}
                 </Button>
               </div>
             </Reveal>
@@ -153,8 +156,8 @@ export function ProgramPage({ program: p }: { program: Program }) {
                 {p.primary.label}
                 <ArrowIcon />
               </Button>
-              <Button href={p.secondary.href} variant="light">
-                {p.secondary.label}
+              <Button href={secondary.href} variant="light">
+                {secondary.label}
               </Button>
             </div>
           </Reveal>
@@ -162,7 +165,7 @@ export function ProgramPage({ program: p }: { program: Program }) {
       </section>
 
       <FinalCta />
-      <Footer />
+      <Footer showEvents={showEvents} />
     </>
   )
 }

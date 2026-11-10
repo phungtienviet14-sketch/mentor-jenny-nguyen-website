@@ -5,9 +5,3 @@
  * khung ảnh lẻ không hiện.
  */
 export const SHOW_PLACEHOLDERS = process.env.NEXT_PUBLIC_SHOW_PLACEHOLDERS !== '0'
-
-/**
- * Công tắc phần Sự kiện (khối, mục menu, link chân trang). Mặc định TẮT; khi có sự kiện thật thì đặt
- * `NEXT_PUBLIC_SHOW_EVENTS=1` trên Vercel và deploy lại. Độc lập với công tắc khung chờ nội dung ở trên.
- */
-export const SHOW_EVENTS = process.env.NEXT_PUBLIC_SHOW_EVENTS === '1'
