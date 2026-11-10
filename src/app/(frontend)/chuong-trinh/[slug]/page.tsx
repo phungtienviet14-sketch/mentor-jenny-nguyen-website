@@ -6,6 +6,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { ProgramPage } from '@/components/programs/ProgramPage'
 import { PROGRAMS, getProgram, programHref } from '@/content/programs'
 import { SITE, absoluteUrl } from '@/lib/site'
+import { getShowEvents } from '@/lib/site-flags'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -32,6 +33,7 @@ export default async function ProgramRoute({ params }: Props) {
   const { slug } = await params
   const p = getProgram(slug)
   if (!p) notFound()
+  const showEvents = await getShowEvents()
 
   const course = {
     '@context': 'https://schema.org',
@@ -45,7 +47,7 @@ export default async function ProgramRoute({ params }: Props) {
   return (
     <>
       <JsonLd data={course} />
-      <ProgramPage program={p} />
+      <ProgramPage program={p} showEvents={showEvents} />
     </>
   )
 }

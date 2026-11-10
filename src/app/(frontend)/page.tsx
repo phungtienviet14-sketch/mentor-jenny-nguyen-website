@@ -17,10 +17,12 @@ import { About, Context, Ecosystem, Hero, MarqueeBand, Partners } from '@/compon
 import { JsonLd } from '@/components/seo/JsonLd'
 import { FAQ } from '@/content/home'
 import { SITE, absoluteUrl } from '@/lib/site'
+import { getShowEvents } from '@/lib/site-flags'
 
 type WithCtx<T> = T & { '@context': 'https://schema.org' }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const showEvents = await getShowEvents()
   const person = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -63,7 +65,7 @@ export default function HomePage() {
       <Courses />
       <Roadmap />
       <Community />
-      <Events />
+      {showEvents && <Events />}
       <Activities />
       <Videos />
       <InHouse />
@@ -73,7 +75,7 @@ export default function HomePage() {
       <GiftBand />
       <Faq />
       <FinalCta />
-      <Footer />
+      <Footer showEvents={showEvents} />
     </>
   )
 }

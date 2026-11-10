@@ -767,6 +767,12 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface SiteSetting {
   id: number;
+  features?: {
+    /**
+     * Bật khi đã có sự kiện thật: hiện khối Sự kiện, mục menu và link chân trang. Tắt thì cả ba cùng ẩn. Lưu xong là site cập nhật ngay.
+     */
+    showEvents?: boolean | null;
+  };
   contact?: {
     assistantPhone?: string | null;
     expertPhone?: string | null;
@@ -857,6 +863,11 @@ export interface HomePage {
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
+  features?:
+    | T
+    | {
+        showEvents?: T;
+      };
   contact?:
     | T
     | {

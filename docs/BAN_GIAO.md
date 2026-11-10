@@ -45,19 +45,22 @@ Khối bị ẩn: Cộng đồng, Hoạt động & dấu ấn, Video, Cảm nh�
 
 ## 3b. Công tắc phần Sự kiện
 
-Phần Sự kiện **mặc định ẩn** (khối `#su-kien`, mục menu, link chân trang), độc lập với công tắc trên. Khi có sự kiện thật thì bật:
+Phần Sự kiện **mặc định ẩn** (khối `#su-kien`, mục menu, link chân trang), độc lập với công tắc trên. Admin hoặc marketing bật/tắt ngay trong trang quản trị, không cần dev:
 
-```bash
-vercel env add NEXT_PUBLIC_SHOW_EVENTS production   # nhập giá trị 1
-vercel deploy --prod
-```
+1. Vào `/admin`, đăng nhập, mở **Cài đặt chung** (Globals).
+2. Mục **Công tắc hiển thị**, tick **Hiện phần Sự kiện**, bấm **Save**.
+3. Site cập nhật ngay, không cần deploy lại. Bỏ tick là ẩn cả ba nơi.
 
-Tắt lại: `vercel env rm NEXT_PUBLIC_SHOW_EVENTS production` rồi deploy lại. Khi ẩn, nút "Xem lịch Workshop" ở trang Workshop AI cho CEO đổi thành "Hỏi lịch Workshop" (cuộn tới form đăng ký). Lưu ý: nội dung các thẻ sự kiện hiện còn là khung mẫu trong `blocks-mid.tsx` (hàm `Events`); cần điền sự kiện thật trước khi bật.
+Chỉ vai trò `admin` và `marketing` sửa được. Nếu không đọc được CMS (lỗi, bản preview) thì site dùng biến `NEXT_PUBLIC_SHOW_EVENTS=1` làm dự phòng, mặc định tắt.
+
+**Bước một lần cho production:** production không tự tạo cột mới, nên chạy file `docs/sql/2026-11-10-site-settings-features.sql` trong SQL Editor của Neon trước khi deploy bản này. Chưa chạy thì trang Cài đặt chung trong admin sẽ báo lỗi.
+
+Khi ẩn, nút "Xem lịch Workshop" ở trang Workshop AI cho CEO đổi thành "Hỏi lịch Workshop" (cuộn tới form đăng ký). Lưu ý: nội dung các thẻ sự kiện hiện còn là khung mẫu trong `blocks-mid.tsx` (hàm `Events`); cần điền sự kiện thật trước khi bật.
 
 ## 4. Biến môi trường trên Vercel
 
 Đã có: `DATABASE_URI`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SITE_URL`, `TURNSTILE_SECRET_KEY`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `SMTP_USER`, `SMTP_PASSWORD`, `LEADS_NOTIFY_TO`.
-Chưa có: `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_SHOW_PLACEHOLDERS` và `NEXT_PUBLIC_SHOW_EVENTS` (tùy chọn).
+Chưa có: `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_SHOW_PLACEHOLDERS` và `NEXT_PUBLIC_SHOW_EVENTS` (tùy chọn; công tắc Sự kiện chính nằm trong CMS, biến này chỉ là dự phòng).
 Khi có tên miền thật, đổi `NEXT_PUBLIC_SITE_URL` cho khớp (canonical, sitemap, JSON-LD dùng biến này).
 
 ## 5. Sau khi gắn tên miền

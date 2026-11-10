@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import type { GlobalConfig } from 'payload'
 
 import { canEditContent } from '@/access'
@@ -9,7 +10,37 @@ export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   label: 'Cài đặt chung',
   access,
+  hooks: {
+    // Lưu xong thì làm mới trang công khai để công tắc có hiệu lực ngay (không cần deploy lại).
+    afterChange: [
+      ({ doc }) => {
+        try {
+          revalidatePath('/', 'layout')
+        } catch {
+          // Chạy ngoài ngữ cảnh Next (script, test): bỏ qua.
+        }
+        return doc
+      },
+    ],
+  },
   fields: [
+    {
+      name: 'features',
+      type: 'group',
+      label: 'Công tắc hiển thị',
+      fields: [
+        {
+          name: 'showEvents',
+          type: 'checkbox',
+          label: 'Hiện phần Sự kiện',
+          defaultValue: false,
+          admin: {
+            description:
+              'Bật khi đã có sự kiện thật: hiện khối Sự kiện, mục menu và link chân trang. Tắt thì cả ba cùng ẩn. Lưu xong là site cập nhật ngay.',
+          },
+        },
+      ],
+    },
     {
       name: 'contact',
       type: 'group',

@@ -11,6 +11,7 @@ import { PageIntro } from '@/components/motion/PageIntro'
 import { ScrollBar } from '@/components/motion/ScrollBar'
 import { ConsentManager } from '@/components/analytics/ConsentManager'
 import { SITE, SITE_URL } from '@/lib/site'
+import { getShowEvents } from '@/lib/site-flags'
 
 import './globals.css'
 
@@ -64,7 +65,8 @@ export const viewport: Viewport = {
  */
 const MOTION_GUARD = `(function(){var h=document.documentElement;h.classList.add('js');setTimeout(function(){if(!h.hasAttribute('data-motion-ready'))h.classList.add('reveal-fallback')},4000)})()`
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const showEvents = await getShowEvents()
   return (
     <html lang="vi" suppressHydrationWarning className={`${anton.variable} ${montserrat.variable} ${dancing.variable}`}>
       <body>
@@ -73,7 +75,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <PageIntro />
           <ScrollBar />
           <Topbar />
-          <Header />
+          <Header showEvents={showEvents} />
           <main>{children}</main>
           <ContactFab />
           <ConsentManager />

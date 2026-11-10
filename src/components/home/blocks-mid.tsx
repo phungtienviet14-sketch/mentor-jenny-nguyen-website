@@ -14,7 +14,7 @@ import {
   TESTIMONIALS,
   VIDEOS,
 } from '@/content/home'
-import { SHOW_EVENTS, SHOW_PLACEHOLDERS } from '@/content/flags'
+import { SHOW_PLACEHOLDERS } from '@/content/flags'
 
 /** Khối 12: cộng đồng Thở cùng AI (nội dung do marketing bổ sung). */
 export function Community() {
@@ -66,7 +66,6 @@ export function Community() {
 
 /** Khối 13: lịch sự kiện, dạng vé. Nội dung do marketing bổ sung. */
 export function Events() {
-  if (!SHOW_EVENTS) return null
   return (
     <section id="su-kien" className="bg-white">
       <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
