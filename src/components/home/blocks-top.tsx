@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import Image from 'next/image'
 
 import { CountUp } from '@/components/motion/CountUp'
@@ -34,7 +35,16 @@ export function Hero() {
           </Reveal>
           <Reveal index={1}>
             <h1 className="font-display text-5xl leading-[1.02] font-normal tracking-tight text-fg uppercase md:text-7xl">
-              <span className="text-gold-500">{HERO.name}</span>
+              <span className="text-gold-500">
+                {HERO.name.split(' ').map((w, i) => (
+                  <span key={w + i}>
+                    {i > 0 && ' '}
+                    <span className="hero-word" style={{ '--i': i } as CSSProperties}>
+                      <span>{w}</span>
+                    </span>
+                  </span>
+                ))}
+              </span>
             </h1>
           </Reveal>
           <Reveal index={2}>

@@ -177,6 +177,36 @@ body {
   }
 }
 
+/* Tiêu đề Hero (M5): mỗi từ trượt lên từ mask khi khối Reveal cha hiện */
+.magnetic {
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+}
+
+.hero-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.hero-word > span {
+  display: inline-block;
+}
+
+.js .reveal:not(.is-visible) .hero-word > span {
+  transform: translateY(110%);
+}
+
+.js .hero-word > span {
+  transition: transform 0.9s var(--ease-out) calc(120ms * var(--i, 0) + 200ms);
+}
+
+.reveal-fallback:not([data-motion-ready]) .hero-word > span {
+  transform: none;
+  transition: none;
+}
+
 /* ---------- Marquee (logo đối tác chạy ngang) ---------- */
 .marquee {
   overflow: hidden;
@@ -246,7 +276,6 @@ body {
   }
 }
 
-
 /* ---------- Thành phần kiểu NTK (bản Sáng v4) ---------- */
 
 /* Nút: vệt sáng quét qua khi hover (M9) */
@@ -254,7 +283,12 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.45) 50%, transparent 65%);
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgb(255 255 255 / 0.45) 50%,
+    transparent 65%
+  );
   transform: translateX(-120%);
   pointer-events: none;
 }
@@ -367,7 +401,12 @@ body {
   inset: -8%;
   border-radius: 50%;
   border: 1px solid rgb(198 154 83 / 0.7);
-  background: radial-gradient(closest-side, rgb(22 69 184 / 0.18), rgb(22 69 184 / 0.04) 70%, transparent);
+  background: radial-gradient(
+    closest-side,
+    rgb(22 69 184 / 0.18),
+    rgb(22 69 184 / 0.04) 70%,
+    transparent
+  );
   animation: halo-spin 40s linear infinite;
 }
 
@@ -578,6 +617,14 @@ body[data-consent-open] .fab {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .js .reveal:not(.is-visible) .hero-word > span {
+    transform: none;
+  }
+
+  .magnetic {
+    transform: none;
+  }
+
   .btn-sheen::after,
   .hero-halo,
   .fab__b,

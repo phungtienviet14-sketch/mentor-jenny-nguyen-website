@@ -15,6 +15,12 @@ import { Placeholder } from '@/components/ui/Placeholder'
 import { SECTION_CLASS, SectionHeading } from '@/components/ui/SectionHeading'
 import { CONTACT, FAQ, FINAL_CTA, FOOTER, GIFT } from '@/content/home'
 
+const SOCIALS = [
+  ['facebook', 'Facebook', FacebookIcon],
+  ['tiktok', 'TikTok', TiktokIcon],
+  ['youtube', 'YouTube', YoutubeIcon],
+] as const
+
 /** Khối 20: băng vàng quà tặng. */
 export function GiftBand() {
   return (
@@ -149,27 +155,21 @@ export function Footer() {
           />
           <p className="text-sm">{FOOTER.intro}</p>
           <div className="flex items-center gap-3 text-gold-strong">
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="rounded-full border border-white/20 p-2 hover:bg-white/10"
-            >
-              <FacebookIcon width={18} height={18} />
-            </a>
-            <a
-              href="#"
-              aria-label="TikTok"
-              className="rounded-full border border-white/20 p-2 hover:bg-white/10"
-            >
-              <TiktokIcon width={18} height={18} />
-            </a>
-            <a
-              href="#"
-              aria-label="YouTube"
-              className="rounded-full border border-white/20 p-2 hover:bg-white/10"
-            >
-              <YoutubeIcon width={18} height={18} />
-            </a>
+            {SOCIALS.map(
+              ([key, label, Icon]) =>
+                CONTACT.social[key] && (
+                  <a
+                    key={key}
+                    href={CONTACT.social[key]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="rounded-full border border-white/20 p-2 hover:bg-white/10"
+                  >
+                    <Icon width={18} height={18} />
+                  </a>
+                ),
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-2 text-sm">

@@ -1,6 +1,12 @@
 import { FacebookIcon, MailIcon, PhoneIcon, TiktokIcon, YoutubeIcon } from '@/components/ui/Icons'
 import { CONTACT } from '@/content/home'
 
+const SOCIALS = [
+  ['facebook', 'Facebook', FacebookIcon],
+  ['tiktok', 'TikTok', TiktokIcon],
+  ['youtube', 'YouTube', YoutubeIcon],
+] as const
+
 /** Thanh trên cùng (navy): liên hệ nhanh + mạng xã hội. Ẩn trên mobile để nhường chỗ cho menu. */
 export function Topbar() {
   return (
@@ -28,15 +34,21 @@ export function Topbar() {
           )}
         </div>
         <div className="flex items-center gap-3">
-          <a href="#" aria-label="Facebook" className="hover:text-gold-strong">
-            <FacebookIcon width={16} height={16} />
-          </a>
-          <a href="#" aria-label="TikTok" className="hover:text-gold-strong">
-            <TiktokIcon width={16} height={16} />
-          </a>
-          <a href="#" aria-label="YouTube" className="hover:text-gold-strong">
-            <YoutubeIcon width={16} height={16} />
-          </a>
+          {SOCIALS.map(
+            ([key, label, Icon]) =>
+              CONTACT.social[key] && (
+                <a
+                  key={key}
+                  href={CONTACT.social[key]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="hover:text-gold-strong"
+                >
+                  <Icon width={16} height={16} />
+                </a>
+              ),
+          )}
         </div>
       </div>
     </div>

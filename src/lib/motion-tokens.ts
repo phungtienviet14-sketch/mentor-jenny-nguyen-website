@@ -14,6 +14,8 @@ export const MOTION = {
   pinMinWidth: 761,
   marqueeSeconds: 32,
   headerScrollPx: 40,
+  /** Độ lệch tối đa của nút "từ tính" khi rê chuột (px). */
+  magneticPx: 6,
 } as const
 
 /** Thiết bị yếu hoặc màn nhỏ: tắt parallax/nền động. */
