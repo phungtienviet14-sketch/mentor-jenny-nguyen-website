@@ -186,8 +186,11 @@ body {
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+  /* chừa chỗ cho dấu mũ/dấu thanh của chữ hoa tiếng Việt (Ễ, Ấ...) khỏi bị mask cắt */
+  padding-top: 0.3em;
+  margin-top: -0.3em;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
 }
 
 .hero-word > span {

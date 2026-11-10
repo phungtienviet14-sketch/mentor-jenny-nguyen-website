@@ -80,7 +80,7 @@ export const CONTEXT = {
 }
 
 export const ABOUT = {
-  eyebrow: 'Về Mentor Jenny',
+  eyebrow: 'Về Mentor Jenny Nguyễn',
   title: 'Làm thật - Dạy thật -',
   accent: 'Kết quả thật.',
   body: 'Tôi là Jenny Nguyễn, Tổng giám đốc NetViet TV, hơn 12 năm trong truyền thông, marketing và công nghệ AI. Tôi đồng hành cùng cá nhân và doanh nghiệp ứng dụng AI bằng phương pháp thực chiến, dễ triển khai.',
@@ -100,7 +100,7 @@ export const ABOUT = {
 export const MARQUEE_WORDS = ['Thở cùng AI', 'Làm thật', 'Dạy thật', 'Kết quả thật']
 
 export const ECOSYSTEM = {
-  eyebrow: 'Hệ sinh thái Mentor Jenny',
+  eyebrow: 'Hệ sinh thái Mentor Jenny Nguyễn',
   title: 'Ứng dụng AI vào',
   accent: 'học tập, sáng tạo & kinh doanh',
   subtitle: 'Từ đào tạo đến triển khai thực tế.',
