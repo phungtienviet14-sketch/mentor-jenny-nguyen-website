@@ -3,6 +3,8 @@
  * Giá trị `info` bắt đầu bằng "[" là thông tin marketing/khách phải xác nhận: hiển thị khung gạch đứt, không bịa số.
  */
 
+import { SHOW_EVENTS } from './flags'
+
 export type ProgramKind = 'course' | 'online' | 'workshop' | 'intro' | 'inhouse'
 
 export type Program = {
@@ -236,7 +238,9 @@ export const PROGRAMS: Program[] = [
     ],
     ctaTitle: 'Sẵn sàng dẫn dắt doanh nghiệp trong kỷ nguyên AI?',
     primary: { label: 'Đăng ký tham gia Workshop', href: '#dang-ky' },
-    secondary: { label: 'Xem lịch Workshop', href: '/#su-kien' },
+    secondary: SHOW_EVENTS
+      ? { label: 'Xem lịch Workshop', href: '/#su-kien' }
+      : { label: 'Hỏi lịch Workshop', href: '#dang-ky' },
   },
   {
     slug: 'nhap-mon-ai',

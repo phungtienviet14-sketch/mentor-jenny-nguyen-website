@@ -41,12 +41,23 @@ vercel env add NEXT_PUBLIC_SHOW_PLACEHOLDERS production
 vercel deploy --prod
 ```
 
-Khối bị ẩn: Cộng đồng, Sự kiện, Hoạt động & dấu ấn, Video, Cảm nhận, Blog. Khung ảnh lẻ ở Sách, Doanh nghiệp, Quà tặng cũng không hiện, và mục "Sự kiện" biến khỏi menu. Xóa biến (hoặc đặt khác `0`) để hiện lại.
+Khối bị ẩn: Cộng đồng, Hoạt động & dấu ấn, Video, Cảm nhận, Blog. Khung ảnh lẻ ở Sách, Doanh nghiệp, Quà tặng cũng không hiện. Xóa biến (hoặc đặt khác `0`) để hiện lại.
+
+## 3b. Công tắc phần Sự kiện
+
+Phần Sự kiện **mặc định ẩn** (khối `#su-kien`, mục menu, link chân trang), độc lập với công tắc trên. Khi có sự kiện thật thì bật:
+
+```bash
+vercel env add NEXT_PUBLIC_SHOW_EVENTS production   # nhập giá trị 1
+vercel deploy --prod
+```
+
+Tắt lại: `vercel env rm NEXT_PUBLIC_SHOW_EVENTS production` rồi deploy lại. Khi ẩn, nút "Xem lịch Workshop" ở trang Workshop AI cho CEO đổi thành "Hỏi lịch Workshop" (cuộn tới form đăng ký). Lưu ý: nội dung các thẻ sự kiện hiện còn là khung mẫu trong `blocks-mid.tsx` (hàm `Events`); cần điền sự kiện thật trước khi bật.
 
 ## 4. Biến môi trường trên Vercel
 
 Đã có: `DATABASE_URI`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SITE_URL`, `TURNSTILE_SECRET_KEY`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `SMTP_USER`, `SMTP_PASSWORD`, `LEADS_NOTIFY_TO`.
-Chưa có: `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_SHOW_PLACEHOLDERS` (tùy chọn).
+Chưa có: `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_SHOW_PLACEHOLDERS` và `NEXT_PUBLIC_SHOW_EVENTS` (tùy chọn).
 Khi có tên miền thật, đổi `NEXT_PUBLIC_SITE_URL` cho khớp (canonical, sitemap, JSON-LD dùng biến này).
 
 ## 5. Sau khi gắn tên miền
