@@ -5,7 +5,7 @@
  * Mục có `confirm: true` là nội dung chưa được xác nhận.
  */
 
-import { SHOW_PLACEHOLDERS } from './flags'
+import { SHOW_EVENTS } from './flags'
 
 export const CTA = {
   register: { label: 'Đăng ký tư vấn', href: '#dang-ky' },
@@ -38,7 +38,7 @@ export const NAV = [
   { label: 'Sách', href: '/#sach' },
   { label: 'Sự kiện', href: '/#su-kien' },
   { label: 'Liên hệ', href: '/#dang-ky' },
-].filter((n) => SHOW_PLACEHOLDERS || n.href !== '/#su-kien')
+].filter((n) => SHOW_EVENTS || n.href !== '/#su-kien')
 
 export const HERO = {
   hi: 'Xin chào, tôi là',
@@ -377,6 +377,6 @@ export const FOOTER = {
     { label: 'Sự kiện', href: '/#su-kien' },
     { label: 'Chính sách bảo mật', href: '/chinh-sach-bao-mat' },
     { label: 'Điều khoản', href: '/dieu-khoan-su-dung' },
-  ],
+  ].filter((l) => SHOW_EVENTS || l.href !== '/#su-kien'),
   copyright: '© 2026 Mentor Jenny Nguyễn. All rights reserved.',
 }
