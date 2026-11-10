@@ -14,9 +14,11 @@ import {
   TESTIMONIALS,
   VIDEOS,
 } from '@/content/home'
+import { SHOW_PLACEHOLDERS } from '@/content/flags'
 
 /** Khối 12: cộng đồng Thở cùng AI (nội dung do marketing bổ sung). */
 export function Community() {
+  if (!SHOW_PLACEHOLDERS) return null
   return (
     <section id="cong-dong" className="bg-elevated">
       <div className={`${SECTION_CLASS} grid items-center gap-12 md:grid-cols-2`}>
@@ -64,6 +66,7 @@ export function Community() {
 
 /** Khối 13: lịch sự kiện, dạng vé. Nội dung do marketing bổ sung. */
 export function Events() {
+  if (!SHOW_PLACEHOLDERS) return null
   return (
     <section id="su-kien" className="bg-white">
       <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
@@ -102,6 +105,7 @@ export function Events() {
 
 /** Khối 14: dải ảnh hoạt động & dấu ấn (ảnh thật do marketing bổ sung). */
 export function Activities() {
+  if (!SHOW_PLACEHOLDERS) return null
   return (
     <section aria-label={ACTIVITIES.caption} className="bg-[var(--band-bg)] py-8">
       <p className="mb-5 text-center text-xs font-bold tracking-[0.22em] text-gold-strong uppercase">
@@ -122,6 +126,7 @@ export function Activities() {
 
 /** Khối 15: video nổi bật. */
 export function Videos() {
+  if (!SHOW_PLACEHOLDERS) return null
   return (
     <section id="video" className="bg-elevated">
       <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
@@ -156,7 +161,9 @@ export function InHouse() {
   return (
     <section id="doanh-nghiep" className="bg-white">
       <div className={SECTION_CLASS}>
-        <Reveal className="grid overflow-hidden rounded-[2rem] bg-[var(--band-bg)] shadow-2xl shadow-[rgb(16_41_120/0.3)] md:grid-cols-2">
+        <Reveal
+          className={`grid overflow-hidden rounded-[2rem] bg-[var(--band-bg)] shadow-2xl shadow-[rgb(16_41_120/0.3)] ${SHOW_PLACEHOLDERS ? 'md:grid-cols-2' : ''}`}
+        >
           <Placeholder
             hint="Ảnh đào tạo doanh nghiệp"
             className="min-h-64 !rounded-none border-gold-strong text-gold-strong"
@@ -190,6 +197,7 @@ export function InHouse() {
 
 /** Khối 17: cảm nhận học viên. Chưa có cảm nhận thật đã xin phép: chỉ hiện khung chờ ảnh. */
 export function Testimonials() {
+  if (!SHOW_PLACEHOLDERS) return null
   return (
     <section id="cam-nhan" className="bg-elevated">
       <div className={`${SECTION_CLASS} flex flex-col gap-10`}>
@@ -256,6 +264,7 @@ export function Books() {
 
 /** Khối 19: blog (bài viết do marketing bổ sung). */
 export function Blog() {
+  if (!SHOW_PLACEHOLDERS) return null
   return (
     <section id="blog" className="bg-elevated">
       <div className={`${SECTION_CLASS} flex flex-col gap-10`}>

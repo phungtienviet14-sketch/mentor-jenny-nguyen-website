@@ -5,6 +5,8 @@
  * Mục có `confirm: true` là nội dung chưa được xác nhận.
  */
 
+import { SHOW_PLACEHOLDERS } from './flags'
+
 export const CTA = {
   register: { label: 'Đăng ký tư vấn', href: '#dang-ky' },
   courses: { label: 'Khám phá khóa học AI', href: '#khoa-hoc' },
@@ -22,6 +24,8 @@ export const CONTACT = {
   email: '',
   zalo: 'https://zalo.me/0812986898',
   messenger: '',
+  /** TODO(khách): link mạng xã hội thật; để trống thì biểu tượng tự ẩn. */
+  social: { facebook: '', tiktok: '', youtube: '' },
   website: 'mentorjennynguyen.com',
   office: 'NetViet TV – Tầng 2, Chelsea Park, 116 Trung Kính, Yên Hòa, Hà Nội',
 }
@@ -34,7 +38,7 @@ export const NAV = [
   { label: 'Sách', href: '/#sach' },
   { label: 'Sự kiện', href: '/#su-kien' },
   { label: 'Liên hệ', href: '/#dang-ky' },
-]
+].filter((n) => SHOW_PLACEHOLDERS || n.href !== '/#su-kien')
 
 export const HERO = {
   hi: 'Xin chào, tôi là',

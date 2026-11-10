@@ -1,6 +1,6 @@
 # Kế hoạch chi tiết theo task (Phase 0 → 6)
 
-Tham chiếu: [PLAN.md](PLAN.md) (tổng quan), [MOTION_AND_TECH.md](MOTION_AND_TECH.md) (chuyển động & thư viện), [SEO.md](SEO.md) (SEO & công cụ). **Chưa viết code** cho tới khi các câu hỏi mở ở mục 1 được chốt và bạn xác nhận.
+Tham chiếu: [PLAN.md](PLAN.md) (tổng quan), [MOTION_AND_TECH.md](MOTION_AND_TECH.md) (chuyển động & thư viện), [SEO.md](SEO.md) (SEO & công cụ). **Cập nhật 10/11/2026:** Phase 0–5 đã code xong và deploy; Phase 6 còn các mục chờ khách (tên miền, GTM, nội dung thật). Xem [BAN_GIAO.md](BAN_GIAO.md).
 
 ## 1. Câu hỏi mở cần chốt trước khi code
 | # | Câu hỏi | Ảnh hưởng |

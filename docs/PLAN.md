@@ -1,7 +1,7 @@
 # Kế hoạch dự án: Website Mentor Jenny Nguyễn (mentorjennynguyen.com)
 
 Nguồn: `NOI_DUNG_TRANG_CHU_Mentor_Jenny_Nguyen.docx` (17 khối nội dung) + bản demo tham chiếu https://mentor-jenny-nguyen-ai.tallcoin1.chatgpt.site/
-Trạng thái: **CHỜ XÁC NHẬN – chưa viết code. Figma phải xong và được duyệt trước Phase 2.**
+Trạng thái: **ĐÃ TRIỂN KHAI và deploy (Vercel, tự deploy khi merge vào `main`).** Giao diện hiện hành là bản "Sáng v4" (23 khối, chỉ chế độ sáng): xem [REDESIGN_DECISIONS.md](REDESIGN_DECISIONS.md). Các mục "giao diện sáng/tối tự động" và "17 khối" bên dưới là lịch sử, đã bị thay thế. Việc còn lại: [BAN_GIAO.md](BAN_GIAO.md).
 
 ## 1. Phân tích yêu cầu
 

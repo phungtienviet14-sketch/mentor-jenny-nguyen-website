@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react'
 type Variant = 'primary' | 'ghost' | 'light'
 
 const base =
-  'btn-sheen relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3 text-sm font-bold tracking-wide transition-[translate,background-color,box-shadow,color] duration-300 hover:-translate-y-0.5 focus-visible:outline-offset-4 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+  'btn-sheen magnetic relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3 text-sm font-bold tracking-wide transition-[translate,transform,background-color,box-shadow,color] duration-300 hover:-translate-y-0.5 focus-visible:outline-offset-4 motion-reduce:transition-none motion-reduce:hover:translate-y-0'
 const variants: Record<Variant, string> = {
   // Nút xanh thương hiệu (gradient), chữ trắng. Vệt sáng quét qua khi hover (.btn-sheen).
   primary:
