@@ -14,14 +14,19 @@ export const getShowEvents = cache(async (): Promise<boolean> => {
   if (!process.env.DATABASE_URI) return envShowEvents()
   try {
     const read = (async () => {
-      const [{ getPayload }, { default: config }] = await Promise.all([import('payload'), import('@payload-config')])
+      const [{ getPayload }, { default: config }] = await Promise.all([
+        import('payload'),
+        import('@payload-config'),
+      ])
       const payload = await getPayload({ config })
       const settings = (await payload.findGlobal({ slug: 'site-settings', depth: 0 })) as {
         features?: { showEvents?: boolean | null } | null
       }
       return settings.features?.showEvents
     })()
-    const timeout = new Promise<undefined>((resolve) => setTimeout(() => resolve(undefined), CMS_TIMEOUT_MS))
+    const timeout = new Promise<undefined>((resolve) =>
+      setTimeout(() => resolve(undefined), CMS_TIMEOUT_MS),
+    )
     const value = await Promise.race([read, timeout])
     return typeof value === 'boolean' ? value : envShowEvents()
   } catch {

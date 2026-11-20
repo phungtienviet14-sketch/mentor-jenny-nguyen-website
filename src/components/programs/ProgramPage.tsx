@@ -11,9 +11,18 @@ import { EVENTS_HREF } from '@/lib/event-links'
 const isTodo = (v: string) => v.startsWith('[')
 
 /** Trang chi tiết khóa học / chương trình, dựng từ dữ liệu `PROGRAMS` (Google Doc). */
-export function ProgramPage({ program: p, showEvents = false }: { program: Program; showEvents?: boolean }) {
+export function ProgramPage({
+  program: p,
+  showEvents = false,
+}: {
+  program: Program
+  showEvents?: boolean
+}) {
   // Khi phần Sự kiện đang tắt, link "Xem lịch" chuyển thành nút hỏi lịch qua form đăng ký.
-  const secondary = !showEvents && p.secondary.href === EVENTS_HREF ? { label: 'Hỏi lịch Workshop', href: '#dang-ky' } : p.secondary
+  const secondary =
+    !showEvents && p.secondary.href === EVENTS_HREF
+      ? { label: 'Hỏi lịch Workshop', href: '#dang-ky' }
+      : p.secondary
   return (
     <>
       <section id="top" className="hero-bg relative overflow-hidden">
@@ -36,7 +45,7 @@ export function ProgramPage({ program: p, showEvents = false }: { program: Progr
               <p className="font-script text-2xl text-gold-text md:text-3xl">{p.kicker}</p>
             </Reveal>
             <Reveal index={2}>
-              <h1 className="font-display text-4xl leading-[1.05] font-normal tracking-tight text-fg uppercase md:text-6xl">
+              <h1 className="font-display text-4xl leading-[1.28] font-normal tracking-[0.015em] text-fg uppercase md:text-6xl">
                 {p.headline[0]}
                 <span className="heading-accent mt-1 block text-gold-text">{p.headline[1]}</span>
               </h1>
@@ -88,9 +97,18 @@ export function ProgramPage({ program: p, showEvents = false }: { program: Progr
           <SectionHeading title={p.learnTitle} />
           <ol className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {p.learn.map((l, i) => (
-              <Reveal as="li" key={l.title} index={i % 3} className={`${CARD_CLASS} flex flex-col gap-3`}>
-                <span className="font-display text-4xl text-gold-accent">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="font-display text-xl leading-tight font-normal tracking-wide text-fg uppercase">{l.title}</h3>
+              <Reveal
+                as="li"
+                key={l.title}
+                index={i % 3}
+                className={`${CARD_CLASS} flex flex-col gap-3`}
+              >
+                <span className="font-display text-4xl text-gold-accent">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="font-display text-xl leading-tight font-normal tracking-wide text-fg uppercase">
+                  {l.title}
+                </h3>
                 <p className="text-sm text-muted">{l.text}</p>
               </Reveal>
             ))}
@@ -105,8 +123,15 @@ export function ProgramPage({ program: p, showEvents = false }: { program: Progr
               <SectionHeading title="Hình thức triển khai" onDark />
               <ul className="grid gap-5 md:grid-cols-3">
                 {p.formats.map((f, i) => (
-                  <Reveal as="li" key={f.title} index={i} className="rounded-3xl border border-white/20 bg-white/5 p-6 text-white">
-                    <h3 className="font-display text-xl font-normal tracking-wide text-gold-strong uppercase">{f.title}</h3>
+                  <Reveal
+                    as="li"
+                    key={f.title}
+                    index={i}
+                    className="rounded-3xl border border-white/20 bg-white/5 p-6 text-white"
+                  >
+                    <h3 className="font-display text-xl font-normal tracking-wide text-gold-strong uppercase">
+                      {f.title}
+                    </h3>
                     <p className="mt-2 text-sm text-white/85">{f.text}</p>
                   </Reveal>
                 ))}
@@ -117,8 +142,12 @@ export function ProgramPage({ program: p, showEvents = false }: { program: Progr
               <ol className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
                 {p.process.map((s, i) => (
                   <Reveal as="li" key={s.title} index={i} className="rounded-3xl bg-white p-6">
-                    <span className="text-xs font-bold tracking-[0.2em] text-gold-text uppercase">Bước {String(i + 1).padStart(2, '0')}</span>
-                    <h3 className="mt-1 font-display text-xl font-normal tracking-wide text-fg uppercase">{s.title}</h3>
+                    <span className="text-xs font-bold tracking-[0.2em] text-gold-text uppercase">
+                      Bước {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="mt-1 font-display text-xl font-normal tracking-wide text-fg uppercase">
+                      {s.title}
+                    </h3>
                     <p className="mt-2 text-sm text-muted">{s.text}</p>
                   </Reveal>
                 ))}
@@ -134,9 +163,18 @@ export function ProgramPage({ program: p, showEvents = false }: { program: Progr
           <Reveal>
             <dl className="divide-y divide-line overflow-hidden rounded-3xl border border-line bg-white">
               {p.info.map((row) => (
-                <div key={row.label} className="grid gap-1 px-6 py-4 sm:grid-cols-[14rem_1fr] sm:gap-6">
+                <div
+                  key={row.label}
+                  className="grid gap-1 px-6 py-4 sm:grid-cols-[14rem_1fr] sm:gap-6"
+                >
                   <dt className="font-bold text-fg">{row.label}</dt>
-                  <dd className={isTodo(row.value) ? 'rounded-lg border border-dashed border-gold-accent bg-gold-accent/10 px-3 py-1 text-sm text-gold-text' : 'text-soft'}>
+                  <dd
+                    className={
+                      isTodo(row.value)
+                        ? 'rounded-lg border border-dashed border-gold-accent bg-gold-accent/10 px-3 py-1 text-sm text-gold-text'
+                        : 'text-soft'
+                    }
+                  >
                     {row.value}
                   </dd>
                 </div>
@@ -149,7 +187,9 @@ export function ProgramPage({ program: p, showEvents = false }: { program: Progr
       <section className="bg-white">
         <div className="mx-auto w-full max-w-6xl px-6 py-12">
           <Reveal className="flex flex-col items-center gap-5 rounded-[2rem] bg-gold-strong p-8 text-center md:p-12">
-            <h2 className="font-display text-3xl font-normal tracking-wide text-gold-600 uppercase md:text-4xl">{p.ctaTitle}</h2>
+            <h2 className="font-display text-3xl font-normal tracking-wide text-gold-600 uppercase md:text-4xl">
+              {p.ctaTitle}
+            </h2>
             {p.ctaText && <p className="max-w-2xl text-gold-600">{p.ctaText}</p>}
             <div className="flex flex-wrap justify-center gap-3">
               <Button href={p.primary.href} className="!bg-[var(--band-bg)] !bg-none text-white">
