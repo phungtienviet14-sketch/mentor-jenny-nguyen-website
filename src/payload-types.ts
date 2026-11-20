@@ -773,6 +773,12 @@ export interface SiteSetting {
      */
     showEvents?: boolean | null;
   };
+  integrations?: {
+    /**
+     * Chỉ dán phần mã trong content="..." của thẻ google-site-verification (không dán cả thẻ). Để trống thì dùng mã mặc định hiện tại. Đổi sang mã mới khi chuyển quyền sở hữu Search Console, lưu là có hiệu lực ngay.
+     */
+    googleSiteVerification?: string | null;
+  };
   contact?: {
     assistantPhone?: string | null;
     expertPhone?: string | null;
@@ -867,6 +873,11 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | T
     | {
         showEvents?: T;
+      };
+  integrations?:
+    | T
+    | {
+        googleSiteVerification?: T;
       };
   contact?:
     | T
