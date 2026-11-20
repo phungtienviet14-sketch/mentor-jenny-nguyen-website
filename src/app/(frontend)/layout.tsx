@@ -11,7 +11,7 @@ import { PageIntro } from '@/components/motion/PageIntro'
 import { ScrollBar } from '@/components/motion/ScrollBar'
 import { ConsentManager } from '@/components/analytics/ConsentManager'
 import { SITE, SITE_URL } from '@/lib/site'
-import { getShowEvents } from '@/lib/site-flags'
+import { getGoogleVerification, getShowEvents } from '@/lib/site-flags'
 
 import './globals.css'
 
@@ -36,22 +36,24 @@ const dancing = Dancing_Script({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: { default: `${SITE.name} | AI cho chủ doanh nghiệp`, template: `%s | ${SITE.name}` },
-  description: SITE.description,
-  applicationName: SITE.name,
-  openGraph: {
-    type: 'website',
-    locale: SITE.locale,
-    siteName: SITE.name,
-    title: SITE.name,
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: `${SITE.name} | AI cho chủ doanh nghiệp`, template: `%s | ${SITE.name}` },
     description: SITE.description,
-    url: SITE_URL,
-  },
-  twitter: { card: 'summary_large_image' },
-  alternates: { canonical: '/' },
-  verification: { google: '0FvpAl5cuxUsRYqYbvFDVZ80Vtr1fl2xWSsAKa45Kg0' },
+    applicationName: SITE.name,
+    openGraph: {
+      type: 'website',
+      locale: SITE.locale,
+      siteName: SITE.name,
+      title: SITE.name,
+      description: SITE.description,
+      url: SITE_URL,
+    },
+    twitter: { card: 'summary_large_image' },
+    alternates: { canonical: '/' },
+    verification: { google: await getGoogleVerification() },
+  }
 }
 
 /** Chỉ có giao diện sáng; màu thanh trình duyệt theo nền trắng. */
@@ -69,9 +71,17 @@ const MOTION_GUARD = `(function(){var h=document.documentElement;h.classList.add
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const showEvents = await getShowEvents()
   return (
-    <html lang="vi" suppressHydrationWarning className={`${anton.variable} ${montserrat.variable} ${dancing.variable}`}>
+    <html
+      lang="vi"
+      suppressHydrationWarning
+      className={`${anton.variable} ${montserrat.variable} ${dancing.variable}`}
+    >
       <body>
-        <Script id="motion-guard" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: MOTION_GUARD }} />
+        <Script
+          id="motion-guard"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: MOTION_GUARD }}
+        />
         <MotionProvider>
           <PageIntro />
           <ScrollBar />

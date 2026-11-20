@@ -42,13 +42,33 @@ export const SiteSettings: GlobalConfig = {
       ],
     },
     {
+      name: 'integrations',
+      type: 'group',
+      label: 'Tích hợp',
+      fields: [
+        {
+          name: 'googleSiteVerification',
+          type: 'text',
+          label: 'Mã xác minh Google Search Console',
+          admin: {
+            description:
+              'Chỉ dán phần mã trong content="..." của thẻ google-site-verification (không dán cả thẻ). Để trống thì dùng mã mặc định hiện tại. Đổi sang mã mới khi chuyển quyền sở hữu Search Console, lưu là có hiệu lực ngay.',
+          },
+        },
+      ],
+    },
+    {
       name: 'contact',
       type: 'group',
       fields: [
         { name: 'assistantPhone', type: 'text', defaultValue: '0812.98.68.98' },
         { name: 'expertPhone', type: 'text', defaultValue: '0934.457.589' },
         { name: 'email', type: 'email' },
-        { name: 'address', type: 'text', defaultValue: 'Tầng 2, Chelsea Park, 116 Trung Kính, Yên Hòa, Hà Nội' },
+        {
+          name: 'address',
+          type: 'text',
+          defaultValue: 'Tầng 2, Chelsea Park, 116 Trung Kính, Yên Hòa, Hà Nội',
+        },
       ],
     },
     {

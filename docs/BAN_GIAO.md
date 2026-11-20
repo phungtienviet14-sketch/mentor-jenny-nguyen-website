@@ -57,6 +57,16 @@ Chỉ vai trò `admin` và `marketing` sửa được. Nếu không đọc đư�
 
 Khi ẩn, nút "Xem lịch Workshop" ở trang Workshop AI cho CEO đổi thành "Hỏi lịch Workshop" (cuộn tới form đăng ký). Lưu ý: nội dung các thẻ sự kiện hiện còn là khung mẫu trong `blocks-mid.tsx` (hàm `Events`); cần điền sự kiện thật trước khi bật.
 
+## 3c. Mã xác minh Google Search Console
+
+Thẻ `google-site-verification` nằm trong CMS để marketing tự đổi khi chuyển quyền sở hữu Search Console:
+
+1. Vào `/admin`, đăng nhập, mở **Cài đặt chung**, mục **Tích hợp**.
+2. Dán mã vào ô **Mã xác minh Google Search Console**: chỉ phần trong `content="..."`, không dán cả thẻ. Bấm **Save**.
+3. Site cập nhật ngay. Để trống thì dùng mã mặc định trong `src/lib/site-flags.ts` (`DEFAULT_GOOGLE_VERIFICATION`).
+
+Production không tự tạo cột mới: file `docs/sql/2026-11-20-site-settings-integrations.sql` đã chạy trên Neon production ngày 20/11/2026. Môi trường khác (cơ sở dữ liệu mới) cần chạy lại file này.
+
 ## 4. Biến môi trường trên Vercel
 
 Đã có: `DATABASE_URI`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SITE_URL`, `TURNSTILE_SECRET_KEY`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `SMTP_USER`, `SMTP_PASSWORD`, `LEADS_NOTIFY_TO`.
