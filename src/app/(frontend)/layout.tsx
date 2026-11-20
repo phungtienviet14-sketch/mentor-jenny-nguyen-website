@@ -51,6 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   alternates: { canonical: '/' },
+  verification: { google: '0FvpAl5cuxUsRYqYbvFDVZ80Vtr1fl2xWSsAKa45Kg0' },
 }
 
 /** Chỉ có giao diện sáng; màu thanh trình duyệt theo nền trắng. */
