@@ -47,7 +47,7 @@ export function SectionHeading({
       )}
       <Reveal index={1}>
         <Tag
-          className={`font-display leading-[1.05] font-normal tracking-tight uppercase ${
+          className={`font-display leading-[1.28] font-normal tracking-[0.015em] uppercase ${
             onDark ? 'text-white' : 'text-fg'
           } ${compact ? 'text-3xl md:text-4xl' : 'text-4xl md:text-6xl'}`}
         >

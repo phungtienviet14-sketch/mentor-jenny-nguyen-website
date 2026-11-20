@@ -34,7 +34,7 @@ export function Hero() {
             <p className="font-script text-3xl text-gold-text md:text-4xl">{HERO.hi}</p>
           </Reveal>
           <Reveal index={1}>
-            <h1 className="font-display text-5xl leading-[1.02] font-normal tracking-tight text-fg uppercase md:text-7xl">
+            <h1 className="font-display text-5xl leading-[1.25] font-normal tracking-[0.015em] text-fg uppercase md:text-7xl">
               <span className="text-gold-500">
                 {HERO.name.split(' ').map((w, i) => (
                   <span key={w + i}>
